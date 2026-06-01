@@ -93,6 +93,7 @@ header.scrolled {
   transition: background 0.3s ease, color 0.3s ease, gap 0.3s ease;
 }
 .nav-cta .nav-cta-arrow { font-size: 0.75rem; transition: transform 0.35s cubic-bezier(.2,.7,.2,1); }
+.nav-cta-label-short { display: none; }
 .nav-cta .nav-cta-beta {
   display: inline-flex; align-items: center;
   padding: 0.15rem 0.45rem; border-radius: 999px;
@@ -609,4 +610,107 @@ footer {
   .uc-grid { grid-template-columns: 1fr; }
   .uc-col { padding: 2.5rem 0 2rem 0 !important; }
   .uc-col + .uc-col { border-left: none; border-top: 1px solid rgba(255,255,255,0.18); }
+}
+
+/* ─────────────── MOBILE TUNING ─────────────── */
+@media (max-width: 640px) {
+  :root {
+    --space-md: 1.25rem;
+    --space-lg: 2.5rem;
+    --space-xl: 4.5rem;
+  }
+
+  /* Header — compact, single line */
+  header {
+    top: 0.75rem; left: 0.75rem; right: 0.75rem;
+    padding: 0.45rem 0.55rem 0.45rem 0.9rem;
+  }
+  header.scrolled { padding: 0.45rem 0.55rem 0.45rem 0.9rem; }
+  .header-actions { gap: 0.55rem; }
+  .brand-name { font-size: 1.1rem; }
+  .brand-mark { width: 9px; height: 9px; }
+  .nav-link { font-size: 0.8rem; }
+  .nav-cta {
+    padding: 0.45rem 0.75rem;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+  }
+  .nav-cta-beta { display: none; }
+  .nav-cta-label-full { display: none; }
+  .nav-cta-label-short { display: inline; }
+
+  /* Hero — tighter vertical rhythm */
+  .hero { padding: 14vh 5vw 10vh; }
+  .hero-tagline { margin-top: 1.5rem; font-size: 0.98rem; }
+  .hero-cta-row { margin-top: 1.75rem; flex-wrap: wrap; gap: 0.9rem 1.25rem; }
+  .hero-cta { padding: 0.85rem 1.4rem; font-size: 0.9rem; }
+  .hero-cta-meta { font-size: 0.82rem; }
+  .manifesto-block { font-size: 0.85rem; padding-left: 1rem; }
+
+  /* Section padding shrink */
+  .usecases-section,
+  .quote-section,
+  .prose-section,
+  .ladder-section,
+  .infrastructure-section,
+  .verification-section,
+  .cta-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .team-frame { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+  /* CTA — stack meta vertically, drop em-dash separators */
+  .cta-meta { flex-direction: column; gap: 0.5rem; align-items: center; margin-top: 1.75rem; }
+  .cta-meta span::before { content: ''; }
+  .cta-badge { margin-bottom: 2.5rem; }
+  .cta-button { padding: 0.85rem 1.5rem; font-size: 0.92rem; }
+
+  /* Quote — bring mark closer so it doesn't crowd the header on scroll */
+  .quote-mark { top: -2.5rem; font-size: 5.5rem; }
+  .quote-section { min-height: auto; }
+
+  /* Prose — drop the right-alignment which fights small widths */
+  .prose-section.right { justify-content: flex-start; }
+  .prose-section.right .prose-block { text-align: left; }
+  .prose-section.right .prose-kicker { justify-content: flex-start; }
+  .prose-section.right .prose-stats,
+  .prose-section.right .prose-body { margin-left: 0; }
+
+  /* Catalyst stat — keep the big number from squeezing the caption */
+  .stat-block { gap: 1.25rem; }
+  .stat-row { gap: 0.75rem; flex-wrap: wrap; }
+  .stat-figure { font-size: clamp(4rem, 22vw, 6.5rem); }
+  .stat-counter { font-size: clamp(2rem, 9vw, 3rem); }
+
+  /* Ladder — readout becomes a single column on narrow screens */
+  .ladder-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+  .ladder-stage { padding: 1.25rem 1.25rem 1.25rem; min-height: 0; }
+  .dag-svg { height: 260px; }
+  .stage-readout { grid-template-columns: 1fr; gap: 1rem; padding-top: 1rem; }
+  .rung-btn { padding: 1rem 1.1rem; grid-template-columns: 2.5rem 1fr; }
+  .rung-btn .rung-name { font-size: 1.5rem; }
+
+  /* Infrastructure feature-quote — stack so the rule doesn't squash text */
+  .feature-quote {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    text-align: left;
+    margin-top: 2.5rem;
+  }
+  .feature-quote .qline { display: none; }
+  .feature-block { padding: 1.25rem; }
+  .layer-canvas-wrap { height: 150px; }
+
+  /* Verification chart — give it a sane height on mobile */
+  .chart-wrap canvas { height: 260px !important; }
+
+  /* Team frame — soften the chrome on small screens */
+  .team-frame { padding-top: 3.5rem; padding-bottom: 3.5rem; border-radius: 2px; }
+  .team-frame::before { inset: 6px; }
+  .team-kicker { width: auto; }
+
+  /* Footer */
+  .footer-grid { gap: 1.75rem; }
+  .footer-bottom { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+
+  /* Scroll cue — avoid colliding with the manifesto on phones */
+  .scroll-cue { bottom: 2vh; }
 }
