@@ -169,13 +169,6 @@ body {
   color: currentColor;
 }
 
-.header-right-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 22px;
-  pointer-events: auto;
-}
-
 .header-right {
   color: rgba(246,247,241,0.46);
   font-size: var(--tiny);
@@ -183,32 +176,6 @@ body {
   line-height: 1.65;
   letter-spacing: 0.08em;
   text-align: right;
-}
-
-.header-cta {
-  display: inline-flex;
-  align-items: center;
-  height: 34px;
-  padding: 0 16px;
-  border: 1px solid rgba(244,246,243,0.42);
-  border-radius: 999px;
-  color: rgba(244,246,243,0.86);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-decoration: none;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-  mix-blend-mode: difference;
-}
-
-.header-cta:hover {
-  background: rgba(244,246,243,0.9);
-  border-color: rgba(244,246,243,0.9);
-  color: #10110f;
-  mix-blend-mode: normal;
 }
 
 main {
@@ -442,44 +409,6 @@ main {
   letter-spacing: 0.14em;
 }
 
-.s1-credibility {
-  display: flex !important;
-  flex-direction: column;
-  gap: 18px;
-  align-items: center;
-  bottom: calc(var(--line-safe-bottom) - 10px) !important;
-  width: min(820px, 90vw) !important;
-  color: rgba(0,0,0,0.78) !important;
-}
-.s1-cred-lead {
-  font-family: var(--mono);
-  font-size: 13px;
-  line-height: 1.55;
-  letter-spacing: 0.12em;
-}
-.s1-cred-marks {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 10px 14px;
-  justify-content: center;
-}
-.s1-cred-marks > span {
-  display: inline-flex;
-  align-items: center;
-  height: 26px;
-  padding: 0 12px;
-  border: 1px solid rgba(0,0,0,0.42);
-  border-radius: 999px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.82);
-  background: rgba(255,255,255,0.28);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
 .s2-copy {
   position: fixed;
   top: 41.5vh;
@@ -487,56 +416,6 @@ main {
   width: min(1100px, 88vw);
   transform: translateX(-50%);
   text-align: center;
-}
-.s2-copy--definition { text-align: center; }
-.s2-definition {
-  display: block;
-  max-width: 780px;
-  margin: 32px auto 0 !important;
-  color: rgba(244,246,243,0.7) !important;
-  font-family: var(--mono) !important;
-  font-size: 14px !important;
-  line-height: 1.7 !important;
-  letter-spacing: 0.06em !important;
-  text-transform: none !important;
-  font-style: normal;
-}
-
-.s3-copy--team { top: 20vh; width: min(880px, 84vw); }
-.s3-copy--team h2 { margin-bottom: 6vh; }
-.team-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 4vh !important;
-  padding-top: 20px;
-  border-top: 1px solid rgba(244,246,243,0.32);
-  max-width: 720px;
-  color: rgba(244,246,243,0.88) !important;
-}
-.team-member {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 24px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(244,246,243,0.14);
-}
-.team-name {
-  font-family: var(--inferi);
-  font-size: 22px;
-  font-weight: 300;
-  letter-spacing: -0.01em;
-  color: rgba(244,246,243,0.94);
-  text-transform: none;
-}
-.team-role {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(244,246,243,0.6);
-  text-align: right;
 }
 
 .s2-copy blockquote {
@@ -1076,50 +955,34 @@ main {
     <path d="M74.7262 18.8714L78.0416 18.6629L78.1307 17.7598H69.8273L69.7382 18.6629L73.3901 18.8714V28.0519H72.1728C69.6491 24.7271 65.7696 20.5387 62.7016 17.8193L62.6323 17.7598H58.8518L58.7627 18.653L62.0187 18.8714C64.7304 21.3327 68.6595 25.402 71.0149 28.6276V28.7864L63.5032 37.2226L61.0587 37.4409L60.9697 38.3341H67.4323L67.5213 37.4409L65.1362 37.2523L72.1629 29.3025H73.3901V49.6287L73.5386 50.8991H74.6569L78.3484 50.5815V49.6486H74.7163V18.8714H74.7262Z" fill="currentColor"/>
     <path d="M97.3294 19.2491L100.843 19.0605V14.2866L99.9421 14.1973L99.7343 17.9489H87.8285C82.6228 17.9489 79.9902 20.3805 79.9902 25.1842C79.9902 27.3875 80.3069 29.5313 80.9205 31.5361L80.9601 31.6751L81.7222 31.8438L86.9279 31.4468L86.8586 30.3054L81.8904 30.2657C81.5341 28.9556 81.1976 26.9409 81.1976 25.1941C81.1976 20.311 84.8496 19.2888 87.9175 19.2888H90.0157C90.273 24.8666 90.7678 29.303 91.4705 32.4889L91.5002 32.608L91.609 32.6576C92.1534 32.9058 93.6676 33.4715 95.9636 33.4715C99.8135 33.4715 101.179 30.1863 101.179 27.3677C101.179 23.4969 98.9524 20.7378 97.3393 19.259L97.3294 19.2491ZM99.9718 27.318C99.9718 30.3749 98.4378 32.1316 95.7558 32.1316C94.301 32.1316 93.1529 31.8239 92.5393 31.6056C91.8466 28.8266 91.3616 22.8617 91.2132 19.2788H95.548C96.9335 20.3309 99.9718 23.1099 99.9718 27.318Z" fill="currentColor"/>
   </svg>
-  <div class="header-right-group">
-    <div class="header-right">by Loka Labs<br>World Model</div>
-    <a class="header-cta" href="mailto:hello@loka.inc">Request a pilot →</a>
-  </div>
+  <div class="header-right">by Loka Labs<br>World Model</div>
 </header>
 
 <main>
   <section class="panel" id="s1">
     <div class="panel-bg s1-bg"></div>
     <div class="content s1-copy">
-      <h1 class="serif">Run the world.<br>Before you run it.</h1>
-      <p class="mono s1-credibility">
-        <span class="s1-cred-lead">Built by pioneers in formal verification, distributed systems, and economic systems.</span>
-        <span class="s1-cred-marks">
-          <span>Turing Award</span>
-          <span>OSDI Best Paper</span>
-          <span>Harvard · MIT · NUS</span>
-        </span>
-      </p>
+      <h1 class="serif">The Economic World Model.</h1>
+      <p class="mono">When the cost of simulation approaches zero,<br>the cost of not simulating becomes indefensible.</p>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
   <section class="panel" id="causation">
     <div class="panel-bg s2-bg"></div>
-    <div class="content s2-copy s2-copy--definition">
-      <blockquote class="serif">The economy is the only critical system humanity deploys without simulation.</blockquote>
-      <cite class="s2-definition">Loka is building the Economic World Model — a behaviorally simulated, causally constrained, and formally verified system for testing decisions before they move nations, markets, and billions of lives.</cite>
+    <div class="content s2-copy">
+      <blockquote class="serif">&ldquo;The three rungs of the Ladder of Causation:<br>Association, Intervention, Counterfactual.&rdquo;</blockquote>
+      <cite>- Judea Pearl, The Book of Why</cite>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
-  <section class="panel" id="team">
+  <section class="panel" id="structural-gap">
     <div class="panel-bg s3-bg"></div>
-    <div class="content s3-copy s3-copy--team">
-      <div class="kicker">Team</div>
-      <h2 class="serif">The people behind<br>Loka Labs.</h2>
-      <p class="mono team-list">
-        <span class="team-member"><span class="team-name">Joseph Sifakis</span><span class="team-role">Founding Scientist · Turing Award, 2007</span></span>
-        <span class="team-member"><span class="team-name">Lora Jiang</span><span class="team-role">Co-founder, CEO · Parsons, Harvard</span></span>
-        <span class="team-member"><span class="team-name">Akasha Zhu</span><span class="team-role">Co-founder, President · Tsinghua, MIT</span></span>
-        <span class="team-member"><span class="team-name">Jialin Li</span><span class="team-role">Co-founder, CTO · NUS · OSDI/NSDI Best Paper</span></span>
-        <span class="team-member"><span class="team-name">Felix Oberholzer</span><span class="team-role">Advisor · Harvard Business School</span></span>
-      </p>
+    <div class="content s3-copy">
+      <div class="kicker">Structural Gap</div>
+      <h2 class="serif">Navigating a living system<br>with a dead map.</h2>
+      <p class="mono">Policies are interventions. Crises are counterfactual failures. Yet the tools we use to make decisions operate on mere statistical association.<br><br>Legacy models treat humanity as a predictable mass. But economic systems are no longer stationary. AI is rewriting reality faster than any historical model can follow.</p>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
@@ -1988,9 +1851,29 @@ function scrollToSection(index) {
   });
 }
 
-/* Wheel snap-scroll hijack removed — native scrolling drives the same
-   `window.scrollY`-based animation loop, so panels transition on scroll
-   without the 1500 ms tween that felt like lag. */
+window.addEventListener("wheel", (event) => {
+  event.preventDefault();
+
+  const delta = event.deltaY;
+  if (Math.abs(delta) < 1) return;
+
+  const now = Date.now();
+  if (now - lastWheelAt > 240) wheelDelta = 0;
+  lastWheelAt = now;
+
+  if (isSectionScrolling || now < sectionScrollRelease) {
+    wheelDelta = 0;
+    return;
+  }
+
+  wheelDelta += delta;
+  if (Math.abs(wheelDelta) < WHEEL_TRIGGER_DELTA) return;
+
+  const panelHeight = panels[0]?.offsetHeight || window.innerHeight || 1;
+  activeSectionIndex = Math.max(0, Math.min(panels.length - 1, Math.round(window.scrollY / panelHeight)));
+  scrollToSection(activeSectionIndex + (wheelDelta > 0 ? 1 : -1));
+  wheelDelta = 0;
+}, { passive: false });
 
 window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlobes(); resizeVerificationSlice(); ScrollTrigger.refresh(); });
 
