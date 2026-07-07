@@ -190,9 +190,12 @@ body {
   align-items: center;
   height: 34px;
   padding: 0 16px;
-  border: 1px solid rgba(244,246,243,0.42);
+  border: 1px solid rgba(244,246,243,0.55);
   border-radius: 999px;
-  color: rgba(244,246,243,0.86);
+  background: rgba(16,17,15,0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(244,246,243,0.92);
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 400;
@@ -200,15 +203,14 @@ body {
   text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-  mix-blend-mode: difference;
 }
 
 .header-cta:hover {
-  background: rgba(244,246,243,0.9);
-  border-color: rgba(244,246,243,0.9);
+  background: rgba(244,246,243,0.92);
+  border-color: rgba(244,246,243,0.92);
   color: #10110f;
-  mix-blend-mode: normal;
 }
 
 main {
@@ -460,24 +462,34 @@ main {
 .s1-cred-marks {
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 10px 14px;
+  gap: 22px 34px;
   justify-content: center;
+  align-items: flex-end;
 }
-.s1-cred-marks > span {
+.s1-cred-mark {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  height: 26px;
-  padding: 0 12px;
-  border: 1px solid rgba(0,0,0,0.42);
-  border-radius: 999px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  gap: 8px;
   color: rgba(0,0,0,0.82);
-  background: rgba(255,255,255,0.28);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+}
+.s1-cred-mark svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+}
+.s1-cred-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.78);
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .s1-cred-marks { gap: 16px 22px; }
+  .s1-cred-mark svg { width: 34px; height: 34px; }
+  .s1-cred-label { font-size: 9px; letter-spacing: 0.12em; }
 }
 
 .s2-copy {
@@ -752,13 +764,200 @@ main {
   margin-top: 20px;
   min-width: 280px;
   height: 48px;
+  padding: 0 24px;
   border: 1px solid rgba(8,9,8,0.64);
+  border-radius: 999px;
   color: rgba(8,9,8,0.86);
   background: transparent;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.16em;
   text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.cta:hover { background: rgba(8,9,8,0.86); color: #f4f6f3; }
+
+/* CONTACT MODAL */
+.contact-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(8,9,8,0.66);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: contactFade 0.25s ease;
+}
+.contact-overlay[hidden] { display: none; }
+@keyframes contactFade { from { opacity: 0; } to { opacity: 1; } }
+.contact-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: #eeeee8;
+  color: #10110f;
+  border-radius: 18px;
+  padding: 40px 36px 32px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,0,0,0.05);
+  animation: contactRise 0.35s cubic-bezier(.2,.7,.2,1);
+  font-family: var(--mono);
+}
+@keyframes contactRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.contact-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  color: #10110f;
+  opacity: 0.6;
+  transition: opacity 0.2s, background 0.2s;
+}
+.contact-close:hover { opacity: 1; background: rgba(0,0,0,0.06); }
+.contact-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 12px;
+}
+.contact-title {
+  margin: 0 0 8px;
+  font-family: var(--inferi);
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.contact-sub {
+  margin: 0 0 26px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  opacity: 0.72;
+  max-width: 420px;
+}
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.contact-form[hidden] { display: none; }
+.contact-field { display: flex; flex-direction: column; gap: 6px; }
+.contact-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.contact-label em { font-style: normal; color: #b14a3a; }
+.contact-field input,
+.contact-field textarea,
+.contact-select {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: #10110f;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.22);
+  padding: 8px 0;
+  transition: border-color 0.25s ease;
+  resize: vertical;
+}
+.contact-field input:focus,
+.contact-field textarea:focus,
+.contact-select:focus { outline: none; border-bottom-color: #10110f; }
+.contact-field input::placeholder,
+.contact-field textarea::placeholder { color: rgba(0,0,0,0.32); }
+.contact-select-wrap { position: relative; }
+.contact-select { appearance: none; -webkit-appearance: none; padding-right: 22px; cursor: pointer; }
+.contact-select-caret {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.contact-error {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #b14a3a;
+  letter-spacing: 0.02em;
+}
+.contact-error[hidden] { display: none; }
+.contact-submit {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #10110f;
+  color: #f4f6f3;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 22px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: gap 0.3s ease, opacity 0.25s ease;
+}
+.contact-submit:hover:not(:disabled) { gap: 14px; }
+.contact-submit:disabled { opacity: 0.55; cursor: progress; }
+.contact-submit .arrow { font-size: 12px; }
+.contact-meta {
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  text-align: center;
+}
+.contact-meta a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.contact-success { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0 4px; }
+.contact-success[hidden] { display: none; }
+.contact-success-mark {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: #4a7c5c;
+  color: #f4f6f3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.contact-success-title {
+  font-family: var(--inferi);
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+.contact-success-body {
+  font-family: var(--mono);
+  font-size: 12px;
+  opacity: 0.72;
+}
+.contact-success-body em { font-style: normal; color: #10110f; }
+@media (max-width: 600px) {
+  .contact-modal { padding: 30px 22px 24px; }
+  .contact-title { font-size: 24px; }
 }
 
 .site-footer {
@@ -1078,7 +1277,7 @@ main {
   </svg>
   <div class="header-right-group">
     <div class="header-right">by Loka Labs<br>World Model</div>
-    <a class="header-cta" href="mailto:hello@loka.inc">Request a pilot →</a>
+    <button type="button" class="header-cta" id="open-contact">Request a pilot →</button>
   </div>
 </header>
 
@@ -1090,9 +1289,26 @@ main {
       <p class="mono s1-credibility">
         <span class="s1-cred-lead">Built by pioneers in formal verification, distributed systems, and economic systems.</span>
         <span class="s1-cred-marks">
-          <span>Turing Award</span>
-          <span>OSDI Best Paper</span>
-          <span>Harvard · MIT · NUS</span>
+          <span class="s1-cred-mark" title="ACM A.M. Turing Award">
+            <svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 12 L42 12 L42 22 Q42 32 30 34 Q18 32 18 22 Z"/><path d="M12 14 Q8 20 12 26 Q16 30 18 22"/><path d="M48 14 Q52 20 48 26 Q44 30 42 22"/><line x1="30" y1="34" x2="30" y2="44"/><line x1="22" y1="48" x2="38" y2="48"/></g><text x="30" y="18" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-style="italic" fill="currentColor" font-weight="600">ACM</text></svg>
+            <span class="s1-cred-label">Turing Award</span>
+          </span>
+          <span class="s1-cred-mark" title="OSDI / USENIX Best Paper">
+            <svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="30" cy="30" r="18"/><path d="M13 30 A17 8 0 0 0 47 30" stroke-width="1"/><path d="M13 30 A17 8 0 0 1 47 30" stroke-width="1"/><line x1="12" y1="30" x2="48" y2="30" stroke-width="1"/><line x1="30" y1="12" x2="30" y2="48" stroke-width="1"/></g><text x="30" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="9" font-weight="700" fill="currentColor">OSDI</text></svg>
+            <span class="s1-cred-label">Best Paper</span>
+          </span>
+          <span class="s1-cred-mark" title="Harvard University">
+            <svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 14 L46 14 L46 34 Q46 46 30 52 Q14 46 14 34 Z"/></g><text x="30" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-weight="700" fill="currentColor" letter-spacing="0.5">VE</text><text x="30" y="34" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-weight="700" fill="currentColor" letter-spacing="0.5">RI</text><text x="30" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-weight="700" fill="currentColor" letter-spacing="0.5">TAS</text></svg>
+            <span class="s1-cred-label">Harvard</span>
+          </span>
+          <span class="s1-cred-mark" title="Massachusetts Institute of Technology">
+            <svg viewBox="0 0 80 60" aria-hidden="true"><g fill="currentColor"><rect x="6" y="20" width="8" height="26"/><rect x="18" y="14" width="8" height="32"/><rect x="30" y="24" width="8" height="22"/><rect x="42" y="16" width="8" height="30"/><rect x="54" y="20" width="8" height="26"/><rect x="66" y="12" width="8" height="34"/></g></svg>
+            <span class="s1-cred-label">MIT</span>
+          </span>
+          <span class="s1-cred-mark" title="National University of Singapore">
+            <svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 14 L48 14 L48 40 Q48 48 30 52 Q12 48 12 40 Z"/><path d="M20 22 L20 40 M20 22 L32 40 M32 22 L32 40" stroke-width="2.2" stroke-linecap="round"/></g></svg>
+            <span class="s1-cred-label">NUS</span>
+          </span>
         </span>
       </p>
     </div>
@@ -1187,7 +1403,7 @@ main {
       <p class="mono proof-line">Formal Verification (2007 Turing Award)<br>&amp; Distributed AI at Scale (NSDI/OSDI).</p>
       <h2 class="serif">Simulation is not an improvement.<br>It is a prerequisite.</h2>
       <p class="mono">Data sovereignty by design.<br>Runs entirely on client infrastructure.</p>
-      <a class="cta" href="#final">Initiate Sovereign Node</a>
+      <button type="button" class="cta" id="open-contact-cta">Request a pilot →</button>
     </div>
     <footer class="site-footer">
       <a href="#s1">Loka Link 1</a>
@@ -1196,6 +1412,61 @@ main {
     </footer>
   </section>
 </main>
+
+<div class="contact-overlay" id="contact-overlay" hidden role="dialog" aria-modal="true">
+  <div class="contact-modal" id="contact-modal">
+    <button class="contact-close" id="contact-close" aria-label="Close">×</button>
+    <div class="contact-eyebrow">— Contact</div>
+    <h2 class="contact-title">Request a Loka pilot.</h2>
+    <p class="contact-sub">For institutional partnerships, research collaborations, simulation pilots, or investor inquiries — tell us what you're exploring.</p>
+
+    <form class="contact-form" id="contact-form">
+      <label class="contact-field">
+        <span class="contact-label">I'm reaching out about</span>
+        <div class="contact-select-wrap">
+          <select name="topic" class="contact-select">
+            <option value="Simulation pilot">Simulation pilot</option>
+            <option value="Strategic partnership">Strategic partnership</option>
+            <option value="Research collaboration">Research collaboration</option>
+            <option value="Investor inquiry">Investor inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="contact-select-caret">▼</span>
+        </div>
+      </label>
+      <label class="contact-field">
+        <span class="contact-label">Name</span>
+        <input type="text" name="name" placeholder="Your name" autocomplete="name">
+      </label>
+      <label class="contact-field">
+        <span class="contact-label">Email <em>*</em></span>
+        <input type="email" name="email" required placeholder="you@domain.com" autocomplete="email">
+      </label>
+      <label class="contact-field">
+        <span class="contact-label">Organization</span>
+        <input type="text" name="organization" placeholder="Company / institution" autocomplete="organization">
+      </label>
+      <label class="contact-field">
+        <span class="contact-label">Message <em>*</em></span>
+        <textarea name="message" required rows="4" placeholder="Briefly describe what you'd like to explore."></textarea>
+      </label>
+      <div class="contact-error" id="contact-error" hidden></div>
+      <button type="submit" class="contact-submit" id="contact-submit">
+        <span id="contact-submit-label">Submit inquiry</span>
+        <span class="arrow">→</span>
+      </button>
+      <div class="contact-meta">Or email us directly at <a href="mailto:hello@loka.inc">hello@loka.inc</a></div>
+    </form>
+
+    <div class="contact-success" id="contact-success" hidden>
+      <div class="contact-success-mark">✓</div>
+      <div>
+        <div class="contact-success-title">Message received.</div>
+        <div class="contact-success-body">We'll be in touch at <em id="contact-success-email"></em> shortly.</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -2020,6 +2291,84 @@ window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlo
 
   render();
   window.addEventListener("resize", render);
+})();
+
+/* Contact modal + web3forms submission */
+(function contactModal() {
+  const overlay = document.getElementById('contact-overlay');
+  if (!overlay) return;
+  const closeBtn = document.getElementById('contact-close');
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('contact-success');
+  const successEmail = document.getElementById('contact-success-email');
+  const errBox = document.getElementById('contact-error');
+  const submit = document.getElementById('contact-submit');
+  const submitLabel = document.getElementById('contact-submit-label');
+  const WEB3FORMS_ACCESS_KEY = '3181ff54-df0a-4280-9f85-33c11d4b064e';
+
+  function open() {
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+    form.hidden = false;
+    success.hidden = true;
+    errBox.hidden = true;
+    form.reset();
+    submitLabel.textContent = 'Submit inquiry';
+    submit.disabled = false;
+  }
+
+  ['open-contact', 'open-contact-cta'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', open);
+  });
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.hidden) close(); });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submit.disabled = true;
+    submitLabel.textContent = 'Sending…';
+    errBox.hidden = true;
+    const fd = new FormData(form);
+    const topic = fd.get('topic') || 'General inquiry';
+    const org = fd.get('organization') || '';
+    const messageBody = `Topic: ${topic}\nOrganization: ${org}\n\n${fd.get('message') || ''}`;
+    const payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: `[${topic}] ${fd.get('name') || fd.get('email')} — loka.inc`,
+      from_name: fd.get('name') || 'loka.inc visitor',
+      email: fd.get('email'),
+      message: messageBody,
+    };
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data.success) {
+        successEmail.textContent = payload.email;
+        form.hidden = true;
+        success.hidden = false;
+      } else {
+        errBox.textContent = data.message || 'Something went wrong.';
+        errBox.hidden = false;
+        submit.disabled = false;
+        submitLabel.textContent = 'Submit inquiry';
+      }
+    } catch (err) {
+      errBox.textContent = err.message || 'Network error.';
+      errBox.hidden = false;
+      submit.disabled = false;
+      submitLabel.textContent = 'Submit inquiry';
+    }
+  });
 })();
 </script>
 </body>
