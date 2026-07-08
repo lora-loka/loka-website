@@ -138,6 +138,7 @@ body {
 }
 
 .global-section-line {
+  display: none;
   position: fixed;
   left: 50%;
   bottom: var(--line-bottom);
@@ -604,13 +605,13 @@ main {
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(14px, 2vh, 20px) 32px;
+  gap: clamp(28px, 4vh, 44px) 56px;
 }
 .team-member {
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 1.4vh, 12px);
-  padding: clamp(10px, 1.6vh, 16px) 0 0;
+  gap: clamp(14px, 2vh, 20px);
+  padding: clamp(18px, 2.4vh, 26px) 0 0;
   border-top: 1px solid rgba(244,246,243,0.28);
 }
 .team-photo {
@@ -634,12 +635,12 @@ main {
 .team-body {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 14px;
 }
 .team-heading {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
 }
 .team-name {
   margin: 0;
@@ -662,8 +663,8 @@ main {
   margin: 0;
   font-family: var(--mono);
   font-size: 11px;
-  line-height: 1.55;
-  color: rgba(244,246,243,0.7);
+  line-height: 1.7;
+  color: rgba(244,246,243,0.72);
 }
 @media (max-width: 900px) {
   .team-grid { grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.6vh, 14px) 20px; }
@@ -801,6 +802,175 @@ main {
   .layer-glyph { max-width: 140px; margin-bottom: 12px; }
 }
 
+/* LADDER OF CAUSATION (s4 architecture) */
+.arch-stack--ladder .ladder-stage-wrap {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  align-items: start;
+  width: 100%;
+  max-width: 1160px;
+  margin-top: 20px;
+}
+.rung-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rung-btn {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 14px 16px;
+  background: rgba(244,246,243,0.06);
+  border: 1px solid rgba(244,246,243,0.18);
+  color: rgba(244,246,243,0.86);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.rung-btn:hover { background: rgba(244,246,243,0.12); border-color: rgba(244,246,243,0.32); }
+.rung-btn .rung-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  opacity: 0.6;
+}
+.rung-btn .rung-name {
+  font-family: var(--inferi);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.rung-btn .rung-verb {
+  grid-column: 2;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-top: 4px;
+}
+.rung-btn.active {
+  background: rgba(244,246,243,0.94);
+  border-color: rgba(244,246,243,0.94);
+  color: #10110f;
+}
+.rung-btn.active .rung-num,
+.rung-btn.active .rung-verb { opacity: 0.7; }
+
+.ladder-stage {
+  position: relative;
+  padding: 20px 24px 16px;
+  background: rgba(244,246,243,0.04);
+  border: 1px solid rgba(244,246,243,0.18);
+  display: flex;
+  flex-direction: column;
+  min-height: 460px;
+}
+.stage-tab {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244,246,243,0.62);
+  margin-bottom: 10px;
+}
+.dag-svg {
+  width: 100%;
+  height: 300px;
+  display: block;
+  color: rgba(244,246,243,0.88);
+}
+.dag-svg .node-circle {
+  fill: rgba(244,246,243,0.92);
+  stroke: rgba(244,246,243,0.92);
+  stroke-width: 1.2;
+  transition: fill 0.5s ease, stroke 0.5s ease;
+}
+.dag-svg .node-circle.intervened {
+  fill: #10110f;
+  stroke: rgba(244,246,243,0.94);
+  stroke-width: 1.6;
+}
+.dag-svg .node-label {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 14px;
+  fill: #10110f;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+.dag-svg .node-label.intervened { fill: rgba(244,246,243,0.94); }
+.dag-svg .node-tag {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
+  fill: rgba(244,246,243,0.62);
+  text-anchor: middle;
+}
+.dag-svg .edge {
+  stroke: rgba(244,246,243,0.75);
+  stroke-width: 1.3;
+  fill: none;
+  transition: stroke-dasharray 0.6s ease, opacity 0.6s ease;
+}
+.dag-svg .edge-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  fill: rgba(244,246,243,0.68);
+  text-anchor: middle;
+}
+.dag-svg .scissor {
+  stroke: #ff8a5b;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.stage-readout {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(244,246,243,0.18);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.readout-q {
+  font-family: var(--inferi);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.4;
+  color: rgba(244,246,243,0.9);
+}
+.readout-desc {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.55;
+  color: rgba(244,246,243,0.7);
+}
+.readout-formula {
+  font-family: var(--mono);
+  font-size: 11px;
+  margin-top: 6px;
+  color: rgba(244,246,243,0.6);
+  letter-spacing: 0.06em;
+}
+@media (max-width: 1000px) {
+  .arch-stack--ladder .ladder-stage-wrap { grid-template-columns: 1fr; }
+  .rung-list { flex-direction: row; gap: 8px; flex-wrap: wrap; }
+  .rung-btn { flex: 1 1 auto; grid-template-columns: 2rem 1fr; padding: 10px 12px; }
+  .rung-btn .rung-name { font-size: 18px; }
+  .rung-btn .rung-verb { display: none; }
+  .ladder-stage { min-height: 360px; padding: 16px; }
+  .dag-svg { height: 220px; }
+  .stage-readout { grid-template-columns: 1fr; gap: 10px; }
+}
+
 .layer-meta {
   display: flex;
   justify-content: space-between;
@@ -852,27 +1022,51 @@ main {
 .arch-stack {
   position: absolute;
   left: var(--edge-x);
-  right: var(--edge-x);
   top: 0;
+  width: calc(100% - 2 * var(--edge-x));
+  max-width: 1160px;
   height: 100svh;
   z-index: 4;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: clamp(16px, 3vh, 40px);
-  padding: clamp(72px, 10vh, 112px) 0 calc(var(--line-bottom) + var(--line-height));
+  justify-content: flex-start;
+  gap: clamp(20px, 3vh, 36px);
+  padding: clamp(128px, 16vh, 172px) 0 calc(var(--line-bottom) + var(--line-height));
 }
 .s4-copy--architecture {
   position: static;
   top: auto;
   left: auto;
-  width: min(760px, 84vw);
+  width: min(760px, 78vw);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.6vh, 18px);
 }
-.s4-copy--architecture h2 { color: rgba(244,246,243,0.9); }
+.s4-copy--architecture .kicker { margin-bottom: 0; }
+.s4-copy--architecture h2 { color: rgba(244,246,243,0.9); margin: 0; }
 .s4-lede {
-  margin-top: clamp(14px, 2vh, 24px);
+  margin: 0;
   color: rgba(244,246,243,0.7);
-  max-width: 620px;
+  max-width: 640px;
+}
+/* Explore link floats at the top-right of the panel, aligned with the kicker.
+   Double-class selector to beat the generic .s4-explore rule that comes after. */
+.s4-explore.s4-explore--inline {
+  position: absolute;
+  right: 0;
+  top: clamp(240px, 32vh, 360px);
+  margin-top: 0;
+  align-self: auto;
+  z-index: 5;
+}
+@media (max-width: 900px) {
+  .s4-explore.s4-explore--inline {
+    position: static;
+    right: auto;
+    top: auto;
+    margin-top: 8px;
+    align-self: flex-start;
+  }
 }
 .arch-stack .layers {
   position: static;
@@ -945,21 +1139,39 @@ main {
 }
 
 /* RESEARCH (s5) */
-.s5-copy--research { top: 14vh; width: min(760px, 82vw); }
+.s5-copy--research { top: 8vh; width: min(760px, 82vw); }
+.s5-copy--research h2 { font-size: clamp(28px, 3.4vw, 44px) !important; }
+.s5-copy--research > p { margin-top: 16px; max-width: 560px; }
 .research-grid {
   position: absolute;
   left: var(--edge-x);
   top: 46vh;
   z-index: 4;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 300px));
-  gap: 34px;
-  width: min(960px, 86vw);
+  grid-template-columns: repeat(3, minmax(0, 320px));
+  gap: 24px 34px;
+  width: min(1040px, 88vw);
+}
+@media (max-height: 820px) {
+  .s5-copy--research { top: 5vh; }
+  .research-grid { top: 40vh; }
 }
 .research-card {
+  display: block;
   padding-top: 22px;
   border-top: 1px solid rgba(244,246,243,0.48);
   color: rgba(244,246,243,0.86);
+  text-decoration: none;
+  transition: border-color 0.25s ease, transform 0.35s cubic-bezier(.2,.7,.2,1);
+}
+.research-card:hover {
+  border-top-color: rgba(244,246,243,0.9);
+  transform: translateY(-2px);
+}
+.research-card:hover h3 { color: rgba(244,246,243,1); }
+.research-card:hover .research-tag {
+  color: rgba(244,246,243,0.95);
+  border-color: rgba(244,246,243,0.95);
 }
 .research-meta {
   display: flex;
@@ -1654,11 +1866,21 @@ main {
   /* ARCHITECTURE — no nested scroll; compress the stack into one screen. */
   .arch-stack {
     top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
     height: 100svh !important;
     overflow-y: visible !important;
-    justify-content: center !important;
-    padding: clamp(56px, 8vh, 80px) 24px calc(var(--line-bottom) + var(--line-height)) !important;
-    gap: 10px !important;
+    justify-content: flex-start !important;
+    padding: clamp(140px, 20vh, 180px) 24px calc(var(--line-bottom) + var(--line-height)) !important;
+    gap: 12px !important;
+  }
+  .s4-explore.s4-explore--inline {
+    position: static !important;
+    right: auto !important;
+    top: auto !important;
+    margin-top: 6px !important;
+    align-self: flex-start !important;
   }
   .s4-copy--architecture h2 { font-size: 23px !important; }
   .s4-lede { font-size: 10.5px !important; margin-top: 6px !important; }
@@ -1670,8 +1892,38 @@ main {
   .layer-card p { font-size: 9.5px !important; line-height: 1.4 !important; }
   .s4-explore { margin-top: 10px !important; font-size: 10px !important; padding: 7px 14px !important; }
 
-  /* RESEARCH — pull grid up and tighten. */
-  .research-grid { top: 30vh !important; gap: 12px !important; }
+  /* RESEARCH — keep section at fixed 100svh so the page-level scroll math
+     (rawIndex = scrollY / panelHeight, used by every text-fade animation)
+     stays valid. Overflow scrolls INTERNALLY within the panel. */
+  #research {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100svh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .s5-copy--research {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: clamp(96px, 14vh, 120px) 24px 0 !important;
+  }
+  .s5-copy--research h2 { font-size: 22px !important; margin: 10px 0 0 !important; }
+  .s5-copy--research .kicker { margin-bottom: 0 !important; }
+  .s5-copy--research > p { font-size: 10.5px !important; line-height: 1.5 !important; max-width: none !important; margin: 10px 0 0 !important; }
+  .research-grid {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 18px 24px calc(var(--line-bottom) + var(--line-height)) !important;
+  }
   .research-card { padding-top: 10px !important; }
   .research-meta { margin-bottom: 8px !important; }
   .research-card h3 { font-size: 15px !important; margin-bottom: 6px !important; }
@@ -1800,7 +2052,6 @@ main {
       <h2 class="serif">The people behind<br>Loka Labs.</h2>
       <div class="team-grid">
       <article class="team-member">
-        <div class="team-photo team-photo--mono" aria-hidden="true"><span>JS</span></div>
         <div class="team-body">
           <div class="team-heading">
             <h3 class="team-name">Joseph Sifakis</h3>
@@ -1810,7 +2061,6 @@ main {
         </div>
       </article>
       <article class="team-member">
-        <div class="team-photo team-photo--mono" aria-hidden="true"><span>LJ</span></div>
         <div class="team-body">
           <div class="team-heading">
             <h3 class="team-name">Lora Jiang</h3>
@@ -1820,7 +2070,6 @@ main {
         </div>
       </article>
       <article class="team-member">
-        <div class="team-photo team-photo--mono" aria-hidden="true"><span>AZ</span></div>
         <div class="team-body">
           <div class="team-heading">
             <h3 class="team-name">Akasha Zhu</h3>
@@ -1830,7 +2079,6 @@ main {
         </div>
       </article>
       <article class="team-member">
-        <div class="team-photo team-photo--mono" aria-hidden="true"><span>JL</span></div>
         <div class="team-body">
           <div class="team-heading">
             <h3 class="team-name">Jialin Li</h3>
@@ -1840,7 +2088,6 @@ main {
         </div>
       </article>
       <article class="team-member">
-        <div class="team-photo team-photo--mono" aria-hidden="true"><span>FO</span></div>
         <div class="team-body">
           <div class="team-heading">
             <h3 class="team-name">Felix Oberholzer</h3>
@@ -1856,75 +2103,59 @@ main {
 
   <section class="panel" id="architecture">
     <div class="panel-bg s4-bg"></div>
-    <div class="arch-stack">
+    <div class="arch-stack arch-stack--ladder">
     <div class="content s4-copy s4-copy--architecture">
-      <div class="kicker">Architecture</div>
-      <h2 class="serif">Others stop at Layer 1.<br>Loka Labs has all three.</h2>
-      <p class="mono s4-lede">A vertically-integrated causal stack — the deterministic guardrails for a stochastic world.</p>
+      <div class="kicker">Architecture · Pearl hierarchy</div>
+      <h2 class="serif">Three rungs.<br>One causal substrate.</h2>
+      <p class="mono s4-lede">Architected upon Judea Pearl's Hierarchy of Causality — we discard correlative guessing for structural understanding. The stage below auto-advances through each rung; click a rung to pin it.</p>
     </div>
-    <div class="layers">
-      <article class="layer-card">
-        <svg class="layer-glyph" viewBox="0 0 120 80" aria-hidden="true">
-          <g fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.85">
-            <circle cx="20" cy="20" r="3"/><circle cx="60" cy="14" r="3"/><circle cx="100" cy="24" r="3"/>
-            <circle cx="34" cy="46" r="3"/><circle cx="74" cy="40" r="3"/>
-            <circle cx="22" cy="66" r="3"/><circle cx="60" cy="70" r="3"/><circle cx="98" cy="60" r="3"/>
-            <line x1="20" y1="20" x2="60" y2="14" opacity="0.35"/>
-            <line x1="60" y1="14" x2="100" y2="24" opacity="0.35"/>
-            <line x1="20" y1="20" x2="34" y2="46" opacity="0.5"/>
-            <line x1="34" y1="46" x2="74" y2="40" opacity="0.5"/>
-            <line x1="74" y1="40" x2="100" y2="24" opacity="0.35"/>
-            <line x1="34" y1="46" x2="22" y2="66" opacity="0.5"/>
-            <line x1="74" y1="40" x2="60" y2="70" opacity="0.5"/>
-            <line x1="60" y1="70" x2="98" y2="60" opacity="0.35"/>
-            <line x1="22" y1="66" x2="60" y2="70" opacity="0.35"/>
-          </g>
-        </svg>
-        <div class="layer-meta"><span>Layer 1</span><span class="layer-tag">Associational</span></div>
-        <h3>Behavioral<br>Simulation</h3>
-        <p class="mono">Models heterogeneous actors. Outputs state-space evolution: how environments change, from t to t+1.</p>
-      </article>
-      <article class="layer-card">
-        <svg class="layer-glyph" viewBox="0 0 120 80" aria-hidden="true">
-          <g fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.85">
-            <line x1="10" y1="66" x2="110" y2="66" opacity="0.4"/>
-            <line x1="10" y1="66" x2="10" y2="14" opacity="0.4"/>
-            <path d="M 12 58 Q 28 54 40 48 T 68 32 T 96 18 L 108 12"/>
-            <circle cx="12" cy="58" r="2" fill="currentColor" stroke="none"/>
-            <circle cx="40" cy="48" r="2" fill="currentColor" stroke="none"/>
-            <circle cx="68" cy="32" r="2" fill="currentColor" stroke="none"/>
-            <circle cx="96" cy="18" r="2" fill="currentColor" stroke="none"/>
-            <path d="M 60 14 L 60 22 M 60 22 L 56 18 M 60 22 L 64 18" opacity="0.6"/>
-            <path d="M 74 46 L 82 40 M 82 40 L 78 39 M 82 40 L 82 44" opacity="0.5"/>
-          </g>
-        </svg>
-        <div class="layer-meta"><span>Layer 2</span><span class="layer-tag">Interventional</span></div>
-        <h3>Economic<br>Engine</h3>
-        <p class="mono">The physics of an economy. Forces changes to propagate through the agent network, revealing second-order effects.</p>
-      </article>
-      <article class="layer-card">
-        <svg class="layer-glyph" viewBox="0 0 120 80" aria-hidden="true">
-          <g fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.85">
-            <path d="M 20 20 L 40 20 L 40 60 L 100 60" opacity="0.4"/>
-            <path d="M 20 20 L 20 60" opacity="0.4"/>
-            <rect x="52" y="14" width="46" height="16" opacity="0.5"/>
-            <path d="M 58 22 L 62 26 L 72 18" stroke-width="1.4"/>
-            <rect x="30" y="34" width="46" height="16" opacity="0.4"/>
-            <text x="34" y="44" font-family="Georgia, serif" font-style="italic" font-size="9" fill="currentColor" opacity="0.7">∀x</text>
-            <text x="46" y="44" font-family="Georgia, serif" font-style="italic" font-size="9" fill="currentColor" opacity="0.6">φ(x)</text>
-            <path d="M 84 62 L 88 66 L 96 56" stroke-width="1.4"/>
-          </g>
-        </svg>
-        <div class="layer-meta"><span>Layer 3</span><span class="layer-tag">Counterfactual</span></div>
-        <h3>Formal<br>Verification</h3>
-        <p class="mono">Mathematically proves properties hold. Results are not just probable. They are provable.</p>
-      </article>
-    </div>
-    <a class="s4-explore" href="https://lokaworld.vercel.app/" target="_blank" rel="noreferrer">
+    <a class="s4-explore s4-explore--inline" href="https://world.loka.cash/" target="_blank" rel="noreferrer">
       <span>Explore LokaWorld</span>
       <span class="beta-tag">beta</span>
       <span class="arrow">→</span>
     </a>
+    <div class="ladder-stage-wrap">
+      <div class="rung-list">
+        <button type="button" class="rung-btn active" data-rung="1">
+          <span class="rung-num">01 →</span>
+          <span class="rung-name">Association</span>
+          <span class="rung-verb">Seeing · Observing</span>
+        </button>
+        <button type="button" class="rung-btn" data-rung="2">
+          <span class="rung-num">02 →</span>
+          <span class="rung-name">Intervention</span>
+          <span class="rung-verb">Doing · Intervening</span>
+        </button>
+        <button type="button" class="rung-btn" data-rung="3">
+          <span class="rung-num">03 →</span>
+          <span class="rung-name">Counterfactual</span>
+          <span class="rung-verb">Imagining · Retrospection</span>
+        </button>
+      </div>
+      <div class="ladder-stage">
+        <div class="stage-tab">
+          <span id="stage-tab-label">Rung 01 · Observational</span>
+          <span id="stage-tab-state">P(Y | X)</span>
+        </div>
+        <svg class="dag-svg" viewBox="0 0 600 340" aria-hidden="true">
+          <defs>
+            <marker id="dag-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+          <g id="dag-edges"></g>
+          <g id="dag-nodes"></g>
+          <g id="dag-extras"></g>
+        </svg>
+        <div class="stage-readout">
+          <div class="readout-q" id="readout-q">"How are policy, market, and welfare correlated?"</div>
+          <div>
+            <div class="readout-desc" id="readout-desc">Joint distributions over observed variables. Patterns, not mechanisms.</div>
+            <div class="readout-formula" id="readout-formula">P(Y | X = x)</div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
@@ -1937,21 +2168,30 @@ main {
       <p class="mono">A working record of the causal stack — from formal verification foundations to the empirical calibration of economic worlds.</p>
     </div>
     <div class="research-grid">
-      <article class="research-card">
-        <div class="research-meta"><span>Foundations</span><span class="research-tag">Paper</span></div>
-        <h3>Formal verification of economic mechanisms</h3>
-        <p class="mono">Extending model-checking beyond hardware into the state space of markets and policy interventions.</p>
-      </article>
-      <article class="research-card">
-        <div class="research-meta"><span>Systems</span><span class="research-tag">Paper</span></div>
-        <h3>Distributed agent simulation at planet scale</h3>
-        <p class="mono">Runtime and scheduling architecture for 10⁸-agent causal simulation on commodity clusters.</p>
-      </article>
-      <article class="research-card">
-        <div class="research-meta"><span>Field notes</span><span class="research-tag">Essay</span></div>
-        <h3>The economy as a critical system</h3>
-        <p class="mono">Why the standard of care for economic decisions must catch up to aviation, pharmaceuticals, and chip design.</p>
-      </article>
+      <a class="research-card" href="https://arxiv.org/pdf/2310.08373" target="_blank" rel="noreferrer">
+        <div class="research-meta"><span>arXiv</span><span class="research-tag">PDF ↗</span></div>
+        <h3>Chrono: Verifiable Causality</h3>
+      </a>
+      <a class="research-card" href="https://www.usenix.org/system/files/atc25-he-yongjun.pdf" target="_blank" rel="noreferrer">
+        <div class="research-meta"><span>USENIX ATC '25</span><span class="research-tag">PDF ↗</span></div>
+        <h3>Resource Multiplexing for LLMs</h3>
+      </a>
+      <a class="research-card" href="https://dl.acm.org/doi/pdf/10.1145/3603269.3604874" target="_blank" rel="noreferrer">
+        <div class="research-meta"><span>ACM SIGCOMM</span><span class="research-tag">PDF ↗</span></div>
+        <h3>NeoBFT: In-Network Ordering</h3>
+      </a>
+      <a class="research-card" href="https://arxiv.org/pdf/2405.13349" target="_blank" rel="noreferrer">
+        <div class="research-meta"><span>arXiv</span><span class="research-tag">PDF ↗</span></div>
+        <h3>Verifiable Logical Clock</h3>
+      </a>
+      <a class="research-card" href="https://yao.lu/ai_native.pdf" target="_blank" rel="noreferrer">
+        <div class="research-meta"><span>Whitepaper</span><span class="research-tag">PDF ↗</span></div>
+        <h3>Cloud-Native to AI-Native</h3>
+      </a>
+      <a class="research-card" href="https://www.comp.nus.edu.sg/~lijl/papers/nopaxos-osdi16.pdf" target="_blank" rel="noreferrer">
+        <div class="research-meta"><span>OSDI '16</span><span class="research-tag">PDF ↗</span></div>
+        <h3>NOPaxos</h3>
+      </a>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
@@ -1973,7 +2213,7 @@ main {
       <p class="mono proof-line">Formal Verification (Turing Award)<br>&amp; Distributed AI at Scale (NSDI/OSDI Best Paper).</p>
       <h2 class="serif">Economic simulation for<br>decisions that move worlds.</h2>
       <p class="mono">Loka Labs helps governments, financial institutions, and global event operators stress-test policies, markets, and large-scale events before they unfold in the real world.</p>
-      <a class="cta cta--explore" href="https://lokaworld.vercel.app/" target="_blank" rel="noreferrer">
+      <a class="cta cta--explore" href="https://world.loka.cash/" target="_blank" rel="noreferrer">
         <span>Explore LokaWorld</span>
         <span class="beta-tag beta-tag--dark">beta</span>
         <span class="arrow">→</span>
@@ -2678,7 +2918,7 @@ panels.forEach((panel, index) => {
     opacitySpeed: isSection2 ? SECTION_2_TITLE_FADE_SPEED : TITLE_FADE_SPEED
   });
 
-  addTextItem(panel, index, ".s1-copy p, .s2-copy cite, .kicker, .s3-copy > p, .team-grid, .s4-detail, .s4-lede, .s4-explore, .s5-copy > p, .layers, .layer-proof, .research-grid, .s6-copy > p, .s7-copy .built-on, .s7-copy .proof-line, .s7-copy > p:not(.proof-line), .cta, .site-footer", {
+  addTextItem(panel, index, ".s1-copy p, .s2-copy cite, .kicker, .s3-copy > p, .team-grid, .s4-detail, .s4-lede, .s4-explore, .ladder-stage-wrap, .s5-copy > p, .layers, .layer-proof, .research-grid, .s6-copy > p, .s7-copy .built-on, .s7-copy .proof-line, .s7-copy > p:not(.proof-line), .cta, .site-footer", {
     enterY: isSection2 ? SECTION_2_BODY_ENTER_Y : BODY_ENTER_Y,
     leaveY: BODY_LEAVE_Y,
     fade: isSection2 ? SECTION_2_BODY_FADE_STRENGTH : BODY_FADE_STRENGTH,
@@ -2880,6 +3120,158 @@ window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlo
 
   render();
   window.addEventListener("resize", render);
+})();
+
+/* Ladder of Causation — interactive DAG for the Architecture panel */
+(function ladderDAG() {
+  const edgesG = document.getElementById('dag-edges');
+  const nodesG = document.getElementById('dag-nodes');
+  const extrasG = document.getElementById('dag-extras');
+  if (!edgesG || !nodesG || !extrasG) return;
+  const tabLabel = document.getElementById('stage-tab-label');
+  const tabState = document.getElementById('stage-tab-state');
+  const roQ = document.getElementById('readout-q');
+  const roDesc = document.getElementById('readout-desc');
+  const roFormula = document.getElementById('readout-formula');
+  const btns = document.querySelectorAll('.rung-btn');
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const NODES = {
+    P: { tag: 'Policy', x: 165, y: 190 },
+    M: { tag: 'Market', x: 300, y: 100 },
+    W: { tag: 'Welfare', x: 435, y: 190 },
+    C: { tag: 'Confound', x: 300, y: 270 },
+  };
+  const RUNGS = {
+    1: { tab: 'Rung 01 · Observational', state: 'P(Y | X)', q: '"How are policy, market, and welfare correlated?"', desc: 'Joint distributions over observed variables. Patterns, not mechanisms.', formula: 'P(Y | X = x)' },
+    2: { tab: 'Rung 02 · Interventional', state: 'P(Y | do(X))', q: '"If I execute policy do(P), how does the system react?"', desc: 'Sever P from its causes, fix its value, and propagate the consequence through the structural model.', formula: 'P(Y | do(X = x))' },
+    3: { tab: 'Rung 03 · Counterfactual', state: 'P(Yₓ | X = x′, Y = y′)', q: '"What would welfare have been, had we chosen otherwise?"', desc: 'A factual world and a counterfactual twin run in parallel. The system imagines alternate histories and quantifies regret.', formula: 'P(Y_{P=1} | P=0, observed)' },
+  };
+
+  function el(tag, attrs, parent) {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) {
+      if (k === 'text') n.textContent = attrs[k];
+      else n.setAttribute(k, attrs[k]);
+    }
+    parent.appendChild(n);
+    return n;
+  }
+  function node(parent, x, y, label, tag, opts = {}) {
+    const intervened = !!opts.intervened;
+    el('circle', { cx: x, cy: y, r: opts.r || 22, class: 'node-circle' + (intervened ? ' intervened' : ''), opacity: opts.opacity || 1 }, parent);
+    el('text', { x, y, class: 'node-label' + (intervened ? ' intervened' : ''), opacity: opts.labelOp || 1, text: label }, parent);
+    if (tag) el('text', { x, y: y + (opts.r || 22) + 16, class: 'node-tag', text: tag }, parent);
+  }
+  function edge(parent, ax, ay, bx, by, opts = {}) {
+    const e = el('line', { x1: ax, y1: ay, x2: bx, y2: by, class: 'edge' }, parent);
+    if (opts.dashed) e.setAttribute('stroke-dasharray', '4 5');
+    else e.setAttribute('marker-end', 'url(#dag-arrow)');
+    if (opts.opacity != null) e.setAttribute('opacity', opts.opacity);
+    if (opts.label) el('text', { x: (ax + bx) / 2, y: (ay + by) / 2 - 8, class: 'edge-label', text: opts.label }, parent);
+  }
+
+  function render(n) {
+    edgesG.innerHTML = '';
+    nodesG.innerHTML = '';
+    extrasG.innerHTML = '';
+    const cfg = RUNGS[n];
+    tabLabel.textContent = cfg.tab;
+    tabState.textContent = cfg.state;
+    roQ.textContent = cfg.q;
+    roDesc.textContent = cfg.desc;
+    roFormula.textContent = cfg.formula;
+
+    const { P, M, W, C } = NODES;
+    if (n === 1) {
+      edge(edgesG, P.x, P.y, M.x, M.y, { dashed: true, label: 'ρ ≈ 0.62' });
+      edge(edgesG, M.x, M.y, W.x, W.y, { dashed: true, label: 'ρ ≈ 0.48' });
+      edge(edgesG, C.x, C.y, P.x, P.y, { dashed: true, opacity: 0.7 });
+      edge(edgesG, C.x, C.y, W.x, W.y, { dashed: true, opacity: 0.7 });
+      node(nodesG, P.x, P.y, 'P', P.tag);
+      node(nodesG, M.x, M.y, 'M', M.tag);
+      node(nodesG, W.x, W.y, 'W', W.tag);
+      node(nodesG, C.x, C.y, 'C', C.tag);
+    } else if (n === 2) {
+      edge(edgesG, C.x, C.y, P.x, P.y, { dashed: true, opacity: 0.18 });
+      const mx = (P.x + C.x) / 2, my = (P.y + C.y) / 2;
+      el('line', { x1: mx - 10, y1: my - 10, x2: mx + 10, y2: my + 10, class: 'scissor' }, edgesG);
+      el('line', { x1: mx + 10, y1: my - 10, x2: mx - 10, y2: my + 10, class: 'scissor' }, edgesG);
+      edge(edgesG, C.x, C.y, W.x, W.y, { opacity: 0.55 });
+      edge(edgesG, P.x, P.y, M.x, M.y, { label: 'β = 0.71' });
+      edge(edgesG, M.x, M.y, W.x, W.y, { label: 'β = 0.54' });
+      el('text', { x: P.x, y: P.y - 38, class: 'node-tag', 'text-anchor': 'middle', text: 'do( P )' }, extrasG);
+      node(nodesG, P.x, P.y, 'P', P.tag, { intervened: true });
+      node(nodesG, M.x, M.y, 'M', M.tag);
+      node(nodesG, W.x, W.y, 'W', W.tag);
+      node(nodesG, C.x, C.y, 'C', C.tag, { opacity: 0.55, labelOp: 0.55 });
+    } else if (n === 3) {
+      const F = { P: { x: 70, y: 180 }, M: { x: 150, y: 100 }, W: { x: 230, y: 180 } };
+      const G = { P: { x: 370, y: 180 }, M: { x: 450, y: 100 }, W: { x: 530, y: 180 } };
+      el('text', { x: 150, y: 38, class: 'node-tag', 'text-anchor': 'middle', text: 'Factual  ·  P = 1' }, extrasG);
+      el('text', { x: 450, y: 38, class: 'node-tag', 'text-anchor': 'middle', text: 'Counterfactual  ·  P = 0' }, extrasG);
+      el('line', { x1: 300, y1: 60, x2: 300, y2: 290, stroke: 'rgba(244,246,243,0.3)', 'stroke-width': 1, 'stroke-dasharray': '2 6' }, extrasG);
+      edge(edgesG, F.P.x, F.P.y, F.M.x, F.M.y, {});
+      edge(edgesG, F.M.x, F.M.y, F.W.x, F.W.y, {});
+      node(nodesG, F.P.x, F.P.y, 'P', '', { r: 19, intervened: true });
+      node(nodesG, F.M.x, F.M.y, 'M', '', { r: 19 });
+      node(nodesG, F.W.x, F.W.y, 'W', '', { r: 19 });
+      el('text', { x: F.W.x, y: F.W.y + 35, class: 'node-tag', text: 'W = 0.71' }, extrasG);
+      edge(edgesG, G.P.x, G.P.y, G.M.x, G.M.y, { opacity: 0.55 });
+      edge(edgesG, G.M.x, G.M.y, G.W.x, G.W.y, { opacity: 0.55 });
+      node(nodesG, G.P.x, G.P.y, 'P′', '', { r: 19 });
+      node(nodesG, G.M.x, G.M.y, 'M′', '', { r: 19, opacity: 0.7, labelOp: 0.7 });
+      node(nodesG, G.W.x, G.W.y, 'W′', '', { r: 19, opacity: 0.7, labelOp: 0.7 });
+      el('text', { x: G.W.x, y: G.W.y + 35, class: 'node-tag', text: "W′ = 0.43" }, extrasG);
+      el('path', { d: 'M 230 220 Q 300 250 370 220', fill: 'none', stroke: 'rgba(244,246,243,0.45)', 'stroke-width': 1, 'stroke-dasharray': '3 4' }, extrasG);
+      el('text', { x: 300, y: 268, class: 'edge-label', 'text-anchor': 'middle', text: 'ΔW = +0.28 (regret)', style: 'fill: #ff8a5b; font-weight: 500;' }, extrasG);
+    }
+  }
+
+  let current = 1;
+  let autoTimer = null;
+  let userPinned = false;
+
+  function activate(rung) {
+    current = rung;
+    btns.forEach((x) => x.classList.toggle('active', parseInt(x.dataset.rung, 10) === rung));
+    render(rung);
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(() => {
+      if (userPinned) return;
+      activate(current === 3 ? 1 : current + 1);
+    }, 3600);
+  }
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+  btns.forEach((b) => {
+    b.addEventListener('click', () => {
+      userPinned = true;
+      stopAuto();
+      activate(parseInt(b.dataset.rung, 10));
+    });
+  });
+
+  activate(1);
+
+  // Start auto-advance only when the panel scrolls into view; stop when it leaves
+  const panel = document.getElementById('architecture');
+  if ('IntersectionObserver' in window && panel) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !userPinned) startAuto();
+        else stopAuto();
+      });
+    }, { threshold: 0.45 });
+    obs.observe(panel);
+  } else {
+    startAuto();
+  }
 })();
 
 /* Contact modal + web3forms submission */
