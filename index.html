@@ -67,12 +67,15 @@
   --line-height: 64px;
   --line-clearance: 20px;
   --line-safe-bottom: calc(var(--line-bottom) + var(--line-height) + var(--line-clearance));
+  /* Fixed header footprint: content on scrolling mobile panels must clear this
+     so the logo / GET IN TOUCH button never overlap section titles. */
+  --header-clear: 92px;
 }
 
 html {
   min-height: 100%;
   scroll-behavior: auto;
-  scroll-snap-type: none;
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -169,6 +172,13 @@ body {
   color: currentColor;
 }
 
+.header-right-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  pointer-events: auto;
+}
+
 .header-right {
   color: rgba(246,247,241,0.46);
   font-size: var(--tiny);
@@ -176,6 +186,34 @@ body {
   line-height: 1.65;
   letter-spacing: 0.08em;
   text-align: right;
+}
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid rgba(244,246,243,0.55);
+  border-radius: 999px;
+  background: rgba(16,17,15,0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(244,246,243,0.92);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.header-cta:hover {
+  background: rgba(244,246,243,0.92);
+  border-color: rgba(244,246,243,0.92);
+  color: #10110f;
 }
 
 main {
@@ -189,6 +227,8 @@ main {
   min-height: 680px;
   overflow: hidden;
   isolation: isolate;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .panel-bg {
@@ -385,15 +425,36 @@ main {
   text-align: center;
 }
 
-.s1-copy h1 {
+.s1-title-group {
   position: absolute;
-  top: 55vh;
+  top: 46vh;
   left: 50%;
   width: min(1280px, 92vw);
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.s1-copy h1 {
+  margin: 0;
   color: #cfedd8;
   mix-blend-mode: exclusion;
   font-size: var(--display-xl);
+  line-height: 0.98;
+}
+.s1-copy p.s1-tagline {
+  margin: 0;
+  color: rgba(207,237,216,0.82);
+  mix-blend-mode: exclusion;
+  font-family: var(--inferi);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-align: center;
+  text-transform: none;
 }
 
 .s1-copy p {
@@ -408,6 +469,95 @@ main {
   line-height: 24px;
   letter-spacing: 0.14em;
 }
+@media (max-width: 820px) {
+  .s1-title-group { top: 40vh; }
+  .s1-copy p.s1-tagline { font-size: 18px; }
+}
+
+.s1-credibility {
+  display: flex !important;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  bottom: calc(var(--line-safe-bottom) - 10px) !important;
+  width: min(820px, 90vw) !important;
+  color: rgba(0,0,0,0.78) !important;
+}
+.s1-cred-lead {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  letter-spacing: 0.12em;
+}
+.s1-cred-marks {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 26px 42px;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 6px;
+}
+.s1-cred-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(0,0,0,0.82);
+}
+.s1-cred-svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+  flex-shrink: 0;
+  color: rgba(0,0,0,0.86);
+}
+/* Official brand logos in their original colors. Desktop marks sit on the
+   light gradient band, so the colored logos read fine as-is. */
+.s1-cred-img {
+  width: auto;
+  max-width: 96px;
+  height: 34px;
+  object-fit: contain;
+  object-position: center;
+}
+.s1-cred-caption {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  line-height: 1;
+}
+.s1-cred-kicker {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+.s1-cred-wordmark {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.9);
+  white-space: nowrap;
+}
+.s1-cred-wordmark.serif-mark {
+  font-family: var(--inferi);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: -0.005em;
+  text-transform: none;
+}
+@media (max-width: 820px) {
+  .s1-cred-marks { gap: 14px 24px; }
+  .s1-cred-svg { width: 34px; height: 34px; }
+  .s1-cred-wordmark { font-size: 11px; }
+  .s1-cred-wordmark.serif-mark { font-size: 15px; }
+  .s1-cred-kicker { font-size: 7.5px; }
+}
 
 .s2-copy {
   position: fixed;
@@ -416,6 +566,124 @@ main {
   width: min(1100px, 88vw);
   transform: translateX(-50%);
   text-align: center;
+}
+.s2-copy--definition { text-align: center; }
+.s2-definition {
+  display: block;
+  max-width: 780px;
+  margin: 32px auto 0 !important;
+  color: rgba(244,246,243,0.7) !important;
+  font-family: var(--mono) !important;
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: none !important;
+  font-style: normal;
+}
+
+.content.s3-copy--team {
+  top: 0;
+  bottom: 0;
+  left: var(--edge-x);
+  width: calc(100% - 2 * var(--edge-x));
+  max-width: 1200px;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(88px, 13vh, 132px) 0 var(--line-safe-bottom);
+}
+.s3-copy--team .kicker { margin-bottom: 4px; }
+.s3-copy.s3-copy--team h2 {
+  margin: 0 0 clamp(14px, 2.4vh, 22px);
+  color: rgba(244,246,243,0.9);
+  font-size: clamp(24px, 2.6vw, 34px) !important;
+  line-height: 1.05;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vh, 20px) 32px;
+}
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.4vh, 12px);
+  padding: clamp(10px, 1.6vh, 16px) 0 0;
+  border-top: 1px solid rgba(244,246,243,0.28);
+}
+.team-photo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(244,246,243,0.08);
+  border: 1px solid rgba(244,246,243,0.3);
+}
+.team-photo--mono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--inferi);
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(244,246,243,0.72);
+  letter-spacing: 0.02em;
+}
+.team-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.team-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.team-name {
+  margin: 0;
+  font-family: var(--inferi);
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: rgba(244,246,243,0.96);
+}
+.team-role {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244,246,243,0.58);
+  line-height: 1.4;
+}
+.team-bio {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.55;
+  color: rgba(244,246,243,0.7);
+}
+@media (max-width: 900px) {
+  .team-grid { grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.6vh, 14px) 20px; }
+  .team-name { font-size: 18px; }
+  .team-role { font-size: 9px; }
+  .team-bio { font-size: 10.5px; line-height: 1.5; }
+  .team-photo { width: 36px; height: 36px; }
+  .team-photo--mono { font-size: 13px; }
+}
+/* Narrow screens: 5 members can't fit one viewport in a single column,
+   so let the team block scroll internally instead of being clipped. */
+@media (max-width: 560px) {
+  .s3-copy--team {
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: clamp(70px, 11vh, 96px);
+  }
+  .team-grid { grid-template-columns: 1fr; gap: 12px; }
+  .team-bio { font-size: 10px; }
 }
 
 .s2-copy blockquote {
@@ -521,6 +789,17 @@ main {
   padding-top: 25px;
   border-top: 1px solid rgba(244,246,243,0.48);
 }
+.layer-glyph {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+  color: rgba(244,246,243,0.85);
+}
+@media (max-width: 820px) {
+  .layer-glyph { max-width: 140px; margin-bottom: 12px; }
+}
 
 .layer-meta {
   display: flex;
@@ -564,6 +843,238 @@ main {
   color: rgba(8,9,8,0.7);
   font-size: 15px;
   line-height: 1.6;
+}
+
+/* ARCHITECTURE (s4) additions */
+/* Wrapper flows title -> lede -> layers -> button as one vertically-centered
+   stack, so cross-platform line-wrap/font differences can't make the grid
+   overlap the button (previous bug: independent absolute vh positions). */
+.arch-stack {
+  position: absolute;
+  left: var(--edge-x);
+  right: var(--edge-x);
+  top: 0;
+  height: 100svh;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(16px, 3vh, 40px);
+  padding: clamp(72px, 10vh, 112px) 0 calc(var(--line-bottom) + var(--line-height));
+}
+.s4-copy--architecture {
+  position: static;
+  top: auto;
+  left: auto;
+  width: min(760px, 84vw);
+}
+.s4-copy--architecture h2 { color: rgba(244,246,243,0.9); }
+.s4-lede {
+  margin-top: clamp(14px, 2vh, 24px);
+  color: rgba(244,246,243,0.7);
+  max-width: 620px;
+}
+.arch-stack .layers {
+  position: static;
+  top: auto;
+  left: auto;
+  width: min(940px, 100%);
+}
+/* Short viewports (e.g. 1280x720 laptops, the reported Mac case): content is
+   taller than one viewport. Top-align and allow internal scroll so nothing is
+   clipped and the button never overlaps the cards, at ANY resolution. */
+@media (max-height: 820px) {
+  .content.s3-copy--team,
+  .arch-stack {
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: clamp(64px, 9vh, 96px);
+  }
+  .s4-copy--architecture h2 { font-size: var(--display-md); }
+}
+.s4-explore {
+  position: static;
+  left: auto;
+  bottom: auto;
+  align-self: flex-start;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border: 1px solid rgba(244,246,243,0.55);
+  border-radius: 999px;
+  background: rgba(16,17,15,0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(244,246,243,0.94);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease, gap 0.3s ease;
+}
+.s4-explore:hover { background: rgba(244,246,243,0.92); color: #10110f; gap: 16px; }
+.s4-explore .arrow { font-size: 14px; }
+
+.beta-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border: 1px solid rgba(95,211,139,0.55);
+  border-radius: 999px;
+  background: rgba(95,211,139,0.14);
+  color: #6fdb99;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.beta-tag--dark {
+  border-color: rgba(64,120,80,0.55);
+  background: rgba(64,120,80,0.14);
+  color: #3d8a5b;
+}
+.s4-explore:hover .beta-tag {
+  border-color: rgba(64,120,80,0.55);
+  background: rgba(64,120,80,0.14);
+  color: #3d8a5b;
+}
+
+/* RESEARCH (s5) */
+.s5-copy--research { top: 14vh; width: min(760px, 82vw); }
+.research-grid {
+  position: absolute;
+  left: var(--edge-x);
+  top: 46vh;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 300px));
+  gap: 34px;
+  width: min(960px, 86vw);
+}
+.research-card {
+  padding-top: 22px;
+  border-top: 1px solid rgba(244,246,243,0.48);
+  color: rgba(244,246,243,0.86);
+}
+.research-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  color: rgba(244,246,243,0.6);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.research-tag {
+  padding: 4px 10px;
+  border: 1px solid currentColor;
+  color: rgba(244,246,243,0.72);
+}
+.research-card h3 {
+  margin: 0 0 14px;
+  color: rgba(244,246,243,0.94);
+  font-family: var(--inferi);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+.research-card p {
+  color: rgba(244,246,243,0.68);
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media (max-width: 1000px) {
+  .research-grid { grid-template-columns: 1fr; gap: 20px; top: 42vh; width: min(560px, 84vw); }
+  .research-card { padding-top: 14px; }
+  .research-meta { margin-bottom: 12px; }
+  .research-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .research-card p { font-size: 11px; }
+  .s4-explore { font-size: 11px; padding: 8px 14px; }
+}
+
+/* CTA — Explore variant (s7) */
+.cta--explore {
+  gap: 10px;
+}
+.cta--explore .beta-tag { margin: 0 2px; }
+
+/* FOOTER v2 */
+.site-footer--v2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 24px 7.65vw;
+  min-height: 78px;
+}
+.site-footer--v2 a,
+.site-footer--v2 button:not(.footer-pilot) {
+  min-height: 0;
+  padding: 0;
+}
+.footer-col {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+.footer-col--center { justify-content: center; }
+.footer-col--right { justify-content: flex-end; }
+.footer-col--right .footer-pilot { flex: 0 0 auto; }
+.footer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  color: rgba(8,9,8,0.62);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.footer-icon:hover { color: rgba(8,9,8,0.92); background: rgba(8,9,8,0.06); }
+.footer-col--center a {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(8,9,8,0.72);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-col--center a:hover { color: rgba(8,9,8,0.94); }
+.footer-pilot {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  white-space: nowrap;
+  border: 1px solid rgba(8,9,8,0.42);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(8,9,8,0.86);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, gap 0.3s ease;
+}
+.footer-pilot:hover { background: rgba(8,9,8,0.86); color: #f4f6f3; gap: 12px; }
+@media (max-width: 820px) {
+  .site-footer--v2 {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 20px 24px 24px;
+  }
+  .footer-col--center, .footer-col--right { justify-content: center; }
+  .footer-col--right { padding-top: 4px; }
 }
 
 .s6-copy {
@@ -631,13 +1142,200 @@ main {
   margin-top: 20px;
   min-width: 280px;
   height: 48px;
+  padding: 0 24px;
   border: 1px solid rgba(8,9,8,0.64);
+  border-radius: 999px;
   color: rgba(8,9,8,0.86);
   background: transparent;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.16em;
   text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.cta:hover { background: rgba(8,9,8,0.86); color: #f4f6f3; }
+
+/* CONTACT MODAL */
+.contact-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(8,9,8,0.66);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: contactFade 0.25s ease;
+}
+.contact-overlay[hidden] { display: none; }
+@keyframes contactFade { from { opacity: 0; } to { opacity: 1; } }
+.contact-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: #eeeee8;
+  color: #10110f;
+  border-radius: 18px;
+  padding: 40px 36px 32px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,0,0,0.05);
+  animation: contactRise 0.35s cubic-bezier(.2,.7,.2,1);
+  font-family: var(--mono);
+}
+@keyframes contactRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.contact-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  color: #10110f;
+  opacity: 0.6;
+  transition: opacity 0.2s, background 0.2s;
+}
+.contact-close:hover { opacity: 1; background: rgba(0,0,0,0.06); }
+.contact-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 12px;
+}
+.contact-title {
+  margin: 0 0 8px;
+  font-family: var(--inferi);
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.contact-sub {
+  margin: 0 0 26px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  opacity: 0.72;
+  max-width: 420px;
+}
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.contact-form[hidden] { display: none; }
+.contact-field { display: flex; flex-direction: column; gap: 6px; }
+.contact-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.contact-label em { font-style: normal; color: #b14a3a; }
+.contact-field input,
+.contact-field textarea,
+.contact-select {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: #10110f;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.22);
+  padding: 8px 0;
+  transition: border-color 0.25s ease;
+  resize: vertical;
+}
+.contact-field input:focus,
+.contact-field textarea:focus,
+.contact-select:focus { outline: none; border-bottom-color: #10110f; }
+.contact-field input::placeholder,
+.contact-field textarea::placeholder { color: rgba(0,0,0,0.32); }
+.contact-select-wrap { position: relative; }
+.contact-select { appearance: none; -webkit-appearance: none; padding-right: 22px; cursor: pointer; }
+.contact-select-caret {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.contact-error {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #b14a3a;
+  letter-spacing: 0.02em;
+}
+.contact-error[hidden] { display: none; }
+.contact-submit {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #10110f;
+  color: #f4f6f3;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 22px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: gap 0.3s ease, opacity 0.25s ease;
+}
+.contact-submit:hover:not(:disabled) { gap: 14px; }
+.contact-submit:disabled { opacity: 0.55; cursor: progress; }
+.contact-submit .arrow { font-size: 12px; }
+.contact-meta {
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  text-align: center;
+}
+.contact-meta a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.contact-success { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0 4px; }
+.contact-success[hidden] { display: none; }
+.contact-success-mark {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: #4a7c5c;
+  color: #f4f6f3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.contact-success-title {
+  font-family: var(--inferi);
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+.contact-success-body {
+  font-family: var(--mono);
+  font-size: 12px;
+  opacity: 0.72;
+}
+.contact-success-body em { font-style: normal; color: #10110f; }
+@media (max-width: 600px) {
+  .contact-modal { padding: 30px 22px 24px; }
+  .contact-title { font-size: 24px; }
 }
 
 .site-footer {
@@ -764,29 +1462,41 @@ main {
     line-height: 1.8;
   }
 
-  .s2-copy {
-    top: 38vh;
-  }
-
-  .s3-copy,
-  .s4-copy,
-  .s5-copy,
-  .s6-copy,
-  .s7-copy {
-    left: 24px;
-    right: 24px;
+  /* ── Mobile panel layout ──────────────────────────────────────────
+     The scroll-snap panels use vh-based absolute tops on desktop, which
+     collide with the fixed header and clip on short phones. On mobile we
+     convert every content panel into a full-height flex column that
+     starts below the header (--header-clear) and scrolls internally if
+     it overflows — deterministic at any viewport height. */
+  .content.s2-copy,
+  .content.s3-copy,
+  .content.s5-copy,
+  .content.s6-copy,
+  .content.s7-copy {
+    position: absolute;
+    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     width: auto;
-    text-align: left;
+    height: 100svh;
     transform: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--header-clear) 24px var(--line-safe-bottom);
+    text-align: left;
   }
 
-  .s3-copy {
-    top: 36vh;
-  }
+  /* s2 is a short centered quote — keep it visually centered. */
+  .content.s2-copy { text-align: center; }
+  .s2-definition { margin-top: 20px !important; }
 
-  .s4-copy {
-    top: 12vh;
-  }
+  /* Panels whose content is taller than a phone screen top-align so the
+     title sits just under the header and the rest scrolls into view. */
+  .content.s3-copy--team { justify-content: flex-start; }
 
   .s4-detail {
     left: 24px;
@@ -795,10 +1505,17 @@ main {
     width: auto;
   }
 
-  .s5-copy {
-    top: 13vh;
+  .arch-stack {
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100svh;
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--header-clear) 24px var(--line-safe-bottom);
+    gap: 18px;
   }
-
   .layers {
     left: 24px;
     right: 24px;
@@ -807,6 +1524,7 @@ main {
     grid-template-columns: 1fr;
     gap: 14px;
   }
+  .arch-stack .layers { width: 100%; }
 
   .layer-card {
     padding-top: 12px;
@@ -834,10 +1552,6 @@ main {
     font-size: 12px;
   }
 
-  .s6-copy {
-    top: 24vh;
-  }
-
   .s6-copy .mono {
     margin-top: 30px;
     margin-left: 0;
@@ -846,7 +1560,6 @@ main {
   }
 
   .s7-copy {
-    top: 14vh;
     text-align: center;
   }
 
@@ -915,6 +1628,64 @@ main {
     line-height: 1.45;
   }
 }
+
+/* ───────────────────────────────────────────────
+   Mobile fit: the scroll-driven design keeps every panel at one
+   viewport, so the content-heavy panels (team / architecture /
+   research / final) are compressed to fit without nested scroll.
+   Positioning & the scroll animation are untouched — type and
+   spacing only.
+   ─────────────────────────────────────────────── */
+@media (max-width: 820px) {
+  /* TEAM — 5 members centered; shrink so all fit one viewport. */
+  .content.s3-copy--team {
+    padding: clamp(56px, 8vh, 84px) 24px calc(var(--line-bottom) + var(--line-height));
+  }
+  .s3-copy.s3-copy--team h2 { font-size: 20px !important; margin-bottom: 10px; }
+  .s3-copy--team .kicker { margin-bottom: 5px; }
+  .team-grid { grid-template-columns: 1fr 1fr !important; gap: 8px 18px !important; }
+  .team-member { gap: 5px !important; padding-top: 7px !important; }
+  .team-photo { width: 30px !important; height: 30px !important; }
+  .team-photo--mono { font-size: 11px !important; }
+  .team-name { font-size: 15px !important; }
+  .team-role { font-size: 8px !important; }
+  .team-bio { font-size: 9px !important; line-height: 1.4 !important; }
+
+  /* ARCHITECTURE — no nested scroll; compress the stack into one screen. */
+  .arch-stack {
+    top: 0 !important;
+    height: 100svh !important;
+    overflow-y: visible !important;
+    justify-content: center !important;
+    padding: clamp(56px, 8vh, 80px) 24px calc(var(--line-bottom) + var(--line-height)) !important;
+    gap: 10px !important;
+  }
+  .s4-copy--architecture h2 { font-size: 23px !important; }
+  .s4-lede { font-size: 10.5px !important; margin-top: 6px !important; }
+  .arch-stack .layers { top: auto !important; gap: 10px !important; }
+  .layer-glyph { max-width: 96px !important; margin-bottom: 8px !important; }
+  .layer-meta { margin-bottom: 8px !important; }
+  .layer-card { padding-top: 8px !important; }
+  .layer-card h3 { font-size: 13px !important; margin-bottom: 5px !important; }
+  .layer-card p { font-size: 9.5px !important; line-height: 1.4 !important; }
+  .s4-explore { margin-top: 10px !important; font-size: 10px !important; padding: 7px 14px !important; }
+
+  /* RESEARCH — pull grid up and tighten. */
+  .research-grid { top: 30vh !important; gap: 12px !important; }
+  .research-card { padding-top: 10px !important; }
+  .research-meta { margin-bottom: 8px !important; }
+  .research-card h3 { font-size: 15px !important; margin-bottom: 6px !important; }
+  .research-card p { font-size: 10px !important; line-height: 1.45 !important; }
+
+  /* FINAL — tighten so the CTA + footer clear the fold. */
+  .s7-copy { top: 8vh !important; }
+  .s7-copy .built-on { margin-bottom: 12px !important; }
+  .s7-copy .proof-line { margin-bottom: 14px !important; font-size: 10.5px; }
+  .s7-copy h2 { font-size: 26px !important; }
+  .s7-copy .mono { margin-top: 14px !important; font-size: 11px; }
+  .cta--explore { margin-top: 14px !important; }
+  .site-footer--v2 { padding: 16px 24px !important; min-height: 0 !important; }
+}
 </style>
 </head>
 <body>
@@ -939,7 +1710,7 @@ main {
   <div id="decor-structural-gap" class="fixed-decor dome-decor" data-panel-start="2" data-panel-end="3">
     <canvas id="domeCanvas"></canvas>
   </div>
-  <div id="decor-layers" class="fixed-decor layers-globe-decor" data-panel-index="4">
+  <div id="decor-layers" class="fixed-decor layers-globe-decor" data-panel-index="3">
     <canvas id="layersCanvas"></canvas>
   </div>
   <div id="decor-verification" class="fixed-decor verification-slice-decor" data-panel-index="5">
@@ -955,81 +1726,233 @@ main {
     <path d="M74.7262 18.8714L78.0416 18.6629L78.1307 17.7598H69.8273L69.7382 18.6629L73.3901 18.8714V28.0519H72.1728C69.6491 24.7271 65.7696 20.5387 62.7016 17.8193L62.6323 17.7598H58.8518L58.7627 18.653L62.0187 18.8714C64.7304 21.3327 68.6595 25.402 71.0149 28.6276V28.7864L63.5032 37.2226L61.0587 37.4409L60.9697 38.3341H67.4323L67.5213 37.4409L65.1362 37.2523L72.1629 29.3025H73.3901V49.6287L73.5386 50.8991H74.6569L78.3484 50.5815V49.6486H74.7163V18.8714H74.7262Z" fill="currentColor"/>
     <path d="M97.3294 19.2491L100.843 19.0605V14.2866L99.9421 14.1973L99.7343 17.9489H87.8285C82.6228 17.9489 79.9902 20.3805 79.9902 25.1842C79.9902 27.3875 80.3069 29.5313 80.9205 31.5361L80.9601 31.6751L81.7222 31.8438L86.9279 31.4468L86.8586 30.3054L81.8904 30.2657C81.5341 28.9556 81.1976 26.9409 81.1976 25.1941C81.1976 20.311 84.8496 19.2888 87.9175 19.2888H90.0157C90.273 24.8666 90.7678 29.303 91.4705 32.4889L91.5002 32.608L91.609 32.6576C92.1534 32.9058 93.6676 33.4715 95.9636 33.4715C99.8135 33.4715 101.179 30.1863 101.179 27.3677C101.179 23.4969 98.9524 20.7378 97.3393 19.259L97.3294 19.2491ZM99.9718 27.318C99.9718 30.3749 98.4378 32.1316 95.7558 32.1316C94.301 32.1316 93.1529 31.8239 92.5393 31.6056C91.8466 28.8266 91.3616 22.8617 91.2132 19.2788H95.548C96.9335 20.3309 99.9718 23.1099 99.9718 27.318Z" fill="currentColor"/>
   </svg>
-  <div class="header-right">by Loka Labs<br>World Model</div>
+  <div class="header-right-group">
+    <div class="header-right">EWM<br>by Loka Labs</div>
+    <button type="button" class="header-cta" id="open-contact">Get in touch →</button>
+  </div>
 </header>
 
 <main>
   <section class="panel" id="s1">
     <div class="panel-bg s1-bg"></div>
     <div class="content s1-copy">
-      <h1 class="serif">The Economic World Model.</h1>
-      <p class="mono">When the cost of simulation approaches zero,<br>the cost of not simulating becomes indefensible.</p>
+      <div class="s1-title-group">
+        <h1 class="serif">The Economic World Model.</h1>
+        <p class="s1-tagline serif">Run the world. Before you run it.</p>
+      </div>
+      <p class="mono s1-credibility">
+        <span class="s1-cred-lead">Built by pioneers in formal verification, distributed systems, and economic systems.</span>
+        <span class="s1-cred-marks">
+          <span class="s1-cred-mark">
+            <img class="s1-cred-svg s1-cred-img" src="/ACM-logo.png" alt="" aria-hidden="true">
+            <span class="s1-cred-caption">
+              <span class="s1-cred-kicker">A.M.</span>
+              <span class="s1-cred-wordmark">Turing Award</span>
+            </span>
+          </span>
+          <span class="s1-cred-mark">
+            <img class="s1-cred-svg s1-cred-img" src="/OSDI-logo-removebg.png" alt="" aria-hidden="true">
+            <span class="s1-cred-caption">
+              <span class="s1-cred-kicker">OSDI</span>
+              <span class="s1-cred-wordmark">Best Paper</span>
+            </span>
+          </span>
+          <span class="s1-cred-mark">
+            <img class="s1-cred-svg s1-cred-img" src="/Harvard.svg" alt="" aria-hidden="true">
+            <span class="s1-cred-caption">
+              <span class="s1-cred-kicker">Cambridge, MA</span>
+              <span class="s1-cred-wordmark serif-mark">Harvard</span>
+            </span>
+          </span>
+          <span class="s1-cred-mark">
+            <img class="s1-cred-svg s1-cred-img" src="/MIT.svg" alt="" aria-hidden="true">
+            <span class="s1-cred-caption">
+              <span class="s1-cred-kicker">Cambridge, MA</span>
+              <span class="s1-cred-wordmark">MIT</span>
+            </span>
+          </span>
+          <span class="s1-cred-mark">
+            <img class="s1-cred-svg s1-cred-img" src="/Singapore.svg" alt="" aria-hidden="true">
+            <span class="s1-cred-caption">
+              <span class="s1-cred-kicker">Singapore</span>
+              <span class="s1-cred-wordmark">NUS</span>
+            </span>
+          </span>
+        </span>
+      </p>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
   <section class="panel" id="causation">
     <div class="panel-bg s2-bg"></div>
-    <div class="content s2-copy">
-      <blockquote class="serif">&ldquo;The three rungs of the Ladder of Causation:<br>Association, Intervention, Counterfactual.&rdquo;</blockquote>
-      <cite>- Judea Pearl, The Book of Why</cite>
+    <div class="content s2-copy s2-copy--definition">
+      <blockquote class="serif">The economy is the only critical system humanity deploys without simulation.</blockquote>
+      <cite class="s2-definition">Loka is building the Economic World Model — a behaviorally simulated, causally constrained, and formally verified system for testing decisions before they move nations, markets, and billions of lives.</cite>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
-  <section class="panel" id="structural-gap">
+  <section class="panel" id="team">
     <div class="panel-bg s3-bg"></div>
-    <div class="content s3-copy">
-      <div class="kicker">Structural Gap</div>
-      <h2 class="serif">Navigating a living system<br>with a dead map.</h2>
-      <p class="mono">Policies are interventions. Crises are counterfactual failures. Yet the tools we use to make decisions operate on mere statistical association.<br><br>Legacy models treat humanity as a predictable mass. But economic systems are no longer stationary. AI is rewriting reality faster than any historical model can follow.</p>
+    <div class="content s3-copy s3-copy--team">
+      <div class="kicker">Team</div>
+      <h2 class="serif">The people behind<br>Loka Labs.</h2>
+      <div class="team-grid">
+      <article class="team-member">
+        <div class="team-photo team-photo--mono" aria-hidden="true"><span>JS</span></div>
+        <div class="team-body">
+          <div class="team-heading">
+            <h3 class="team-name">Joseph Sifakis</h3>
+            <span class="team-role">Founding Scientist · Turing Award, 2007</span>
+          </div>
+          <p class="team-bio">Founder of model checking. Pioneered proving complex systems correct before they run — chips, aircraft, mission-critical infrastructure. First commercial engagement applying formal verification to economic systems.</p>
+        </div>
+      </article>
+      <article class="team-member">
+        <div class="team-photo team-photo--mono" aria-hidden="true"><span>LJ</span></div>
+        <div class="team-body">
+          <div class="team-heading">
+            <h3 class="team-name">Lora Jiang</h3>
+            <span class="team-role">Co-founder, CEO · Parsons, Harvard</span>
+          </div>
+          <p class="team-bio">Led Taiko's $1.2B Series A (Lightspeed Faction lead) and $2.2B TGE as Head of Strategic Finance — four months from close to public market. Backed by Sequoia China, Tencent, BAI.</p>
+        </div>
+      </article>
+      <article class="team-member">
+        <div class="team-photo team-photo--mono" aria-hidden="true"><span>AZ</span></div>
+        <div class="team-body">
+          <div class="team-heading">
+            <h3 class="team-name">Akasha Zhu</h3>
+            <span class="team-role">Co-founder, President · Tsinghua, MIT</span>
+          </div>
+          <p class="team-bio">12 patents. Founder of Hetu (distributed systems), Vinci (consumer hardware), and Tongxue (social network). Identified the Economic World Model category before anyone else was looking.</p>
+        </div>
+      </article>
+      <article class="team-member">
+        <div class="team-photo team-photo--mono" aria-hidden="true"><span>JL</span></div>
+        <div class="team-body">
+          <div class="team-heading">
+            <h3 class="team-name">Jialin Li</h3>
+            <span class="team-role">Co-founder, CTO · NUS Assistant Professor</span>
+          </div>
+          <p class="team-bio">Distributed systems researcher. OSDI / NSDI Best Paper. Co-founded Hetu with Akasha — they have shipped together before. Builds the systems that make the impossible run at scale.</p>
+        </div>
+      </article>
+      <article class="team-member">
+        <div class="team-photo team-photo--mono" aria-hidden="true"><span>FO</span></div>
+        <div class="team-body">
+          <div class="team-heading">
+            <h3 class="team-name">Felix Oberholzer</h3>
+            <span class="team-role">Advisor · Harvard Business School</span>
+          </div>
+          <p class="team-bio">Strategy and economics scholar at Harvard Business School. Advises on the market design and institutional adoption of large-scale simulation infrastructure.</p>
+        </div>
+      </article>
+      </div>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
-  <section class="panel" id="catalyst">
+  <section class="panel" id="architecture">
     <div class="panel-bg s4-bg"></div>
-    <div class="content s4-copy">
-      <div class="kicker">Catalyst</div>
-      <h2 class="serif">History has failed<br>as a predictive tool.</h2>
-    </div>
-    <div class="content s4-detail">
-      <div class="detail-block">
-        <h3>Cost Collapse</h3>
-        <p class="mono">Generative agent simulation cost dropped 280x in two years. Two curves are crossing: simulation cost falls exponentially, real-world trial cost rises.</p>
-      </div>
-      <div class="detail-block">
-        <h3>Novel Worlds</h3>
-        <p class="mono">Charter cities and AI jurisdictions are being built from zero. Using past data to predict these environments is not just inaccurate; it is reckless.</p>
-      </div>
-    </div>
-    <div class="section-line" aria-hidden="true"></div>
-  </section>
-
-  <section class="panel" id="layers">
-    <div class="panel-bg s5-bg"></div>
-    <div class="content s5-copy">
+    <div class="arch-stack">
+    <div class="content s4-copy s4-copy--architecture">
+      <div class="kicker">Architecture</div>
       <h2 class="serif">Others stop at Layer 1.<br>Loka Labs has all three.</h2>
-      <p class="mono">Deterministic guardrails for a stochastic world.</p>
+      <p class="mono s4-lede">A vertically-integrated causal stack — the deterministic guardrails for a stochastic world.</p>
     </div>
     <div class="layers">
       <article class="layer-card">
+        <svg class="layer-glyph" viewBox="0 0 120 80" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.85">
+            <circle cx="20" cy="20" r="3"/><circle cx="60" cy="14" r="3"/><circle cx="100" cy="24" r="3"/>
+            <circle cx="34" cy="46" r="3"/><circle cx="74" cy="40" r="3"/>
+            <circle cx="22" cy="66" r="3"/><circle cx="60" cy="70" r="3"/><circle cx="98" cy="60" r="3"/>
+            <line x1="20" y1="20" x2="60" y2="14" opacity="0.35"/>
+            <line x1="60" y1="14" x2="100" y2="24" opacity="0.35"/>
+            <line x1="20" y1="20" x2="34" y2="46" opacity="0.5"/>
+            <line x1="34" y1="46" x2="74" y2="40" opacity="0.5"/>
+            <line x1="74" y1="40" x2="100" y2="24" opacity="0.35"/>
+            <line x1="34" y1="46" x2="22" y2="66" opacity="0.5"/>
+            <line x1="74" y1="40" x2="60" y2="70" opacity="0.5"/>
+            <line x1="60" y1="70" x2="98" y2="60" opacity="0.35"/>
+            <line x1="22" y1="66" x2="60" y2="70" opacity="0.35"/>
+          </g>
+        </svg>
         <div class="layer-meta"><span>Layer 1</span><span class="layer-tag">Associational</span></div>
         <h3>Behavioral<br>Simulation</h3>
         <p class="mono">Models heterogeneous actors. Outputs state-space evolution: how environments change, from t to t+1.</p>
       </article>
       <article class="layer-card">
+        <svg class="layer-glyph" viewBox="0 0 120 80" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.85">
+            <line x1="10" y1="66" x2="110" y2="66" opacity="0.4"/>
+            <line x1="10" y1="66" x2="10" y2="14" opacity="0.4"/>
+            <path d="M 12 58 Q 28 54 40 48 T 68 32 T 96 18 L 108 12"/>
+            <circle cx="12" cy="58" r="2" fill="currentColor" stroke="none"/>
+            <circle cx="40" cy="48" r="2" fill="currentColor" stroke="none"/>
+            <circle cx="68" cy="32" r="2" fill="currentColor" stroke="none"/>
+            <circle cx="96" cy="18" r="2" fill="currentColor" stroke="none"/>
+            <path d="M 60 14 L 60 22 M 60 22 L 56 18 M 60 22 L 64 18" opacity="0.6"/>
+            <path d="M 74 46 L 82 40 M 82 40 L 78 39 M 82 40 L 82 44" opacity="0.5"/>
+          </g>
+        </svg>
         <div class="layer-meta"><span>Layer 2</span><span class="layer-tag">Interventional</span></div>
         <h3>Economic<br>Engine</h3>
         <p class="mono">The physics of an economy. Forces changes to propagate through the agent network, revealing second-order effects.</p>
       </article>
       <article class="layer-card">
+        <svg class="layer-glyph" viewBox="0 0 120 80" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.85">
+            <path d="M 20 20 L 40 20 L 40 60 L 100 60" opacity="0.4"/>
+            <path d="M 20 20 L 20 60" opacity="0.4"/>
+            <rect x="52" y="14" width="46" height="16" opacity="0.5"/>
+            <path d="M 58 22 L 62 26 L 72 18" stroke-width="1.4"/>
+            <rect x="30" y="34" width="46" height="16" opacity="0.4"/>
+            <text x="34" y="44" font-family="Georgia, serif" font-style="italic" font-size="9" fill="currentColor" opacity="0.7">∀x</text>
+            <text x="46" y="44" font-family="Georgia, serif" font-style="italic" font-size="9" fill="currentColor" opacity="0.6">φ(x)</text>
+            <path d="M 84 62 L 88 66 L 96 56" stroke-width="1.4"/>
+          </g>
+        </svg>
         <div class="layer-meta"><span>Layer 3</span><span class="layer-tag">Counterfactual</span></div>
         <h3>Formal<br>Verification</h3>
         <p class="mono">Mathematically proves properties hold. Results are not just probable. They are provable.</p>
       </article>
     </div>
-    <p class="mono layer-proof">&ldquo;Agents simulate decisions. Economics enforces the rules. Math proves the results.&rdquo;</p>
+    <a class="s4-explore" href="https://lokaworld.vercel.app/" target="_blank" rel="noreferrer">
+      <span>Explore LokaWorld</span>
+      <span class="beta-tag">beta</span>
+      <span class="arrow">→</span>
+    </a>
+    </div>
+    <div class="section-line" aria-hidden="true"></div>
+  </section>
+
+  <section class="panel" id="research">
+    <div class="panel-bg s5-bg"></div>
+    <div class="content s5-copy s5-copy--research">
+      <div class="kicker">Research</div>
+      <h2 class="serif">Papers, essays,<br>and public briefings.</h2>
+      <p class="mono">A working record of the causal stack — from formal verification foundations to the empirical calibration of economic worlds.</p>
+    </div>
+    <div class="research-grid">
+      <article class="research-card">
+        <div class="research-meta"><span>Foundations</span><span class="research-tag">Paper</span></div>
+        <h3>Formal verification of economic mechanisms</h3>
+        <p class="mono">Extending model-checking beyond hardware into the state space of markets and policy interventions.</p>
+      </article>
+      <article class="research-card">
+        <div class="research-meta"><span>Systems</span><span class="research-tag">Paper</span></div>
+        <h3>Distributed agent simulation at planet scale</h3>
+        <p class="mono">Runtime and scheduling architecture for 10⁸-agent causal simulation on commodity clusters.</p>
+      </article>
+      <article class="research-card">
+        <div class="research-meta"><span>Field notes</span><span class="research-tag">Essay</span></div>
+        <h3>The economy as a critical system</h3>
+        <p class="mono">Why the standard of care for economic decisions must catch up to aviation, pharmaceuticals, and chip design.</p>
+      </article>
+    </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
@@ -1047,18 +1970,92 @@ main {
     <div class="panel-bg s7-bg"></div>
     <div class="content s7-copy">
       <div class="built-on">Built on</div>
-      <p class="mono proof-line">Formal Verification (2007 Turing Award)<br>&amp; Distributed AI at Scale (NSDI/OSDI).</p>
-      <h2 class="serif">Simulation is not an improvement.<br>It is a prerequisite.</h2>
-      <p class="mono">Data sovereignty by design.<br>Runs entirely on client infrastructure.</p>
-      <a class="cta" href="#final">Initiate Sovereign Node</a>
+      <p class="mono proof-line">Formal Verification (Turing Award)<br>&amp; Distributed AI at Scale (NSDI/OSDI Best Paper).</p>
+      <h2 class="serif">Economic simulation for<br>decisions that move worlds.</h2>
+      <p class="mono">Loka Labs helps governments, financial institutions, and global event operators stress-test policies, markets, and large-scale events before they unfold in the real world.</p>
+      <a class="cta cta--explore" href="https://lokaworld.vercel.app/" target="_blank" rel="noreferrer">
+        <span>Explore LokaWorld</span>
+        <span class="beta-tag beta-tag--dark">beta</span>
+        <span class="arrow">→</span>
+      </a>
     </div>
-    <footer class="site-footer">
-      <a href="#s1">Loka Link 1</a>
-      <a href="#causation">Loka Link 2</a>
-      <span>Loka Social&nbsp;&nbsp;.&nbsp;&nbsp;0&nbsp;&nbsp;.&nbsp;&nbsp;0&nbsp;&nbsp;.&nbsp;&nbsp;0</span>
+    <footer class="site-footer site-footer--v2">
+      <div class="footer-col footer-col--left">
+        <a class="footer-icon" href="https://twitter.com/lokainc" target="_blank" rel="noreferrer" aria-label="Twitter">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21.5l-7.5 8.573L22.5 22h-6.86l-5.37-7.02L4.5 22H1.244l8.03-9.176L1 2h6.96l4.86 6.42L18.244 2Zm-1.202 18h1.898L7.05 4H5.06L17.042 20Z"/></svg>
+        </a>
+        <a class="footer-icon" href="https://github.com/lora-loka" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.575.105.786-.25.786-.556 0-.275-.01-1.003-.016-1.97-3.202.695-3.878-1.545-3.878-1.545-.523-1.328-1.278-1.681-1.278-1.681-1.045-.714.079-.7.079-.7 1.156.081 1.764 1.187 1.764 1.187 1.028 1.76 2.697 1.251 3.354.957.104-.744.402-1.252.732-1.54-2.556-.29-5.244-1.278-5.244-5.687 0-1.257.45-2.284 1.187-3.089-.119-.291-.514-1.466.112-3.054 0 0 .967-.31 3.171 1.18a11.023 11.023 0 0 1 5.774 0c2.203-1.49 3.169-1.18 3.169-1.18.627 1.588.232 2.763.114 3.054.74.805 1.185 1.832 1.185 3.089 0 4.42-2.693 5.394-5.257 5.679.412.354.78 1.054.78 2.124 0 1.533-.014 2.769-.014 3.146 0 .308.208.667.79.554A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a class="footer-icon" href="https://linkedin.com/company/loka-labs" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.93v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.02H3.56V9h3.56v11.45Z"/></svg>
+        </a>
+      </div>
+      <div class="footer-col footer-col--center">
+        <a href="#team">About</a>
+        <a href="#research">Blog</a>
+      </div>
+      <div class="footer-col footer-col--right">
+        <button type="button" class="footer-pilot" id="open-contact-footer">Request a Pilot →</button>
+      </div>
     </footer>
   </section>
 </main>
+
+<div class="contact-overlay" id="contact-overlay" hidden role="dialog" aria-modal="true">
+  <div class="contact-modal" id="contact-modal">
+    <button class="contact-close" id="contact-close" aria-label="Close">×</button>
+    <div class="contact-eyebrow">— Contact</div>
+    <h2 class="contact-title">Request a Loka pilot.</h2>
+    <p class="contact-sub">For institutional partnerships, research collaborations, simulation pilots, or investor inquiries — tell us what you're exploring.</p>
+
+    <form class="contact-form" id="contact-form">
+      <label class="contact-field">
+        <span class="contact-label">I'm reaching out about</span>
+        <div class="contact-select-wrap">
+          <select name="topic" class="contact-select">
+            <option value="Simulation pilot">Simulation pilot</option>
+            <option value="Strategic partnership">Strategic partnership</option>
+            <option value="Research collaboration">Research collaboration</option>
+            <option value="Investor inquiry">Investor inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="contact-select-caret">▼</span>
+        </div>
+      </label>
+      <label class="contact-field">
+        <span class="contact-label">Name</span>
+        <input type="text" name="name" placeholder="Your name" autocomplete="name">
+      </label>
+      <label class="contact-field">
+        <span class="contact-label">Email <em>*</em></span>
+        <input type="email" name="email" required placeholder="you@domain.com" autocomplete="email">
+      </label>
+      <label class="contact-field">
+        <span class="contact-label">Organization</span>
+        <input type="text" name="organization" placeholder="Company / institution" autocomplete="organization">
+      </label>
+      <label class="contact-field">
+        <span class="contact-label">Message <em>*</em></span>
+        <textarea name="message" required rows="4" placeholder="Briefly describe what you'd like to explore."></textarea>
+      </label>
+      <div class="contact-error" id="contact-error" hidden></div>
+      <button type="submit" class="contact-submit" id="contact-submit">
+        <span id="contact-submit-label">Submit inquiry</span>
+        <span class="arrow">→</span>
+      </button>
+      <div class="contact-meta">Or email us directly at <a href="mailto:hello@loka.inc">hello@loka.inc</a></div>
+    </form>
+
+    <div class="contact-success" id="contact-success" hidden>
+      <div class="contact-success-mark">✓</div>
+      <div>
+        <div class="contact-success-title">Message received.</div>
+        <div class="contact-success-body">We'll be in touch at <em id="contact-success-email"></em> shortly.</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -1681,7 +2678,7 @@ panels.forEach((panel, index) => {
     opacitySpeed: isSection2 ? SECTION_2_TITLE_FADE_SPEED : TITLE_FADE_SPEED
   });
 
-  addTextItem(panel, index, ".s1-copy p, .s2-copy cite, .kicker, .s3-copy > p, .s4-detail, .s5-copy > p, .layers, .layer-proof, .s6-copy > p, .s7-copy .built-on, .s7-copy .proof-line, .s7-copy > p:not(.proof-line), .cta, .site-footer", {
+  addTextItem(panel, index, ".s1-copy p, .s2-copy cite, .kicker, .s3-copy > p, .team-grid, .s4-detail, .s4-lede, .s4-explore, .s5-copy > p, .layers, .layer-proof, .research-grid, .s6-copy > p, .s7-copy .built-on, .s7-copy .proof-line, .s7-copy > p:not(.proof-line), .cta, .site-footer", {
     enterY: isSection2 ? SECTION_2_BODY_ENTER_Y : BODY_ENTER_Y,
     leaveY: BODY_LEAVE_Y,
     fade: isSection2 ? SECTION_2_BODY_FADE_STRENGTH : BODY_FADE_STRENGTH,
@@ -1851,29 +2848,9 @@ function scrollToSection(index) {
   });
 }
 
-window.addEventListener("wheel", (event) => {
-  event.preventDefault();
-
-  const delta = event.deltaY;
-  if (Math.abs(delta) < 1) return;
-
-  const now = Date.now();
-  if (now - lastWheelAt > 240) wheelDelta = 0;
-  lastWheelAt = now;
-
-  if (isSectionScrolling || now < sectionScrollRelease) {
-    wheelDelta = 0;
-    return;
-  }
-
-  wheelDelta += delta;
-  if (Math.abs(wheelDelta) < WHEEL_TRIGGER_DELTA) return;
-
-  const panelHeight = panels[0]?.offsetHeight || window.innerHeight || 1;
-  activeSectionIndex = Math.max(0, Math.min(panels.length - 1, Math.round(window.scrollY / panelHeight)));
-  scrollToSection(activeSectionIndex + (wheelDelta > 0 ? 1 : -1));
-  wheelDelta = 0;
-}, { passive: false });
+/* Wheel snap-scroll hijack removed — native scrolling drives the same
+   `window.scrollY`-based animation loop, so panels transition on scroll
+   without the 1500 ms tween that felt like lag. */
 
 window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlobes(); resizeVerificationSlice(); ScrollTrigger.refresh(); });
 
@@ -1903,6 +2880,84 @@ window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlo
 
   render();
   window.addEventListener("resize", render);
+})();
+
+/* Contact modal + web3forms submission */
+(function contactModal() {
+  const overlay = document.getElementById('contact-overlay');
+  if (!overlay) return;
+  const closeBtn = document.getElementById('contact-close');
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('contact-success');
+  const successEmail = document.getElementById('contact-success-email');
+  const errBox = document.getElementById('contact-error');
+  const submit = document.getElementById('contact-submit');
+  const submitLabel = document.getElementById('contact-submit-label');
+  const WEB3FORMS_ACCESS_KEY = '3181ff54-df0a-4280-9f85-33c11d4b064e';
+
+  function open() {
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+    form.hidden = false;
+    success.hidden = true;
+    errBox.hidden = true;
+    form.reset();
+    submitLabel.textContent = 'Submit inquiry';
+    submit.disabled = false;
+  }
+
+  ['open-contact', 'open-contact-cta', 'open-contact-footer'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', open);
+  });
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.hidden) close(); });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submit.disabled = true;
+    submitLabel.textContent = 'Sending…';
+    errBox.hidden = true;
+    const fd = new FormData(form);
+    const topic = fd.get('topic') || 'General inquiry';
+    const org = fd.get('organization') || '';
+    const messageBody = `Topic: ${topic}\nOrganization: ${org}\n\n${fd.get('message') || ''}`;
+    const payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: `[${topic}] ${fd.get('name') || fd.get('email')} — loka.inc`,
+      from_name: fd.get('name') || 'loka.inc visitor',
+      email: fd.get('email'),
+      message: messageBody,
+    };
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data.success) {
+        successEmail.textContent = payload.email;
+        form.hidden = true;
+        success.hidden = false;
+      } else {
+        errBox.textContent = data.message || 'Something went wrong.';
+        errBox.hidden = false;
+        submit.disabled = false;
+        submitLabel.textContent = 'Submit inquiry';
+      }
+    } catch (err) {
+      errBox.textContent = err.message || 'Network error.';
+      errBox.hidden = false;
+      submit.disabled = false;
+      submitLabel.textContent = 'Submit inquiry';
+    }
+  });
 })();
 </script>
 </body>
