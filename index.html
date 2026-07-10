@@ -711,7 +711,6 @@ main {
 }
 
 .s3-copy h2,
-.s4-copy h2,
 .s5-copy h2,
 .s6-copy h2,
 .s7-copy h2 {
@@ -719,7 +718,6 @@ main {
 }
 
 .s3-copy h2,
-.s4-copy h2,
 .s5-copy h2 {
   color: rgba(244,246,243,0.88);
 }
@@ -729,39 +727,6 @@ main {
   color: rgba(255,255,255,0.86);
   mix-blend-mode: difference;
   max-width: 580px;
-}
-
-.s4-copy {
-  top: 20.8vh;
-  left: 12.3vw;
-  width: min(540px, 78vw);
-}
-
-.s4-detail {
-  top: calc(20.8vh + 42px);
-  right: 12.3vw;
-  width: min(420px, 36vw);
-  padding-left: 34px;
-  border-left: 1px solid rgba(244,246,243,0.5);
-  color: rgba(244,246,243,0.76);
-}
-
-.detail-block + .detail-block {
-  margin-top: 20px;
-}
-
-.detail-block h3 {
-  margin: 0 0 9px;
-  font-family: var(--inferi);
-  font-size: 24px;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-}
-
-.detail-block p {
-  color: rgba(244,246,243,0.64);
-  font-size: 12px;
-  line-height: 1.55;
 }
 
 .s5-copy {
@@ -775,244 +740,193 @@ main {
   color: rgba(244,246,243,0.72);
 }
 
-.layers {
-  position: absolute;
-  left: var(--edge-x);
-  top: 45vh;
-  z-index: 4;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 290px));
-  gap: 42px;
-  width: min(940px, 84vw);
+/* ARCHITECTURE DIAGRAM (s4) — full native figure, scaled-to-fit.
+   Design colors: purple center, orange human rail, green verify rail. */
+.arch-stack--diagram {
+  --c-accent: rgba(244,246,243,0.55);
 }
-
-.layer-card {
-  padding-top: 25px;
-  border-top: 1px solid rgba(244,246,243,0.48);
+/* Keep the diagram inside the panel's darker upper zone — the s4-bg
+   gradient (like every panel bg) eases to a light tone near the very
+   bottom, and white diagram text needs to stay clear of that. */
+.arch-stack.arch-stack--diagram {
+  padding-top: clamp(96px, 8.5vh, 112px);
+  padding-bottom: max(calc(var(--line-bottom) + var(--line-height)), 14vh);
+  gap: clamp(8px, 1.2vh, 14px);
 }
-.layer-glyph {
-  display: block;
+.arch-top {
   width: 100%;
-  max-width: 200px;
-  height: auto;
-  margin-bottom: 20px;
-  color: rgba(244,246,243,0.85);
-}
-@media (max-width: 820px) {
-  .layer-glyph { max-width: 140px; margin-bottom: 12px; }
-}
-
-/* LADDER OF CAUSATION (s4 architecture) */
-.arch-stack--ladder .ladder-stage-wrap {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 32px;
-  align-items: start;
-  width: 100%;
-  max-width: 1160px;
-  margin-top: 20px;
-}
-.rung-list {
+  max-width: 1200px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.rung-btn {
-  display: grid;
-  grid-template-columns: 2.6rem 1fr;
-  gap: 0.75rem;
-  align-items: center;
-  padding: 14px 16px;
-  background: rgba(244,246,243,0.06);
-  border: 1px solid rgba(244,246,243,0.18);
-  color: rgba(244,246,243,0.86);
-  font-family: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-}
-.rung-btn:hover { background: rgba(244,246,243,0.12); border-color: rgba(244,246,243,0.32); }
-.rung-btn .rung-num {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  opacity: 0.6;
-}
-.rung-btn .rung-name {
-  font-family: var(--inferi);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 26px;
-  line-height: 1;
-  letter-spacing: -0.01em;
-}
-.rung-btn .rung-verb {
-  grid-column: 2;
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.55;
-  margin-top: 4px;
-}
-.rung-btn.active {
-  background: rgba(244,246,243,0.94);
-  border-color: rgba(244,246,243,0.94);
-  color: #10110f;
-}
-.rung-btn.active .rung-num,
-.rung-btn.active .rung-verb { opacity: 0.7; }
-
-.ladder-stage {
-  position: relative;
-  padding: 20px 24px 16px;
-  background: rgba(244,246,243,0.04);
-  border: 1px solid rgba(244,246,243,0.18);
-  display: flex;
-  flex-direction: column;
-  min-height: 460px;
-}
-.stage-tab {
-  display: flex;
+  align-items: flex-start;
   justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(244,246,243,0.62);
-  margin-bottom: 10px;
+  gap: 24px;
 }
-.dag-svg {
+.arch-heading { max-width: 720px; }
+.arch-top .kicker { margin: 0 0 6px; }
+.arch-heading h2 {
+  margin: 0;
+  color: rgba(244,246,243,0.94);
+  font-size: clamp(20px, 2vw, 27px);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.arch-lede {
+  margin: 5px 0 0;
+  color: rgba(244,246,243,0.6);
+  max-width: 600px;
+  font-size: 11px;
+  line-height: 1.35;
+}
+.arch-top .s4-explore.s4-explore--inline {
+  position: static;
+  top: auto;
+  right: auto;
+  margin: 4px 0 0;
+  flex: none;
+}
+.arch-fit {
+  position: relative;
+  flex: 1;
   width: 100%;
-  height: 300px;
-  display: block;
-  color: rgba(244,246,243,0.88);
+  min-height: 0;
 }
-.dag-svg .node-circle {
-  fill: rgba(244,246,243,0.92);
-  stroke: rgba(244,246,243,0.92);
-  stroke-width: 1.2;
-  transition: fill 0.5s ease, stroke 0.5s ease;
-}
-.dag-svg .node-circle.intervened {
-  fill: #10110f;
-  stroke: rgba(244,246,243,0.94);
-  stroke-width: 1.6;
-}
-.dag-svg .node-label {
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: 14px;
-  fill: #10110f;
-  text-anchor: middle;
-  dominant-baseline: middle;
-}
-.dag-svg .node-label.intervened { fill: rgba(244,246,243,0.94); }
-.dag-svg .node-tag {
-  font-family: var(--mono);
-  font-size: 8.5px;
-  letter-spacing: 0.08em;
-  fill: rgba(244,246,243,0.62);
-  text-anchor: middle;
-}
-.dag-svg .edge {
-  stroke: rgba(244,246,243,0.75);
-  stroke-width: 1.3;
-  fill: none;
-  transition: stroke-dasharray 0.6s ease, opacity 0.6s ease;
-}
-.dag-svg .edge-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  fill: rgba(244,246,243,0.68);
-  text-anchor: middle;
-}
-.dag-svg .scissor {
-  stroke: #ff8a5b;
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-.stage-readout {
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid rgba(244,246,243,0.18);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.readout-q {
-  font-family: var(--inferi);
-  font-style: italic;
-  font-size: 15px;
-  line-height: 1.4;
+.arch-figure {
+  width: 1140px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(var(--arch-scale, 1));
+  transform-origin: center center;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
   color: rgba(244,246,243,0.9);
 }
-.readout-desc {
-  font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1.55;
-  color: rgba(244,246,243,0.7);
-}
-.readout-formula {
-  font-family: var(--mono);
-  font-size: 11px;
-  margin-top: 6px;
-  color: rgba(244,246,243,0.6);
-  letter-spacing: 0.06em;
-}
-@media (max-width: 1000px) {
-  .arch-stack--ladder .ladder-stage-wrap { grid-template-columns: 1fr; }
-  .rung-list { flex-direction: row; gap: 8px; flex-wrap: wrap; }
-  .rung-btn { flex: 1 1 auto; grid-template-columns: 2rem 1fr; padding: 10px 12px; }
-  .rung-btn .rung-name { font-size: 18px; }
-  .rung-btn .rung-verb { display: none; }
-  .ladder-stage { min-height: 360px; padding: 16px; }
-  .dag-svg { height: 220px; }
-  .stage-readout { grid-template-columns: 1fr; gap: 10px; }
-}
-
-.layer-meta {
-  display: flex;
-  justify-content: space-between;
+.arch-row {
+  display: grid;
+  grid-template-columns: 1fr 170px 1fr;
   align-items: center;
-  margin-bottom: 28px;
-  color: rgba(244,246,243,0.62);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  column-gap: 34px;
+  height: 156px;
 }
-
-.layer-tag {
-  padding: 4px 11px;
-  border: 1px solid currentColor;
-  color: rgba(244,246,243,0.72);
-}
-
-.layer-card h3 {
-  margin: 0 0 17px;
-  color: rgba(244,246,243,0.84);
+.arch-row-left { text-align: right; }
+.arch-row-title {
+  margin: 0;
   font-family: var(--mono);
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  line-height: 1.2;
+  font-weight: 700;
+  font-size: 25px;
+  letter-spacing: 0.01em;
+  color: rgba(244,246,243,0.98);
 }
-
-.layer-card p {
-  color: rgba(244,246,243,0.68);
-  font-size: 12px;
-  line-height: 1.55;
+.arch-row-sub {
+  margin: 7px 0 0;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  letter-spacing: 0.02em;
+  color: var(--c-accent);
 }
-
-.layer-proof {
+.arch-row-mid {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  align-items: center;
+  column-gap: 6px;
+  height: 100%;
+}
+.arch-row-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(244,246,243,0.4);
+  text-align: right;
+}
+.arch-row-line-col {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arch-row-line-col::before {
+  content: '';
   position: absolute;
-  left: var(--edge-x);
-  top: 72vh;
-  z-index: 4;
-  width: min(900px, 82vw);
-  color: rgba(8,9,8,0.7);
-  font-size: 15px;
-  line-height: 1.6;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-left: 1px dashed rgba(244,246,243,0.22);
+  transform: translateX(-50%);
+}
+.arch-row:first-child .arch-row-line-col::before { top: 50%; }
+.arch-row:last-child .arch-row-line-col::before { bottom: 50%; }
+.arch-row-icon {
+  position: relative;
+  z-index: 1;
+  width: 116px;
+  height: 82px;
+  color: rgba(244,246,243,0.85);
+}
+.arch-row-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  z-index: 2;
+  color: var(--c-accent);
+}
+.arch-row-arrow svg {
+  width: 16px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.arch-row-feats {
+  list-style: none;
+  margin: 0;
+  padding-left: 18px;
+  border-left: 2px solid rgba(244,246,243,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-family: var(--mono);
+  font-size: 14.5px;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  color: rgba(244,246,243,0.9);
+}
+
+/* Mobile: no scale transform, single column, panel scrolls internally */
+@media (max-width: 900px) {
+  .arch-figure {
+    position: static;
+    top: auto;
+    left: auto;
+    width: 100%;
+    transform: none;
+    padding: 10px 18px;
+  }
+  .arch-row {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+    height: auto;
+    padding: 16px 0;
+    border-top: 1px solid rgba(244,246,243,0.14);
+  }
+  .arch-row:first-child { border-top: none; }
+  .arch-row-left { text-align: left; order: 1; }
+  .arch-row-mid {
+    order: 0;
+    grid-template-columns: 24px 1fr;
+    height: 56px;
+  }
+  .arch-row-line-col::before { display: none; }
+  .arch-row-arrow { display: none; }
+  .arch-row-icon { width: 48px; height: 34px; }
+  .arch-row-title { font-size: 16px; }
+  .arch-row-sub { font-size: 10.5px; margin-top: 3px; }
+  .arch-row-feats { order: 2; padding-left: 14px; font-size: 11px; gap: 5px; }
 }
 
 /* ARCHITECTURE (s4) additions */
@@ -1024,68 +938,23 @@ main {
   left: var(--edge-x);
   top: 0;
   width: calc(100% - 2 * var(--edge-x));
-  max-width: 1160px;
+  max-width: 1240px;
   height: 100svh;
   z-index: 4;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: clamp(20px, 3vh, 36px);
-  padding: clamp(128px, 16vh, 172px) 0 calc(var(--line-bottom) + var(--line-height));
+  gap: clamp(16px, 2.4vh, 28px);
+  padding: clamp(104px, 13vh, 140px) 0 calc(var(--line-bottom) + var(--line-height));
 }
-.s4-copy--architecture {
-  position: static;
-  top: auto;
-  left: auto;
-  width: min(760px, 78vw);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 1.6vh, 18px);
-}
-.s4-copy--architecture .kicker { margin-bottom: 0; }
-.s4-copy--architecture h2 { color: rgba(244,246,243,0.9); margin: 0; }
-.s4-lede {
-  margin: 0;
-  color: rgba(244,246,243,0.7);
-  max-width: 640px;
-}
-/* Explore link floats at the top-right of the panel, aligned with the kicker.
-   Double-class selector to beat the generic .s4-explore rule that comes after. */
-.s4-explore.s4-explore--inline {
-  position: absolute;
-  right: 0;
-  top: clamp(240px, 32vh, 360px);
-  margin-top: 0;
-  align-self: auto;
-  z-index: 5;
-}
-@media (max-width: 900px) {
-  .s4-explore.s4-explore--inline {
-    position: static;
-    right: auto;
-    top: auto;
-    margin-top: 8px;
-    align-self: flex-start;
-  }
-}
-.arch-stack .layers {
-  position: static;
-  top: auto;
-  left: auto;
-  width: min(940px, 100%);
-}
-/* Short viewports (e.g. 1280x720 laptops, the reported Mac case): content is
-   taller than one viewport. Top-align and allow internal scroll so nothing is
-   clipped and the button never overlaps the cards, at ANY resolution. */
+/* Short viewports: top-align the team panel and allow it to scroll. */
 @media (max-height: 820px) {
-  .content.s3-copy--team,
-  .arch-stack {
+  .content.s3-copy--team {
     justify-content: flex-start;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding-top: clamp(64px, 9vh, 96px);
   }
-  .s4-copy--architecture h2 { font-size: var(--display-md); }
 }
 .s4-explore {
   position: static;
@@ -1584,15 +1453,6 @@ main {
 }
 
 @media (max-width: 1300px) {
-  .s4-copy {
-    width: min(470px, 44vw);
-  }
-
-  .s4-detail {
-    width: clamp(260px, 26vw, 320px);
-    padding-left: 30px;
-  }
-
   .s3-copy {
     top: 42vh;
   }
@@ -1610,37 +1470,8 @@ main {
     --display-md: 36px;
   }
 
-  .s4-copy {
-    width: min(430px, 46vw);
-  }
-
-  .s4-detail {
-    right: 12.3vw;
-    width: min(300px, 30vw);
-    padding-left: 28px;
-  }
-
   .s3-copy {
     top: 43vh;
-  }
-
-  .layers {
-    gap: 24px;
-    width: 88vw;
-  }
-}
-
-@media (max-width: 1000px) {
-  .s4-copy {
-    left: var(--edge-x);
-    width: min(520px, 76vw);
-  }
-
-  .s4-detail {
-    left: var(--edge-x);
-    right: auto;
-    top: 40vh;
-    width: min(520px, 76vw);
   }
 }
 
@@ -1710,58 +1541,18 @@ main {
      title sits just under the header and the rest scrolls into view. */
   .content.s3-copy--team { justify-content: flex-start; }
 
-  .s4-detail {
-    left: 24px;
-    right: 24px;
-    top: 31vh;
-    width: auto;
-  }
-
   .arch-stack {
     left: 0;
     right: 0;
     top: 0;
+    width: auto;
+    max-width: none;
     height: 100svh;
     justify-content: flex-start;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding: var(--header-clear) 24px var(--line-safe-bottom);
-    gap: 18px;
-  }
-  .layers {
-    left: 24px;
-    right: 24px;
-    top: 32vh;
-    width: auto;
-    grid-template-columns: 1fr;
     gap: 14px;
-  }
-  .arch-stack .layers { width: 100%; }
-
-  .layer-card {
-    padding-top: 12px;
-  }
-
-  .layer-meta {
-    margin-bottom: 12px;
-  }
-
-  .layer-card h3 {
-    margin-bottom: 8px;
-    font-size: 14px;
-  }
-
-  .layer-card p {
-    font-size: 10px;
-  }
-
-  .layer-proof {
-    left: 24px;
-    right: 24px;
-    top: auto;
-    bottom: calc(var(--line-safe-bottom) + 28px);
-    width: auto;
-    font-size: 12px;
   }
 
   .s6-copy .mono {
@@ -1811,34 +1602,6 @@ main {
     margin-top: 24px;
   }
 
-  .layers {
-    top: 36vh;
-    gap: 9px;
-  }
-
-  .layer-card {
-    padding-top: 9px;
-  }
-
-  .layer-meta {
-    margin-bottom: 8px;
-  }
-
-  .layer-card h3 {
-    margin-bottom: 6px;
-    font-size: 13px;
-  }
-
-  .layer-card p {
-    font-size: 9px;
-    line-height: 1.42;
-  }
-
-  .layer-proof {
-    bottom: calc(var(--line-safe-bottom) + 28px);
-    font-size: 10px;
-    line-height: 1.45;
-  }
 }
 
 /* ───────────────────────────────────────────────
@@ -1863,34 +1626,23 @@ main {
   .team-role { font-size: 8px !important; }
   .team-bio { font-size: 9px !important; line-height: 1.4 !important; }
 
-  /* ARCHITECTURE — no nested scroll; compress the stack into one screen. */
+  /* ARCHITECTURE — panel scrolls internally so the diagram is reachable
+     even when it can't shrink further; top strip stays compact. */
   .arch-stack {
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
     max-width: none !important;
     height: 100svh !important;
-    overflow-y: visible !important;
+    overflow-y: auto !important;
     justify-content: flex-start !important;
-    padding: clamp(140px, 20vh, 180px) 24px calc(var(--line-bottom) + var(--line-height)) !important;
+    padding: var(--header-clear) 20px calc(var(--line-bottom) + var(--line-height)) !important;
     gap: 12px !important;
   }
-  .s4-explore.s4-explore--inline {
-    position: static !important;
-    right: auto !important;
-    top: auto !important;
-    margin-top: 6px !important;
-    align-self: flex-start !important;
-  }
-  .s4-copy--architecture h2 { font-size: 23px !important; }
-  .s4-lede { font-size: 10.5px !important; margin-top: 6px !important; }
-  .arch-stack .layers { top: auto !important; gap: 10px !important; }
-  .layer-glyph { max-width: 96px !important; margin-bottom: 8px !important; }
-  .layer-meta { margin-bottom: 8px !important; }
-  .layer-card { padding-top: 8px !important; }
-  .layer-card h3 { font-size: 13px !important; margin-bottom: 5px !important; }
-  .layer-card p { font-size: 9.5px !important; line-height: 1.4 !important; }
-  .s4-explore { margin-top: 10px !important; font-size: 10px !important; padding: 7px 14px !important; }
+  .arch-top { flex-wrap: wrap; gap: 10px 16px; }
+  .arch-top .kicker { font-size: 10px; }
+  .arch-heading h2 { font-size: 22px; }
+  .arch-lede { font-size: 10.5px; margin-top: 6px; }
 
   /* RESEARCH — keep section at fixed 100svh so the page-level scroll math
      (rawIndex = scrollY / panelHeight, used by every text-fade animation)
@@ -2103,56 +1855,162 @@ main {
 
   <section class="panel" id="architecture">
     <div class="panel-bg s4-bg"></div>
-    <div class="arch-stack arch-stack--ladder">
-    <div class="content s4-copy s4-copy--architecture">
-      <div class="kicker">Architecture · Pearl hierarchy</div>
-      <h2 class="serif">Three rungs.<br>One causal substrate.</h2>
-      <p class="mono s4-lede">Architected upon Judea Pearl's Hierarchy of Causality — we discard correlative guessing for structural understanding. The stage below auto-advances through each rung; click a rung to pin it.</p>
-    </div>
-    <a class="s4-explore s4-explore--inline" href="https://world.loka.cash/" target="_blank" rel="noreferrer">
-      <span>Explore LokaWorld</span>
-      <span class="beta-tag">beta</span>
-      <span class="arrow">→</span>
-    </a>
-    <div class="ladder-stage-wrap">
-      <div class="rung-list">
-        <button type="button" class="rung-btn active" data-rung="1">
-          <span class="rung-num">01 →</span>
-          <span class="rung-name">Association</span>
-          <span class="rung-verb">Seeing · Observing</span>
-        </button>
-        <button type="button" class="rung-btn" data-rung="2">
-          <span class="rung-num">02 →</span>
-          <span class="rung-name">Intervention</span>
-          <span class="rung-verb">Doing · Intervening</span>
-        </button>
-        <button type="button" class="rung-btn" data-rung="3">
-          <span class="rung-num">03 →</span>
-          <span class="rung-name">Counterfactual</span>
-          <span class="rung-verb">Imagining · Retrospection</span>
-        </button>
+    <div class="arch-stack arch-stack--diagram">
+    <div class="arch-top">
+      <div class="arch-heading">
+        <div class="kicker">Architecture · four layers</div>
+        <h2 class="serif">A modular, composable stack.</h2>
+        <p class="mono arch-lede">From raw data to real decisions — one continuous, causal pipeline.</p>
       </div>
-      <div class="ladder-stage">
-        <div class="stage-tab">
-          <span id="stage-tab-label">Rung 01 · Observational</span>
-          <span id="stage-tab-state">P(Y | X)</span>
-        </div>
-        <svg class="dag-svg" viewBox="0 0 600 340" aria-hidden="true">
-          <defs>
-            <marker id="dag-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
-            </marker>
-          </defs>
-          <g id="dag-edges"></g>
-          <g id="dag-nodes"></g>
-          <g id="dag-extras"></g>
-        </svg>
-        <div class="stage-readout">
-          <div class="readout-q" id="readout-q">"How are policy, market, and welfare correlated?"</div>
-          <div>
-            <div class="readout-desc" id="readout-desc">Joint distributions over observed variables. Patterns, not mechanisms.</div>
-            <div class="readout-formula" id="readout-formula">P(Y | X = x)</div>
+      <a class="s4-explore s4-explore--inline" href="https://world.loka.cash/" target="_blank" rel="noreferrer">
+        <span>Explore LokaWorld</span>
+        <span class="beta-tag">beta</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+    <div class="arch-fit">
+      <div class="arch-figure">
+        <div class="arch-row">
+          <div class="arch-row-left">
+            <h3 class="arch-row-title">Decision Intelligence</h3>
+            <p class="arch-row-sub">Generate, evaluate, and recommend actions</p>
           </div>
+          <div class="arch-row-mid">
+            <span class="arch-row-num">04</span>
+            <div class="arch-row-line-col">
+              <svg class="arch-row-icon" viewBox="0 0 110 80" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+                  <path d="M55 12 L98 40 L55 68 L12 40 Z"/>
+                </g>
+                <g stroke="currentColor" stroke-width="1" opacity="0.7">
+                  <line x1="55" y1="40" x2="30" y2="28"/>
+                  <line x1="55" y1="40" x2="80" y2="28"/>
+                  <line x1="55" y1="40" x2="30" y2="52"/>
+                  <line x1="55" y1="40" x2="80" y2="52"/>
+                </g>
+                <g fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="30" cy="28" r="3"/>
+                  <circle cx="80" cy="28" r="3"/>
+                  <circle cx="30" cy="52" r="3"/>
+                  <circle cx="80" cy="52" r="3"/>
+                </g>
+                <circle cx="55" cy="40" r="4.4" fill="currentColor"/>
+              </svg>
+              <div class="arch-row-arrow" aria-hidden="true"><svg viewBox="0 0 16 22"><line x1="8" y1="21" x2="8" y2="3"/><polyline points="2,9 8,2 14,9"/></svg></div>
+            </div>
+          </div>
+          <ul class="arch-row-feats">
+            <li>Scenario Generation</li>
+            <li>Policy Optimization</li>
+            <li>Counterfactual Analysis</li>
+            <li>Decision Recommendation</li>
+          </ul>
+        </div>
+
+        <div class="arch-row">
+          <div class="arch-row-left">
+            <h3 class="arch-row-title">Economic Simulation Engine</h3>
+            <p class="arch-row-sub">Simulate how the world evolves</p>
+          </div>
+          <div class="arch-row-mid">
+            <span class="arch-row-num">03</span>
+            <div class="arch-row-line-col">
+              <svg class="arch-row-icon" viewBox="0 0 110 80" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="0.9">
+                  <path d="M8 26 Q22 14 36 24 T64 22 T102 12" opacity="0.9"/>
+                  <path d="M8 38 Q22 28 36 36 T64 34 T102 26" opacity="0.68"/>
+                  <path d="M8 50 Q22 44 36 48 T64 46 T102 40" opacity="0.46"/>
+                  <path d="M8 62 Q22 58 36 60 T64 58 T102 54" opacity="0.26"/>
+                  <path d="M18 18 Q26 40 22 68" opacity="0.35"/>
+                  <path d="M40 16 Q46 40 42 66" opacity="0.35"/>
+                  <path d="M64 14 Q68 38 66 62" opacity="0.35"/>
+                  <path d="M88 10 Q90 34 88 56" opacity="0.35"/>
+                </g>
+                <g fill="currentColor" opacity="0.85">
+                  <circle cx="36" cy="24" r="1.3"/>
+                  <circle cx="64" cy="22" r="1.3"/>
+                  <circle cx="36" cy="36" r="1.3"/>
+                  <circle cx="64" cy="34" r="1.3"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <ul class="arch-row-feats">
+            <li>Behavioral Agents</li>
+            <li>Institution Dynamics</li>
+            <li>Market Dynamics</li>
+            <li>Shock Propagation</li>
+            <li>Scenario Execution</li>
+          </ul>
+        </div>
+
+        <div class="arch-row">
+          <div class="arch-row-left">
+            <h3 class="arch-row-title">Economic World Model</h3>
+            <p class="arch-row-sub">A structured, causal representation of the economy</p>
+          </div>
+          <div class="arch-row-mid">
+            <span class="arch-row-num">02</span>
+            <div class="arch-row-line-col">
+              <svg class="arch-row-icon" viewBox="0 0 110 80" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="1.1">
+                  <circle cx="55" cy="40" r="27"/>
+                </g>
+                <g fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.55">
+                  <ellipse cx="55" cy="40" rx="27" ry="8"/>
+                  <ellipse cx="55" cy="40" rx="27" ry="17"/>
+                  <ellipse cx="55" cy="40" rx="10" ry="27"/>
+                  <ellipse cx="55" cy="40" rx="19" ry="27"/>
+                </g>
+                <g stroke="currentColor" stroke-width="0.9" opacity="0.6">
+                  <line x1="28" y1="40" x2="82" y2="40"/>
+                  <line x1="55" y1="13" x2="55" y2="67"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <ul class="arch-row-feats">
+            <li>Ontology &amp; Relations</li>
+            <li>Behavior Models</li>
+            <li>Causal Structure</li>
+            <li>Institution Models</li>
+            <li>Constraints &amp; Rules</li>
+          </ul>
+        </div>
+
+        <div class="arch-row">
+          <div class="arch-row-left">
+            <h3 class="arch-row-title">Data Foundation</h3>
+            <p class="arch-row-sub">Diverse, high-quality, and continuously updated</p>
+          </div>
+          <div class="arch-row-mid">
+            <span class="arch-row-num">01</span>
+            <div class="arch-row-line-col">
+              <svg class="arch-row-icon" viewBox="0 0 110 80" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round">
+                  <!-- top cube -->
+                  <path d="M46 16 L60 24 L46 32 L32 24 Z" opacity="0.9"/>
+                  <path d="M32 24 L46 32 L46 48 L32 40 Z" opacity="0.9"/>
+                  <path d="M60 24 L46 32 L46 48 L60 40 Z" opacity="0.9"/>
+                  <!-- front-left cube -->
+                  <path d="M32 38 L46 46 L32 54 L18 46 Z"/>
+                  <path d="M18 46 L32 54 L32 70 L18 62 Z"/>
+                  <path d="M46 46 L32 54 L32 70 L46 62 Z"/>
+                  <!-- front-right cube -->
+                  <path d="M60 38 L74 46 L60 54 L46 46 Z"/>
+                  <path d="M46 46 L60 54 L60 70 L46 62 Z"/>
+                  <path d="M74 46 L60 54 L60 70 L74 62 Z"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <ul class="arch-row-feats">
+            <li>Time-Series Data</li>
+            <li>Documents &amp; Reports</li>
+            <li>Structured Data</li>
+            <li>Real-time Events</li>
+            <li>APIs &amp; External Data</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -2910,7 +2768,7 @@ function addTextItem(panel, index, selector, options) {
 panels.forEach((panel, index) => {
   const isSection2 = index === 1;
 
-  addTextItem(panel, index, ".s1-copy h1, .s2-copy blockquote, .s3-copy h2, .s4-copy h2, .s5-copy h2, .s6-copy h2, .s7-copy h2", {
+  addTextItem(panel, index, ".s1-copy h1, .s2-copy blockquote, .s3-copy h2, .arch-heading h2, .s5-copy h2, .s6-copy h2, .s7-copy h2", {
     enterY: isSection2 ? SECTION_2_TITLE_ENTER_Y : TITLE_ENTER_Y,
     leaveY: TITLE_LEAVE_Y,
     fade: isSection2 ? SECTION_2_TITLE_FADE_STRENGTH : TITLE_FADE_STRENGTH,
@@ -2918,7 +2776,7 @@ panels.forEach((panel, index) => {
     opacitySpeed: isSection2 ? SECTION_2_TITLE_FADE_SPEED : TITLE_FADE_SPEED
   });
 
-  addTextItem(panel, index, ".s1-copy p, .s2-copy cite, .kicker, .s3-copy > p, .team-grid, .s4-detail, .s4-lede, .s4-explore, .ladder-stage-wrap, .s5-copy > p, .layers, .layer-proof, .research-grid, .s6-copy > p, .s7-copy .built-on, .s7-copy .proof-line, .s7-copy > p:not(.proof-line), .cta, .site-footer", {
+  addTextItem(panel, index, ".s1-copy p, .s2-copy cite, .kicker, .s3-copy > p, .team-grid, .arch-lede, .s4-explore, .arch-fit, .s5-copy > p, .research-grid, .s6-copy > p, .s7-copy .built-on, .s7-copy .proof-line, .s7-copy > p:not(.proof-line), .cta, .site-footer", {
     enterY: isSection2 ? SECTION_2_BODY_ENTER_Y : BODY_ENTER_Y,
     leaveY: BODY_LEAVE_Y,
     fade: isSection2 ? SECTION_2_BODY_FADE_STRENGTH : BODY_FADE_STRENGTH,
@@ -3122,155 +2980,33 @@ window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlo
   window.addEventListener("resize", render);
 })();
 
-/* Ladder of Causation — interactive DAG for the Architecture panel */
-(function ladderDAG() {
-  const edgesG = document.getElementById('dag-edges');
-  const nodesG = document.getElementById('dag-nodes');
-  const extrasG = document.getElementById('dag-extras');
-  if (!edgesG || !nodesG || !extrasG) return;
-  const tabLabel = document.getElementById('stage-tab-label');
-  const tabState = document.getElementById('stage-tab-state');
-  const roQ = document.getElementById('readout-q');
-  const roDesc = document.getElementById('readout-desc');
-  const roFormula = document.getElementById('readout-formula');
-  const btns = document.querySelectorAll('.rung-btn');
+/* Architecture diagram — scale the fixed-design figure to fit whatever
+   space is left in the panel (viewport height varies; the panel itself
+   never scrolls on desktop, so the figure must shrink to fit instead). */
+(function fitArchFigure() {
+  const fit = document.querySelector('.arch-fit');
+  const figure = document.querySelector('.arch-figure');
+  if (!fit || !figure) return;
 
-  const NS = 'http://www.w3.org/2000/svg';
-  const NODES = {
-    P: { tag: 'Policy', x: 165, y: 190 },
-    M: { tag: 'Market', x: 300, y: 100 },
-    W: { tag: 'Welfare', x: 435, y: 190 },
-    C: { tag: 'Confound', x: 300, y: 270 },
-  };
-  const RUNGS = {
-    1: { tab: 'Rung 01 · Observational', state: 'P(Y | X)', q: '"How are policy, market, and welfare correlated?"', desc: 'Joint distributions over observed variables. Patterns, not mechanisms.', formula: 'P(Y | X = x)' },
-    2: { tab: 'Rung 02 · Interventional', state: 'P(Y | do(X))', q: '"If I execute policy do(P), how does the system react?"', desc: 'Sever P from its causes, fix its value, and propagate the consequence through the structural model.', formula: 'P(Y | do(X = x))' },
-    3: { tab: 'Rung 03 · Counterfactual', state: 'P(Yₓ | X = x′, Y = y′)', q: '"What would welfare have been, had we chosen otherwise?"', desc: 'A factual world and a counterfactual twin run in parallel. The system imagines alternate histories and quantifies regret.', formula: 'P(Y_{P=1} | P=0, observed)' },
-  };
-
-  function el(tag, attrs, parent) {
-    const n = document.createElementNS(NS, tag);
-    for (const k in attrs) {
-      if (k === 'text') n.textContent = attrs[k];
-      else n.setAttribute(k, attrs[k]);
+  function apply() {
+    if (window.innerWidth <= 900) {
+      figure.style.removeProperty('--arch-scale');
+      return;
     }
-    parent.appendChild(n);
-    return n;
-  }
-  function node(parent, x, y, label, tag, opts = {}) {
-    const intervened = !!opts.intervened;
-    el('circle', { cx: x, cy: y, r: opts.r || 22, class: 'node-circle' + (intervened ? ' intervened' : ''), opacity: opts.opacity || 1 }, parent);
-    el('text', { x, y, class: 'node-label' + (intervened ? ' intervened' : ''), opacity: opts.labelOp || 1, text: label }, parent);
-    if (tag) el('text', { x, y: y + (opts.r || 22) + 16, class: 'node-tag', text: tag }, parent);
-  }
-  function edge(parent, ax, ay, bx, by, opts = {}) {
-    const e = el('line', { x1: ax, y1: ay, x2: bx, y2: by, class: 'edge' }, parent);
-    if (opts.dashed) e.setAttribute('stroke-dasharray', '4 5');
-    else e.setAttribute('marker-end', 'url(#dag-arrow)');
-    if (opts.opacity != null) e.setAttribute('opacity', opts.opacity);
-    if (opts.label) el('text', { x: (ax + bx) / 2, y: (ay + by) / 2 - 8, class: 'edge-label', text: opts.label }, parent);
+    figure.style.setProperty('--arch-scale', '1');
+    const naturalW = figure.scrollWidth;
+    const naturalH = figure.scrollHeight;
+    const availW = fit.clientWidth;
+    const availH = fit.clientHeight;
+    if (!naturalW || !naturalH || !availW || !availH) return;
+    const scale = Math.min(availW / naturalW, availH / naturalH, 1);
+    figure.style.setProperty('--arch-scale', scale.toFixed(4));
   }
 
-  function render(n) {
-    edgesG.innerHTML = '';
-    nodesG.innerHTML = '';
-    extrasG.innerHTML = '';
-    const cfg = RUNGS[n];
-    tabLabel.textContent = cfg.tab;
-    tabState.textContent = cfg.state;
-    roQ.textContent = cfg.q;
-    roDesc.textContent = cfg.desc;
-    roFormula.textContent = cfg.formula;
-
-    const { P, M, W, C } = NODES;
-    if (n === 1) {
-      edge(edgesG, P.x, P.y, M.x, M.y, { dashed: true, label: 'ρ ≈ 0.62' });
-      edge(edgesG, M.x, M.y, W.x, W.y, { dashed: true, label: 'ρ ≈ 0.48' });
-      edge(edgesG, C.x, C.y, P.x, P.y, { dashed: true, opacity: 0.7 });
-      edge(edgesG, C.x, C.y, W.x, W.y, { dashed: true, opacity: 0.7 });
-      node(nodesG, P.x, P.y, 'P', P.tag);
-      node(nodesG, M.x, M.y, 'M', M.tag);
-      node(nodesG, W.x, W.y, 'W', W.tag);
-      node(nodesG, C.x, C.y, 'C', C.tag);
-    } else if (n === 2) {
-      edge(edgesG, C.x, C.y, P.x, P.y, { dashed: true, opacity: 0.18 });
-      const mx = (P.x + C.x) / 2, my = (P.y + C.y) / 2;
-      el('line', { x1: mx - 10, y1: my - 10, x2: mx + 10, y2: my + 10, class: 'scissor' }, edgesG);
-      el('line', { x1: mx + 10, y1: my - 10, x2: mx - 10, y2: my + 10, class: 'scissor' }, edgesG);
-      edge(edgesG, C.x, C.y, W.x, W.y, { opacity: 0.55 });
-      edge(edgesG, P.x, P.y, M.x, M.y, { label: 'β = 0.71' });
-      edge(edgesG, M.x, M.y, W.x, W.y, { label: 'β = 0.54' });
-      el('text', { x: P.x, y: P.y - 38, class: 'node-tag', 'text-anchor': 'middle', text: 'do( P )' }, extrasG);
-      node(nodesG, P.x, P.y, 'P', P.tag, { intervened: true });
-      node(nodesG, M.x, M.y, 'M', M.tag);
-      node(nodesG, W.x, W.y, 'W', W.tag);
-      node(nodesG, C.x, C.y, 'C', C.tag, { opacity: 0.55, labelOp: 0.55 });
-    } else if (n === 3) {
-      const F = { P: { x: 70, y: 180 }, M: { x: 150, y: 100 }, W: { x: 230, y: 180 } };
-      const G = { P: { x: 370, y: 180 }, M: { x: 450, y: 100 }, W: { x: 530, y: 180 } };
-      el('text', { x: 150, y: 38, class: 'node-tag', 'text-anchor': 'middle', text: 'Factual  ·  P = 1' }, extrasG);
-      el('text', { x: 450, y: 38, class: 'node-tag', 'text-anchor': 'middle', text: 'Counterfactual  ·  P = 0' }, extrasG);
-      el('line', { x1: 300, y1: 60, x2: 300, y2: 290, stroke: 'rgba(244,246,243,0.3)', 'stroke-width': 1, 'stroke-dasharray': '2 6' }, extrasG);
-      edge(edgesG, F.P.x, F.P.y, F.M.x, F.M.y, {});
-      edge(edgesG, F.M.x, F.M.y, F.W.x, F.W.y, {});
-      node(nodesG, F.P.x, F.P.y, 'P', '', { r: 19, intervened: true });
-      node(nodesG, F.M.x, F.M.y, 'M', '', { r: 19 });
-      node(nodesG, F.W.x, F.W.y, 'W', '', { r: 19 });
-      el('text', { x: F.W.x, y: F.W.y + 35, class: 'node-tag', text: 'W = 0.71' }, extrasG);
-      edge(edgesG, G.P.x, G.P.y, G.M.x, G.M.y, { opacity: 0.55 });
-      edge(edgesG, G.M.x, G.M.y, G.W.x, G.W.y, { opacity: 0.55 });
-      node(nodesG, G.P.x, G.P.y, 'P′', '', { r: 19 });
-      node(nodesG, G.M.x, G.M.y, 'M′', '', { r: 19, opacity: 0.7, labelOp: 0.7 });
-      node(nodesG, G.W.x, G.W.y, 'W′', '', { r: 19, opacity: 0.7, labelOp: 0.7 });
-      el('text', { x: G.W.x, y: G.W.y + 35, class: 'node-tag', text: "W′ = 0.43" }, extrasG);
-      el('path', { d: 'M 230 220 Q 300 250 370 220', fill: 'none', stroke: 'rgba(244,246,243,0.45)', 'stroke-width': 1, 'stroke-dasharray': '3 4' }, extrasG);
-      el('text', { x: 300, y: 268, class: 'edge-label', 'text-anchor': 'middle', text: 'ΔW = +0.28 (regret)', style: 'fill: #ff8a5b; font-weight: 500;' }, extrasG);
-    }
-  }
-
-  let current = 1;
-  let autoTimer = null;
-  let userPinned = false;
-
-  function activate(rung) {
-    current = rung;
-    btns.forEach((x) => x.classList.toggle('active', parseInt(x.dataset.rung, 10) === rung));
-    render(rung);
-  }
-
-  function startAuto() {
-    stopAuto();
-    autoTimer = setInterval(() => {
-      if (userPinned) return;
-      activate(current === 3 ? 1 : current + 1);
-    }, 3600);
-  }
-  function stopAuto() {
-    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
-  }
-
-  btns.forEach((b) => {
-    b.addEventListener('click', () => {
-      userPinned = true;
-      stopAuto();
-      activate(parseInt(b.dataset.rung, 10));
-    });
-  });
-
-  activate(1);
-
-  // Start auto-advance only when the panel scrolls into view; stop when it leaves
-  const panel = document.getElementById('architecture');
-  if ('IntersectionObserver' in window && panel) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && !userPinned) startAuto();
-        else stopAuto();
-      });
-    }, { threshold: 0.45 });
-    obs.observe(panel);
-  } else {
-    startAuto();
+  apply();
+  window.addEventListener('resize', apply);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(apply).observe(fit);
   }
 })();
 
