@@ -332,7 +332,6 @@ section.block {
 .apply-file.has-file .apply-file-text { color: rgba(244,246,243,0.92); }
 .apply-error { font-size: 11px; color: #e0a67a; letter-spacing: 0.02em; }
 .apply-error[hidden] { display: none; }
-.apply-honey { position: absolute; left: -9999px; opacity: 0; }
 .apply-submit {
   margin-top: 4px;
   display: inline-flex;
@@ -550,32 +549,25 @@ section.block {
       <span>Thanks — your resume is on its way to us. We read every application and will reach out if it's a fit.</span>
     </div>
 
-    <form class="apply-form" id="apply-form"
-          action="https://formsubmit.co/hello@loka.inc" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="_subject" value="Application: Founding Head of Narrative & Communications">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://loka.inc/careers?submitted=1">
-      <input type="text" name="_honey" class="apply-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-
+    <form class="apply-form" id="apply-form" novalidate>
       <div class="apply-field">
         <span class="apply-label">Resume / CV <em>*</em></span>
         <label class="apply-file" id="apply-file-label">
-          <input type="file" name="attachment" id="apply-file" required
+          <input type="file" id="apply-file" required
                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
           <span class="apply-file-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
           </span>
-          <span class="apply-file-text" id="apply-file-text">Upload a file — PDF or Word, up to 5&nbsp;MB</span>
+          <span class="apply-file-text" id="apply-file-text">Upload a file — PDF or Word, up to 3&nbsp;MB</span>
         </label>
       </div>
       <label class="apply-field">
         <span class="apply-label">Email <em>(optional, so we can reply)</em></span>
-        <input type="email" name="email" placeholder="you@domain.com" autocomplete="email">
+        <input type="email" id="apply-email" placeholder="you@domain.com" autocomplete="email">
       </label>
       <div class="apply-error" id="apply-error" hidden></div>
       <button type="submit" class="apply-submit" id="apply-submit">
-        <span>Submit application</span>
+        <span id="apply-submit-label">Submit application</span>
         <span>→</span>
       </button>
       <div class="apply-meta">Prefer email? Send your resume to <a href="mailto:hello@loka.inc?subject=Application%3A%20Founding%20Head%20of%20Narrative%20%26%20Communications">hello@loka.inc</a></div>
@@ -605,25 +597,29 @@ section.block {
 
 <script>
 (function applyUpload() {
-  const params = new URLSearchParams(location.search);
-  const note = document.getElementById('apply-note');
   const form = document.getElementById('apply-form');
-
-  // After FormSubmit redirects back with ?submitted=1, show the success note.
-  if (params.get('submitted') === '1' && note) {
-    note.hidden = false;
-    if (form) form.hidden = true;
-    note.scrollIntoView({ block: 'center', behavior: 'smooth' });
-  }
-
+  const note = document.getElementById('apply-note');
   const fileInput = document.getElementById('apply-file');
   const fileLabel = document.getElementById('apply-file-label');
   const fileText = document.getElementById('apply-file-text');
+  const emailInput = document.getElementById('apply-email');
   const errBox = document.getElementById('apply-error');
   const submit = document.getElementById('apply-submit');
-  if (!fileInput) return;
+  const submitLabel = document.getElementById('apply-submit-label');
+  if (!form || !fileInput) return;
+
   const fileDefault = fileText.innerHTML;
-  const MAX_BYTES = 5 * 1024 * 1024;
+  const MAX_BYTES = 3 * 1024 * 1024; // keep base64 body under Vercel's ~4.5MB cap
+  const ROLE = 'Founding Head of Narrative & Communications';
+
+  function showError(msg) {
+    errBox.textContent = msg;
+    errBox.hidden = false;
+  }
+  function resetSubmit() {
+    submit.disabled = false;
+    submitLabel.textContent = 'Submit application';
+  }
 
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
@@ -637,18 +633,56 @@ section.block {
       fileInput.value = '';
       fileLabel.classList.remove('has-file');
       fileText.innerHTML = fileDefault;
-      errBox.textContent = 'That file is over 5 MB — please choose a smaller PDF or Word doc.';
-      errBox.hidden = false;
+      showError('That file is over 3 MB — please choose a smaller PDF or Word doc.');
       return;
     }
     fileLabel.classList.add('has-file');
     fileText.textContent = file.name;
   });
 
-  form.addEventListener('submit', () => {
-    if (fileInput.files[0]) {
-      submit.disabled = true;
-      submit.querySelector('span').textContent = 'Sending…';
+  function readAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+      reader.onerror = () => reject(reader.error || new Error('Could not read the file.'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errBox.hidden = true;
+    const file = fileInput.files[0];
+    if (!file) { showError('Please attach your resume first.'); return; }
+
+    submit.disabled = true;
+    submitLabel.textContent = 'Sending…';
+    try {
+      const contentBase64 = await readAsBase64(file);
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename: file.name,
+          contentType: file.type || 'application/octet-stream',
+          contentBase64,
+          email: (emailInput && emailInput.value.trim()) || '',
+          role: ROLE,
+        }),
+      });
+      let data = {};
+      try { data = await res.json(); } catch {}
+      if (res.ok && data.success) {
+        form.hidden = true;
+        note.hidden = false;
+        note.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      } else {
+        showError(data.error || 'Something went wrong sending your application. Please email it to hello@loka.inc instead.');
+        resetSubmit();
+      }
+    } catch (err) {
+      showError('Network error — please try again, or email your resume to hello@loka.inc.');
+      resetSubmit();
     }
   });
 })();
