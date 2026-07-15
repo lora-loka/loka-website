@@ -9,8 +9,9 @@ function cleanUrlRewrite() {
     name: 'clean-url-rewrite',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        if (req.url === '/careers') {
-          req.url = '/careers/'
+        // Match /careers with or without a query string (?submitted=1 etc.)
+        if (req.url === '/careers' || req.url.startsWith('/careers?')) {
+          req.url = '/careers/' + req.url.slice('/careers'.length)
         }
         next()
       })

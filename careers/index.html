@@ -287,9 +287,8 @@ section.block {
   text-transform: uppercase;
   color: rgba(244,246,243,0.5);
 }
-.apply-label em { font-style: normal; color: #e0a67a; }
-.apply-field input,
-.apply-field textarea {
+.apply-label em { font-style: normal; color: rgba(244,246,243,0.4); text-transform: none; letter-spacing: 0.02em; }
+.apply-field input[type="email"] {
   width: 100%;
   font-family: var(--mono);
   font-size: 14px;
@@ -299,18 +298,41 @@ section.block {
   border-bottom: 1px solid rgba(244,246,243,0.22);
   padding: 8px 0;
   transition: border-color 0.25s ease;
-  resize: vertical;
 }
-.apply-field input::placeholder,
-.apply-field textarea::placeholder { color: rgba(244,246,243,0.32); }
-.apply-field input:focus,
-.apply-field textarea:focus { outline: none; border-bottom-color: rgba(244,246,243,0.85); }
-.apply-error {
-  font-size: 11px;
-  color: #e0a67a;
+.apply-field input[type="email"]::placeholder { color: rgba(244,246,243,0.32); }
+.apply-field input[type="email"]:focus { outline: none; border-bottom-color: rgba(244,246,243,0.85); }
+/* File upload control */
+.apply-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 16px;
+  border: 1px dashed rgba(244,246,243,0.28);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.apply-file:hover { border-color: rgba(244,246,243,0.55); background: rgba(244,246,243,0.03); }
+.apply-file input[type="file"] {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+.apply-file-icon { flex: none; display: inline-flex; color: rgba(244,246,243,0.6); }
+.apply-file-text {
+  font-family: var(--mono);
+  font-size: 12.5px;
   letter-spacing: 0.02em;
+  color: rgba(244,246,243,0.55);
 }
+.apply-file.has-file { border-style: solid; border-color: rgba(244,246,243,0.5); }
+.apply-file.has-file .apply-file-icon,
+.apply-file.has-file .apply-file-text { color: rgba(244,246,243,0.92); }
+.apply-error { font-size: 11px; color: #e0a67a; letter-spacing: 0.02em; }
 .apply-error[hidden] { display: none; }
+.apply-honey { position: absolute; left: -9999px; opacity: 0; }
 .apply-submit {
   margin-top: 4px;
   display: inline-flex;
@@ -322,7 +344,7 @@ section.block {
   color: #10110f;
   border: none;
   border-radius: 999px;
-  padding: 14px 26px;
+  padding: 15px 28px;
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 500;
@@ -340,23 +362,21 @@ section.block {
   color: rgba(244,246,243,0.45);
 }
 .apply-meta a { text-decoration: underline; text-underline-offset: 3px; }
-.apply-success[hidden] { display: none; }
-.apply-success { display: flex; align-items: flex-start; gap: 14px; margin-top: 28px; max-width: 520px; }
-.apply-success-mark {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  background: #4a7c5c;
-  color: var(--white);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
+.apply-note {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 520px;
+  padding: 14px 16px;
+  border: 1px solid rgba(74,124,92,0.5);
+  border-radius: 8px;
+  background: rgba(74,124,92,0.08);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgba(244,246,243,0.85);
 }
-.apply-success-title { font-family: var(--inferi); font-size: 17px; font-weight: 300; margin-bottom: 4px; color: rgba(244,246,243,0.96); }
-.apply-success-body { font-size: 12.5px; color: rgba(244,246,243,0.65); }
-.apply-form[hidden] { display: none; }
+.apply-note[hidden] { display: none; }
 
 /* ── Footer ─────────────────────────────────────────────── */
 .site-footer {
@@ -522,41 +542,44 @@ section.block {
 
   <section class="apply-section" id="apply">
     <div class="kicker">Apply</div>
-    <h2 class="block-heading">Tell us why you're the one.</h2>
-    <p class="block-lede" style="margin-bottom:0;">No cover-letter formalities needed — just a clear note on why this role, and a link to your best writing.</p>
+    <h2 class="block-heading">Send us your resume.</h2>
+    <p class="block-lede" style="margin-bottom:0;">Upload your resume and hit submit — it lands straight in our inbox.</p>
 
-    <form class="apply-form" id="apply-form">
+    <div class="apply-note" id="apply-note" hidden>
+      <span aria-hidden="true">✓</span>
+      <span>Thanks — your resume is on its way to us. We read every application and will reach out if it's a fit.</span>
+    </div>
+
+    <form class="apply-form" id="apply-form"
+          action="https://formsubmit.co/hello@loka.inc" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Application: Founding Head of Narrative & Communications">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://loka.inc/careers?submitted=1">
+      <input type="text" name="_honey" class="apply-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="apply-field">
+        <span class="apply-label">Resume / CV <em>*</em></span>
+        <label class="apply-file" id="apply-file-label">
+          <input type="file" name="attachment" id="apply-file" required
+                 accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          <span class="apply-file-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+          </span>
+          <span class="apply-file-text" id="apply-file-text">Upload a file — PDF or Word, up to 5&nbsp;MB</span>
+        </label>
+      </div>
       <label class="apply-field">
-        <span class="apply-label">Name</span>
-        <input type="text" name="name" placeholder="Your name" autocomplete="name">
-      </label>
-      <label class="apply-field">
-        <span class="apply-label">Email <em>*</em></span>
-        <input type="email" name="email" required placeholder="you@domain.com" autocomplete="email">
-      </label>
-      <label class="apply-field">
-        <span class="apply-label">Link to your best writing / portfolio <em>*</em></span>
-        <input type="text" name="portfolio" required placeholder="LinkedIn, Substack, published work…">
-      </label>
-      <label class="apply-field">
-        <span class="apply-label">Why this role <em>*</em></span>
-        <textarea name="message" required rows="5" placeholder="Why Loka, why this role, why you."></textarea>
+        <span class="apply-label">Email <em>(optional, so we can reply)</em></span>
+        <input type="email" name="email" placeholder="you@domain.com" autocomplete="email">
       </label>
       <div class="apply-error" id="apply-error" hidden></div>
       <button type="submit" class="apply-submit" id="apply-submit">
-        <span id="apply-submit-label">Submit application</span>
+        <span>Submit application</span>
         <span>→</span>
       </button>
-      <div class="apply-meta">Or email us directly at <a href="mailto:hello@loka.inc?subject=Application%3A%20Founding%20Head%20of%20Narrative%20%26%20Communications">hello@loka.inc</a></div>
+      <div class="apply-meta">Prefer email? Send your resume to <a href="mailto:hello@loka.inc?subject=Application%3A%20Founding%20Head%20of%20Narrative%20%26%20Communications">hello@loka.inc</a></div>
     </form>
-
-    <div class="apply-success" id="apply-success" hidden>
-      <div class="apply-success-mark">✓</div>
-      <div>
-        <div class="apply-success-title">Application received.</div>
-        <div class="apply-success-body">We'll be in touch at <em id="apply-success-email"></em> if it's a fit.</div>
-      </div>
-    </div>
   </section>
 </main>
 
@@ -581,52 +604,51 @@ section.block {
 </footer>
 
 <script>
-(function applyForm() {
+(function applyUpload() {
+  const params = new URLSearchParams(location.search);
+  const note = document.getElementById('apply-note');
   const form = document.getElementById('apply-form');
-  const success = document.getElementById('apply-success');
-  const successEmail = document.getElementById('apply-success-email');
+
+  // After FormSubmit redirects back with ?submitted=1, show the success note.
+  if (params.get('submitted') === '1' && note) {
+    note.hidden = false;
+    if (form) form.hidden = true;
+    note.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+
+  const fileInput = document.getElementById('apply-file');
+  const fileLabel = document.getElementById('apply-file-label');
+  const fileText = document.getElementById('apply-file-text');
   const errBox = document.getElementById('apply-error');
   const submit = document.getElementById('apply-submit');
-  const submitLabel = document.getElementById('apply-submit-label');
-  const WEB3FORMS_ACCESS_KEY = '3181ff54-df0a-4280-9f85-33c11d4b064e';
-  const ROLE = 'Founding Head of Narrative & Communications';
+  if (!fileInput) return;
+  const fileDefault = fileText.innerHTML;
+  const MAX_BYTES = 5 * 1024 * 1024;
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submit.disabled = true;
-    submitLabel.textContent = 'Sending…';
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
     errBox.hidden = true;
-    const fd = new FormData(form);
-    const messageBody = `Role: ${ROLE}\nPortfolio: ${fd.get('portfolio') || ''}\n\n${fd.get('message') || ''}`;
-    const payload = {
-      access_key: WEB3FORMS_ACCESS_KEY,
-      subject: `[Application] ${ROLE} — ${fd.get('name') || fd.get('email')}`,
-      from_name: fd.get('name') || 'loka.inc applicant',
-      email: fd.get('email'),
-      message: messageBody,
-    };
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
-      if (data.success) {
-        successEmail.textContent = payload.email;
-        form.hidden = true;
-        success.hidden = false;
-      } else {
-        errBox.textContent = data.message || 'Something went wrong.';
-        errBox.hidden = false;
-        submit.disabled = false;
-        submitLabel.textContent = 'Submit application';
-      }
-    } catch (err) {
-      errBox.textContent = err.message || 'Network error.';
+    if (!file) {
+      fileLabel.classList.remove('has-file');
+      fileText.innerHTML = fileDefault;
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      fileInput.value = '';
+      fileLabel.classList.remove('has-file');
+      fileText.innerHTML = fileDefault;
+      errBox.textContent = 'That file is over 5 MB — please choose a smaller PDF or Word doc.';
       errBox.hidden = false;
-      submit.disabled = false;
-      submitLabel.textContent = 'Submit application';
+      return;
+    }
+    fileLabel.classList.add('has-file');
+    fileText.textContent = file.name;
+  });
+
+  form.addEventListener('submit', () => {
+    if (fileInput.files[0]) {
+      submit.disabled = true;
+      submit.querySelector('span').textContent = 'Sending…';
     }
   });
 })();
