@@ -173,6 +173,27 @@ body {
   color: currentColor;
 }
 
+.header-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 30px;
+  height: 34px; /* align with the Get-in-touch pill row */
+  margin-left: auto;   /* pull the nav right, up against the right-hand group */
+  margin-right: 48px;
+  pointer-events: auto;
+}
+.header-nav a {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(246,247,241,0.68);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+.header-nav a:hover { color: rgba(246,247,241,0.98); }
+
 .header-right-group {
   display: inline-flex;
   align-items: center;
@@ -491,12 +512,25 @@ main {
   letter-spacing: 0.12em;
 }
 .s1-cred-marks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-top: 6px;
+}
+.s1-cred-row {
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 26px 42px;
+  gap: 24px 42px;
   justify-content: center;
   align-items: flex-end;
-  padding-top: 6px;
+}
+/* Schools row sits under a hairline, one visual tier below the awards. */
+.s1-cred-row--schools {
+  gap: 22px 34px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0,0,0,0.14);
+  width: 100%;
 }
 .s1-cred-mark {
   display: inline-flex;
@@ -519,6 +553,13 @@ main {
   height: 34px;
   object-fit: contain;
   object-position: center;
+}
+/* The Columbia crest asset is a faint monochrome (light-gray) watermark, so
+   it washes out on the light gradient band. Render it as solid dark ink to
+   match the weight of the neighboring wordmarks. */
+.s1-cred-img--columbia {
+  filter: brightness(0);
+  opacity: 0.82;
 }
 .s1-cred-caption {
   display: inline-flex;
@@ -553,7 +594,9 @@ main {
   text-transform: none;
 }
 @media (max-width: 820px) {
-  .s1-cred-marks { gap: 14px 24px; }
+  .s1-cred-marks { gap: 12px; }
+  .s1-cred-row { gap: 12px 22px; }
+  .s1-cred-row--schools { padding-top: 12px; }
   .s1-cred-svg { width: 34px; height: 34px; }
   .s1-cred-wordmark { font-size: 11px; }
   .s1-cred-wordmark.serif-mark { font-size: 15px; }
@@ -818,6 +861,13 @@ main {
   letter-spacing: 0.01em;
   color: rgba(244,246,243,0.98);
 }
+/* Economic World Model is the headline layer — enlarge + glow it. */
+.arch-row--hero .arch-row-title {
+  font-size: 33px;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(255,255,255,0.45), 0 0 42px rgba(160,180,255,0.28);
+}
+.arch-row--hero .arch-row-sub { color: rgba(244,246,243,0.85); }
 .arch-row-sub {
   margin: 7px 0 0;
   font-family: var(--mono);
@@ -925,6 +975,7 @@ main {
   .arch-row-arrow { display: none; }
   .arch-row-icon { width: 48px; height: 34px; }
   .arch-row-title { font-size: 16px; }
+  .arch-row--hero .arch-row-title { font-size: 20px; }
   .arch-row-sub { font-size: 10.5px; margin-top: 3px; }
   .arch-row-feats { order: 2; padding-left: 14px; font-size: 11px; gap: 5px; }
 }
@@ -1058,6 +1109,21 @@ main {
   border: 1px solid currentColor;
   color: rgba(244,246,243,0.72);
 }
+/* Best-paper accolade — warm accent so it reads as an award, not a link. */
+.research-tag--award {
+  color: #e8c07a;
+  border-color: rgba(232,192,122,0.6);
+  background: rgba(232,192,122,0.1);
+}
+.research-card:hover .research-tag--award {
+  color: #f0cd8c;
+  border-color: rgba(232,192,122,0.9);
+}
+/* Freshly-published paper gets a brighter frame + top billing. */
+.research-card--new {
+  border-top-color: rgba(232,192,122,0.85);
+}
+.research-card--new .research-meta { color: #e8c07a; }
 .research-card h3 {
   margin: 0 0 14px;
   color: rgba(244,246,243,0.94);
@@ -1088,38 +1154,39 @@ main {
 .cta--explore .beta-tag { margin: 0 2px; }
 
 /* FOOTER v2 */
-.site-footer--v2 {
-  display: grid;
-  /* Center track sizes to its own content (now 3 links wide) instead of a
-     fixed 1/3 — otherwise the empty, transparent right-column grid item
-     still stretches to fill its full track and swallows clicks on any
-     center link that overflows into that space. */
-  grid-template-columns: 1fr auto 1fr;
+/* Double-class (.site-footer.site-footer--v2) so these beat the older base
+   .site-footer rules that appear later in the sheet — otherwise the footer
+   falls back to display:grid and the base `.site-footer a { padding:0 7.65vw }`
+   blows each icon up to ~220px and pushes the row past the viewport. */
+.site-footer.site-footer--v2 {
+  /* One row, never wrapping: flex items push each other so nothing overlaps,
+     and the side groups stay their natural width while the center links take
+     the flexible middle. Below 900px it switches to a centered stack. */
+  display: flex;
   align-items: center;
-  padding: 24px 7.65vw;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 24px;
+  padding: 24px clamp(24px, 6vw, 110px);
   min-height: 78px;
 }
-.site-footer--v2 a,
-.site-footer--v2 button:not(.footer-pilot) {
+.site-footer.site-footer--v2 a,
+.site-footer.site-footer--v2 button:not(.footer-pilot) {
   min-height: 0;
   padding: 0;
 }
 .footer-col {
   display: flex;
   align-items: center;
-  gap: 22px;
-  min-width: 0;
-  /* The 3-column grid divides the footer into equal thirds, but a column's
-     actual link/icon content can be narrower or (after adding a link) wider
-     than its own third. When that happens the empty, transparent remainder
-     of this box still sits on top of whatever spills over from a neighbor
-     and swallows its clicks. Making the column itself click-through, and
-     re-enabling pointer-events only on the real interactive children below,
-     means an overlap can never again silently eat a click. */
+  gap: 18px;
+  /* Columns are click-through; only the real links/buttons below take clicks,
+     so a tight layout can never silently swallow a neighbor's click. */
   pointer-events: none;
 }
-.footer-col--center { justify-content: center; }
-.footer-col--right { justify-content: flex-end; }
+.footer-col--center { flex: 1 1 auto; justify-content: center; flex-wrap: nowrap; gap: 32px; }
+.footer-col--center a { white-space: nowrap; }
+.footer-col--right { justify-content: flex-end; flex: 0 0 auto; }
+.footer-col--left { flex: 0 0 auto; }
 .footer-col--right .footer-pilot { flex: 0 0 auto; }
 .footer-icon {
   display: inline-flex;
@@ -1163,14 +1230,17 @@ main {
   pointer-events: auto;
 }
 .footer-pilot:hover { background: rgba(8,9,8,0.86); color: #f4f6f3; gap: 12px; }
-@media (max-width: 820px) {
-  .site-footer--v2 {
-    grid-template-columns: 1fr;
-    gap: 14px;
+/* Below 900px the one-row footer gets tight — stack the three groups
+   centered instead of cramming them onto a single line. */
+@media (max-width: 900px) {
+  .site-footer.site-footer--v2 {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
     padding: 20px 24px 24px;
   }
-  .footer-col--center, .footer-col--right { justify-content: center; }
-  .footer-col--right { padding-top: 4px; }
+  .footer-col { justify-content: center; flex: 0 0 auto; }
+  .footer-col--center { flex-wrap: wrap; }
 }
 
 .s6-copy {
@@ -1502,6 +1572,10 @@ main {
     padding: 18px 22px;
   }
 
+  /* No room for inline nav on small screens — the footer sitemap carries
+     these links on mobile. */
+  .header-nav { display: none; }
+
   .brand-mark {
     width: 58px;
   }
@@ -1745,6 +1819,12 @@ main {
     <path d="M74.7262 18.8714L78.0416 18.6629L78.1307 17.7598H69.8273L69.7382 18.6629L73.3901 18.8714V28.0519H72.1728C69.6491 24.7271 65.7696 20.5387 62.7016 17.8193L62.6323 17.7598H58.8518L58.7627 18.653L62.0187 18.8714C64.7304 21.3327 68.6595 25.402 71.0149 28.6276V28.7864L63.5032 37.2226L61.0587 37.4409L60.9697 38.3341H67.4323L67.5213 37.4409L65.1362 37.2523L72.1629 29.3025H73.3901V49.6287L73.5386 50.8991H74.6569L78.3484 50.5815V49.6486H74.7163V18.8714H74.7262Z" fill="currentColor"/>
     <path d="M97.3294 19.2491L100.843 19.0605V14.2866L99.9421 14.1973L99.7343 17.9489H87.8285C82.6228 17.9489 79.9902 20.3805 79.9902 25.1842C79.9902 27.3875 80.3069 29.5313 80.9205 31.5361L80.9601 31.6751L81.7222 31.8438L86.9279 31.4468L86.8586 30.3054L81.8904 30.2657C81.5341 28.9556 81.1976 26.9409 81.1976 25.1941C81.1976 20.311 84.8496 19.2888 87.9175 19.2888H90.0157C90.273 24.8666 90.7678 29.303 91.4705 32.4889L91.5002 32.608L91.609 32.6576C92.1534 32.9058 93.6676 33.4715 95.9636 33.4715C99.8135 33.4715 101.179 30.1863 101.179 27.3677C101.179 23.4969 98.9524 20.7378 97.3393 19.259L97.3294 19.2491ZM99.9718 27.318C99.9718 30.3749 98.4378 32.1316 95.7558 32.1316C94.301 32.1316 93.1529 31.8239 92.5393 31.6056C91.8466 28.8266 91.3616 22.8617 91.2132 19.2788H95.548C96.9335 20.3309 99.9718 23.1099 99.9718 27.318Z" fill="currentColor"/>
   </svg>
+  <nav class="header-nav" aria-label="Primary">
+    <a href="#team">About</a>
+    <a href="#research">Blog</a>
+    <a href="https://world.loka.inc/" target="_blank" rel="noreferrer">Use Cases</a>
+    <a href="/careers">Careers</a>
+  </nav>
   <div class="header-right-group">
     <div class="header-right">EWM<br>by Loka Labs</div>
     <button type="button" class="header-cta" id="open-contact">Get in touch →</button>
@@ -1762,39 +1842,51 @@ main {
       <p class="mono s1-credibility">
         <span class="s1-cred-lead">Built by pioneers in formal verification, distributed systems, and economic systems.</span>
         <span class="s1-cred-marks">
-          <span class="s1-cred-mark">
-            <img class="s1-cred-svg s1-cred-img" src="/ACM-logo.png" alt="" aria-hidden="true">
-            <span class="s1-cred-caption">
-              <span class="s1-cred-kicker">A.M.</span>
-              <span class="s1-cred-wordmark">Turing Award</span>
+          <span class="s1-cred-row s1-cred-row--awards">
+            <span class="s1-cred-mark">
+              <img class="s1-cred-svg s1-cred-img" src="/ACM-logo.png" alt="" aria-hidden="true">
+              <span class="s1-cred-caption">
+                <span class="s1-cred-kicker">A.M.</span>
+                <span class="s1-cred-wordmark">Turing Award</span>
+              </span>
+            </span>
+            <span class="s1-cred-mark">
+              <img class="s1-cred-svg s1-cred-img" src="/OSDI-logo-removebg.png" alt="" aria-hidden="true">
+              <span class="s1-cred-caption">
+                <span class="s1-cred-kicker">OSDI</span>
+                <span class="s1-cred-wordmark">Best Paper</span>
+              </span>
             </span>
           </span>
-          <span class="s1-cred-mark">
-            <img class="s1-cred-svg s1-cred-img" src="/OSDI-logo-removebg.png" alt="" aria-hidden="true">
-            <span class="s1-cred-caption">
-              <span class="s1-cred-kicker">OSDI</span>
-              <span class="s1-cred-wordmark">Best Paper</span>
+          <span class="s1-cred-row s1-cred-row--schools">
+            <span class="s1-cred-mark">
+              <img class="s1-cred-svg s1-cred-img" src="/Harvard.svg" alt="" aria-hidden="true">
+              <span class="s1-cred-caption">
+                <span class="s1-cred-kicker">Cambridge, MA</span>
+                <span class="s1-cred-wordmark serif-mark">Harvard</span>
+              </span>
             </span>
-          </span>
-          <span class="s1-cred-mark">
-            <img class="s1-cred-svg s1-cred-img" src="/Harvard.svg" alt="" aria-hidden="true">
-            <span class="s1-cred-caption">
-              <span class="s1-cred-kicker">Cambridge, MA</span>
-              <span class="s1-cred-wordmark serif-mark">Harvard</span>
+            <span class="s1-cred-mark">
+              <img class="s1-cred-svg s1-cred-img" src="/MIT.svg" alt="" aria-hidden="true">
+              <span class="s1-cred-caption">
+                <span class="s1-cred-kicker">Cambridge, MA</span>
+                <span class="s1-cred-wordmark">MIT</span>
+              </span>
             </span>
-          </span>
-          <span class="s1-cred-mark">
-            <img class="s1-cred-svg s1-cred-img" src="/MIT.svg" alt="" aria-hidden="true">
-            <span class="s1-cred-caption">
-              <span class="s1-cred-kicker">Cambridge, MA</span>
-              <span class="s1-cred-wordmark">MIT</span>
+            <span class="s1-cred-mark">
+              <img class="s1-cred-svg s1-cred-img" src="/Singapore.svg" alt="" aria-hidden="true">
+              <span class="s1-cred-caption">
+                <span class="s1-cred-kicker">Singapore</span>
+                <span class="s1-cred-wordmark">NUS</span>
+              </span>
             </span>
-          </span>
-          <span class="s1-cred-mark">
-            <img class="s1-cred-svg s1-cred-img" src="/Singapore.svg" alt="" aria-hidden="true">
-            <span class="s1-cred-caption">
-              <span class="s1-cred-kicker">Singapore</span>
-              <span class="s1-cred-wordmark">NUS</span>
+            <span class="s1-cred-mark">
+              <img class="s1-cred-svg s1-cred-img s1-cred-img--columbia" src="/Columbia.png" alt="" aria-hidden="true"
+                   onerror="this.closest('.s1-cred-mark').style.display='none'">
+              <span class="s1-cred-caption">
+                <span class="s1-cred-kicker">New York</span>
+                <span class="s1-cred-wordmark serif-mark">Columbia</span>
+              </span>
             </span>
           </span>
         </span>
@@ -1806,8 +1898,8 @@ main {
   <section class="panel" id="causation">
     <div class="panel-bg s2-bg"></div>
     <div class="content s2-copy s2-copy--definition">
-      <blockquote class="serif">The economy is the only critical system humanity deploys without simulation.</blockquote>
-      <cite class="s2-definition">Loka is building the Economic World Model — a behaviorally simulated, causally constrained, and formally verified system for testing decisions before they move nations, markets, and billions of lives.</cite>
+      <blockquote class="serif">The economy is the only critical system humanity deploys<br>without simulation.</blockquote>
+      <cite class="s2-definition">Loka is building the Economic World Model —<br>a behaviorally simulated, causally constrained, and formally verified system for testing decisions before they move nations, markets, and billions of lives.</cite>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
@@ -1833,7 +1925,7 @@ main {
             <h3 class="team-name">Lora Jiang</h3>
             <span class="team-role">Co-founder, CEO · Parsons, Harvard</span>
           </div>
-          <p class="team-bio">Led Taiko's $1.2B Series A (Lightspeed Faction lead) and $2.2B TGE as Head of Strategic Finance — four months from close to public market. Backed by Sequoia China, Tencent, BAI.</p>
+          <p class="team-bio">Led Taiko Labs' $1.2B Series A (Lightspeed Faction lead). Built frontier capital systems and scaled emerging technologies globally. Backed by Sequoia China, Tencent, BAI.</p>
         </div>
       </article>
       <article class="team-member">
@@ -1842,7 +1934,7 @@ main {
             <h3 class="team-name">Akasha Zhu</h3>
             <span class="team-role">Co-founder, President · Tsinghua, MIT</span>
           </div>
-          <p class="team-bio">12 patents. Founder of Hetu (distributed systems), Vinci (consumer hardware), and Tongxue (social network). Identified the Economic World Model category before anyone else was looking.</p>
+          <p class="team-bio">12 patents. Founder of Hetu (distributed systems), Vinci (consumer hardware), and Tongxue (social network). Early advocate of economic simulation infrastructure.</p>
         </div>
       </article>
       <article class="team-member">
@@ -1877,7 +1969,7 @@ main {
         <h2 class="serif">A modular, composable stack.</h2>
         <p class="mono arch-lede">From raw data to real decisions — one continuous, causal pipeline.</p>
       </div>
-      <a class="s4-explore s4-explore--inline" href="https://world.loka.cash/" target="_blank" rel="noreferrer">
+      <a class="s4-explore s4-explore--inline" href="https://world.loka.inc/" target="_blank" rel="noreferrer">
         <span>Explore LokaWorld</span>
         <span class="beta-tag">beta</span>
         <span class="arrow">→</span>
@@ -1959,7 +2051,7 @@ main {
           </ul>
         </div>
 
-        <div class="arch-row">
+        <div class="arch-row arch-row--hero">
           <div class="arch-row-left">
             <h3 class="arch-row-title">Economic World Model</h3>
             <p class="arch-row-sub">A structured, causal representation of the economy</p>
@@ -2038,7 +2130,7 @@ main {
     <div class="content s5-copy s5-copy--research">
       <div class="kicker">Research</div>
       <h2 class="serif">Papers, essays,<br>and public briefings.</h2>
-      <p class="mono">A working record of the causal stack — from formal verification foundations to the empirical calibration of economic worlds.</p>
+      <p class="mono">Grounded in a Turing Award lineage in formal verification and systems research published at OSDI, SOSP, and SIGCOMM — from verification foundations to the empirical calibration of economic worlds.</p>
     </div>
     <div class="research-grid">
       <a class="research-card" href="https://arxiv.org/pdf/2310.08373" target="_blank" rel="noreferrer">
@@ -2050,20 +2142,20 @@ main {
         <h3>Resource Multiplexing for LLMs</h3>
       </a>
       <a class="research-card" href="https://dl.acm.org/doi/pdf/10.1145/3603269.3604874" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>ACM SIGCOMM</span><span class="research-tag">PDF ↗</span></div>
+        <div class="research-meta"><span>SIGCOMM '23</span><span class="research-tag">PDF ↗</span></div>
         <h3>NeoBFT: In-Network Ordering</h3>
       </a>
-      <a class="research-card" href="https://arxiv.org/pdf/2405.13349" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>arXiv</span><span class="research-tag">PDF ↗</span></div>
-        <h3>Verifiable Logical Clock</h3>
+      <a class="research-card" href="https://www.comp.nus.edu.sg/~lijl/" target="_blank" rel="noreferrer">
+        <div class="research-meta"><span>SOSP '17</span><span class="research-tag">Paper ↗</span></div>
+        <h3>Eris: Coordination-Free Consistent Transactions</h3>
+      </a>
+      <a class="research-card" href="https://www.usenix.org/conference/osdi16/technical-sessions/presentation/li" target="_blank" rel="noreferrer">
+        <div class="research-meta"><span>OSDI '16</span><span class="research-tag">Paper ↗</span></div>
+        <h3>NOPaxos: Consensus via Network Ordering</h3>
       </a>
       <a class="research-card" href="https://yao.lu/ai_native.pdf" target="_blank" rel="noreferrer">
         <div class="research-meta"><span>Whitepaper</span><span class="research-tag">PDF ↗</span></div>
         <h3>Cloud-Native to AI-Native</h3>
-      </a>
-      <a class="research-card" href="https://www.comp.nus.edu.sg/~lijl/papers/nopaxos-osdi16.pdf" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>OSDI '16</span><span class="research-tag">PDF ↗</span></div>
-        <h3>NOPaxos</h3>
       </a>
     </div>
     <div class="section-line" aria-hidden="true"></div>
@@ -2086,7 +2178,7 @@ main {
       <p class="mono proof-line">Formal Verification (Turing Award)<br>&amp; Distributed AI at Scale (NSDI/OSDI Best Paper).</p>
       <h2 class="serif">Economic simulation for<br>decisions that move worlds.</h2>
       <p class="mono">Loka Labs helps governments, financial institutions, and global event operators stress-test policies, markets, and large-scale events before they unfold in the real world.</p>
-      <a class="cta cta--explore" href="https://world.loka.cash/" target="_blank" rel="noreferrer">
+      <a class="cta cta--explore" href="https://world.loka.inc/" target="_blank" rel="noreferrer">
         <span>Explore LokaWorld</span>
         <span class="beta-tag beta-tag--dark">beta</span>
         <span class="arrow">→</span>
@@ -2107,6 +2199,7 @@ main {
       <div class="footer-col footer-col--center">
         <a href="#team">About</a>
         <a href="#research">Blog</a>
+        <a href="https://world.loka.inc/" target="_blank" rel="noreferrer">Use Cases</a>
         <a href="/careers">Careers</a>
       </div>
       <div class="footer-col footer-col--right">
