@@ -1,4 +1,7 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/careers", "destination": "/careers/head-of-narrative", "permanent": false }
+  ]
 }
