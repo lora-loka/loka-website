@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<title>ML Researcher (Part-time) — Careers | Loka Labs</title>
+<meta name="description" content="Loka Labs is hiring a part-time ML Researcher to turn the Economic World Model architecture into a core model that runs — time-series &amp; behavioral modeling. Remote-friendly." />
+<meta name="keywords" content="Loka Labs careers, ML researcher, machine learning, time series, behavioral modeling, agent-based modeling, causal inference, economic world model, part-time, remote" />
+<link rel="canonical" href="https://loka.inc/careers/ml-researcher" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://loka.inc/careers/ml-researcher" />
+<meta property="og:title" content="ML Researcher (Part-time) — Loka Labs" />
+<meta property="og:description" content="Build the core model of the Economic World Model — time-series &amp; behavioral modeling, alongside Turing laureate Joseph Sifakis. Part-time, remote-friendly." />
+<meta property="og:site_name" content="loka.Inc" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://loka.inc/careers/ml-researcher" />
+<meta name="twitter:title" content="ML Researcher (Part-time) — Loka Labs" />
+<meta name="twitter:description" content="Build the core model of the Economic World Model — time-series &amp; behavioral modeling. Part-time, remote-friendly." />
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "title": "ML Researcher (Part-time)",
+    "description": "Design and implement the time-series and behavioral models at the core of Loka's Economic World Model, and take an end-to-end pipeline from research to backtest.",
+    "hiringOrganization": { "@type": "Organization", "name": "Loka Labs", "sameAs": "https://loka.inc/" },
+    "employmentType": "PART_TIME",
+    "jobLocationType": "TELECOMMUTE",
+    "applicantLocationRequirements": { "@type": "Country", "name": "Remote" },
+    "url": "https://loka.inc/careers/ml-researcher",
+    "directApply": true
+  }
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "Inferi";
+  src: url("/0620/Inferi-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --inferi: "Inferi", Georgia, serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --white: #f4f6f3;
+  --edge-x: clamp(20px, 4vw, 56px);
+  --rule: rgba(244,246,243,0.16);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #080a0d;
+  color: var(--white);
+  font-family: var(--mono);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* On-brand backdrop: echoes the home hero's dark-olive-into-black wash
+   (its top stops are #161715 → olive #494d03) as a fixed, subtle glow so
+   the page reads warmer than a flat black while staying dark enough for
+   white body text. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(130% 90% at 50% -20%, rgba(73,77,3,0.20) 0%, rgba(28,32,14,0.16) 30%, transparent 62%),
+    linear-gradient(180deg, #12140e 0%, #0c0e0c 34%, #080a0d 72%);
+}
+
+a { color: inherit; }
+
+/* ── Header ── transparent floating logo only, matching the home page's
+   clean top (no bar, no border, not sticky) ─────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: center;
+  padding: 26px var(--edge-x) 0;
+}
+.brand-link { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand-mark { width: 52px; height: auto; opacity: 0.86; color: currentColor; }
+.brand-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  padding-left: 12px;
+  border-left: 1px solid var(--rule);
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+main { max-width: 760px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: rgba(244,246,243,0.5);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.kicker::before { content: ''; width: 22px; height: 1px; background: currentColor; opacity: 0.5; }
+
+/* ── Hero ───────────────────────────────────────────────── */
+.hero { padding: 72px 0 56px; }
+.hero-role {
+  margin: 0;
+  font-family: var(--inferi);
+  font-weight: 300;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: rgba(244,246,243,0.98);
+}
+.hero-meta {
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(244,246,243,0.55);
+}
+.hero-tagline {
+  margin: 34px 0 0;
+  font-family: var(--inferi);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(20px, 2.6vw, 27px);
+  color: rgba(244,246,243,0.92);
+}
+.hero-manifesto {
+  margin: 22px 0 0;
+  max-width: 560px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(244,246,243,0.74);
+}
+.hero-manifesto strong { color: rgba(244,246,243,0.95); font-weight: 500; }
+.hero-cta-row { margin-top: 36px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--white);
+  color: #10110f;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: gap 0.3s ease, transform 0.3s ease;
+}
+.cta-pill:hover { gap: 14px; transform: translateY(-1px); }
+.hero-cta-note { font-size: 11px; color: rgba(244,246,243,0.45); letter-spacing: 0.04em; }
+
+/* ── Sections ───────────────────────────────────────────── */
+section.block {
+  padding: 48px 0;
+  border-top: 1px solid var(--rule);
+}
+.block-heading {
+  margin: 0 0 16px;
+  font-family: var(--inferi);
+  font-weight: 300;
+  font-size: clamp(22px, 3vw, 28px);
+  color: rgba(244,246,243,0.96);
+}
+.block-lede {
+  margin: 0 0 22px;
+  max-width: 600px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: rgba(244,246,243,0.72);
+}
+.role-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.role-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(244,246,243,0.85);
+}
+.role-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: rgba(244,246,243,0.4);
+}
+
+.simple-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.simple-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(244,246,243,0.85);
+}
+.simple-list li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(244,246,243,0.45);
+}
+.block-note {
+  margin: 20px 0 0;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: rgba(244,246,243,0.55);
+  max-width: 580px;
+}
+.block-note em { font-style: italic; color: rgba(244,246,243,0.78); }
+
+/* Logistics key/value rows */
+.logistics { display: flex; flex-direction: column; gap: 16px; }
+.logistics-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(244,246,243,0.1);
+  font-size: 13px;
+}
+.logistics-row:last-child { border-bottom: none; padding-bottom: 0; }
+.logistics-key { color: rgba(244,246,243,0.45); letter-spacing: 0.06em; text-transform: uppercase; font-size: 10.5px; padding-top: 2px; }
+.logistics-val { color: rgba(244,246,243,0.9); line-height: 1.6; }
+
+/* ── Apply section ──────────────────────────────────────── */
+.apply-section { padding: 56px 0 72px; border-top: 1px solid var(--rule); }
+.apply-form { display: flex; flex-direction: column; gap: 22px; max-width: 520px; margin-top: 28px; }
+.apply-field { display: flex; flex-direction: column; gap: 6px; }
+.apply-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244,246,243,0.5);
+}
+.apply-label em { font-style: normal; color: rgba(244,246,243,0.4); text-transform: none; letter-spacing: 0.02em; }
+.apply-field input[type="email"] {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--white);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(244,246,243,0.22);
+  padding: 8px 0;
+  transition: border-color 0.25s ease;
+}
+.apply-field input[type="email"]::placeholder { color: rgba(244,246,243,0.32); }
+.apply-field input[type="email"]:focus { outline: none; border-bottom-color: rgba(244,246,243,0.85); }
+/* File upload control */
+.apply-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 16px;
+  border: 1px dashed rgba(244,246,243,0.28);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.apply-file:hover { border-color: rgba(244,246,243,0.55); background: rgba(244,246,243,0.03); }
+.apply-file input[type="file"] {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+.apply-file-icon { flex: none; display: inline-flex; color: rgba(244,246,243,0.6); }
+.apply-file-text {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: rgba(244,246,243,0.55);
+}
+.apply-file.has-file { border-style: solid; border-color: rgba(244,246,243,0.5); }
+.apply-file.has-file .apply-file-icon,
+.apply-file.has-file .apply-file-text { color: rgba(244,246,243,0.92); }
+.apply-error { font-size: 11px; color: #e0a67a; letter-spacing: 0.02em; }
+.apply-error[hidden] { display: none; }
+.apply-submit {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  align-self: flex-start;
+  background: var(--white);
+  color: #10110f;
+  border: none;
+  border-radius: 999px;
+  padding: 15px 28px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: gap 0.3s ease, opacity 0.25s ease;
+}
+.apply-submit:hover:not(:disabled) { gap: 14px; }
+.apply-submit:disabled { opacity: 0.55; cursor: progress; }
+.apply-meta {
+  margin-top: 4px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(244,246,243,0.45);
+}
+.apply-meta a { text-decoration: underline; text-underline-offset: 3px; }
+.apply-note {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 520px;
+  padding: 14px 16px;
+  border: 1px solid rgba(74,124,92,0.5);
+  border-radius: 8px;
+  background: rgba(74,124,92,0.08);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgba(244,246,243,0.85);
+}
+.apply-note[hidden] { display: none; }
+
+/* ── Footer ─────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px var(--edge-x) 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-icons { display: flex; gap: 16px; }
+.footer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: rgba(244,246,243,0.55);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.footer-icon:hover { color: rgba(244,246,243,0.95); background: rgba(244,246,243,0.08); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244,246,243,0.55);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover { color: rgba(244,246,243,0.92); }
+.footer-copy { font-size: 10.5px; letter-spacing: 0.06em; color: rgba(244,246,243,0.35); width: 100%; text-align: center; margin-top: 8px; }
+
+@media (max-width: 640px) {
+  .hero { padding: 56px 0 40px; }
+  .logistics-row { grid-template-columns: 1fr; gap: 4px; }
+  .footer-links { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand-link" href="/">
+    <svg class="brand-mark" viewBox="0 0 120 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Loka">
+      <path d="M28.5774 19.0202L28.429 17.7598H27.3106L23.6191 18.0674V19.0103H27.2513V49.7875L23.9358 49.9959L23.8468 50.8892H32.1403L32.2293 49.9959L28.5774 49.7776V19.0202Z" fill="currentColor"/>
+      <path d="M47.4813 34.1662C40.8504 34.1662 36.8818 37.7491 36.8818 43.7437C36.8818 49.3811 40.702 52.6067 47.3526 52.6067C55.27 52.6067 58.0708 47.803 58.0708 43.6941C58.0708 37.8086 54.0131 34.1562 47.4714 34.1562L47.4813 34.1662ZM56.8337 43.575C56.8337 48.1603 53.0433 51.2371 47.4021 51.2371C43.6314 51.2371 41.949 50.4828 39.8212 48.8848C38.7226 47.2472 38.1387 45.4707 38.1387 43.7437C38.1387 38.6324 41.6224 35.5854 47.4417 35.5854C50.8858 35.5854 53.2511 36.4588 55.3393 38.5034C56.2795 40.012 56.8337 41.3221 56.8337 43.575Z" fill="currentColor"/>
+      <path d="M74.7262 18.8714L78.0416 18.6629L78.1307 17.7598H69.8273L69.7382 18.6629L73.3901 18.8714V28.0519H72.1728C69.6491 24.7271 65.7696 20.5387 62.7016 17.8193L62.6323 17.7598H58.8518L58.7627 18.653L62.0187 18.8714C64.7304 21.3327 68.6595 25.402 71.0149 28.6276V28.7864L63.5032 37.2226L61.0587 37.4409L60.9697 38.3341H67.4323L67.5213 37.4409L65.1362 37.2523L72.1629 29.3025H73.3901V49.6287L73.5386 50.8991H74.6569L78.3484 50.5815V49.6486H74.7163V18.8714H74.7262Z" fill="currentColor"/>
+      <path d="M97.3294 19.2491L100.843 19.0605V14.2866L99.9421 14.1973L99.7343 17.9489H87.8285C82.6228 17.9489 79.9902 20.3805 79.9902 25.1842C79.9902 27.3875 80.3069 29.5313 80.9205 31.5361L80.9601 31.6751L81.7222 31.8438L86.9279 31.4468L86.8586 30.3054L81.8904 30.2657C81.5341 28.9556 81.1976 26.9409 81.1976 25.1941C81.1976 20.311 84.8496 19.2888 87.9175 19.2888H90.0157C90.273 24.8666 90.7678 29.303 91.4705 32.4889L91.5002 32.608L91.609 32.6576C92.1534 32.9058 93.6676 33.4715 95.9636 33.4715C99.8135 33.4715 101.179 30.1863 101.179 27.3677C101.179 23.4969 98.9524 20.7378 97.3393 19.259L97.3294 19.2491ZM99.9718 27.318C99.9718 30.3749 98.4378 32.1316 95.7558 32.1316C94.301 32.1316 93.1529 31.8239 92.5393 31.6056C91.8466 28.8266 91.3616 22.8617 91.2132 19.2788H95.548C96.9335 20.3309 99.9718 23.1099 99.9718 27.318Z" fill="currentColor"/>
+    </svg>
+    <span class="brand-tag">Careers</span>
+  </a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="kicker">Careers · Research · Part-time</div>
+    <h1 class="hero-role">ML Researcher</h1>
+    <div class="hero-meta">Loka Labs · Part-time · Remote-friendly · Economic World Model</div>
+    <p class="hero-tagline">Run the world, before you run it.</p>
+    <p class="hero-manifesto">Every complex system gets tested before deployment. Aircraft. Semiconductors. Drugs. Self-driving cars. Except one — <strong>the economy.</strong> The architecture is already laid out in a paper; now we need to turn it into a core model that runs and backtests.</p>
+    <div class="hero-cta-row">
+      <a class="cta-pill" href="#apply"><span>Apply for this role</span><span>→</span></a>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="kicker">About Loka</div>
+    <p class="block-lede" style="margin-bottom:0;">Loka is building an Economic World Model — a differentiable simulator of economic reality that "pre-runs" major economic and public-policy decisions before they happen. The core is not yet another forecasting model, but an orchestration of causal reasoning, multi-agent dynamics, and time-series &amp; behavioral modeling that outputs a set of possible futures plus actionable levers. Our Founding Scientist is Joseph Sifakis, recipient of the Turing Award and pioneer of formal verification. First deployment scenario: public funding / aid allocation decisions.</p>
+  </section>
+
+  <section class="block">
+    <div class="kicker">The work</div>
+    <h2 class="block-heading">Turn the architecture into a model that runs.</h2>
+    <ul class="role-list">
+      <li>Design and implement the time-series models (evolution of economic / social indicators) and behavioral models (multi-agent responses to interventions).</li>
+      <li>Integrate these models into the overall world-model framework — causal layer, state representation, interventions &amp; counterfactuals.</li>
+      <li>Get an end-to-end pipeline running in a bounded scenario (NGO / public funding allocation) and backtest it against historical data.</li>
+      <li>Deliver on a stable weekly cadence and participate in key reviews.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="kicker">Requirements</div>
+    <ul class="simple-list">
+      <li>PhD (in progress or completed) in ML, Statistics, Computational Economics, Complex Systems, or a related field.</li>
+      <li>Strong capabilities in time-series modeling and/or multi-agent / behavioral modeling.</li>
+      <li>Able to independently turn research ideas into runnable, backtestable code (Python / PyTorch, etc.).</li>
+      <li>Critical: a reliable weekly time investment and on-time delivery. Part-time is fine, but the delivery rhythm must be dependable — outputs on schedule, presence at required reviews. We are results-oriented, but we need predictable output.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="kicker">Nice to have</div>
+    <ul class="simple-list">
+      <li>Any of: graph neural networks; causal inference (SCM / do-calculus); agent-based modeling.</li>
+      <li>Background in modeling economic, financial, policy, or social systems.</li>
+      <li>Relevant publications or demonstrable modeling projects.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="kicker">What you'll get</div>
+    <ul class="simple-list">
+      <li>Work alongside Turing Award laureate Joseph Sifakis and the founding team on a direction almost no one has explored.</li>
+      <li>Help define the core model of a new category.</li>
+      <li>Competitive part-time compensation plus early-stage equity.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="kicker">Logistics</div>
+    <div class="logistics">
+      <div class="logistics-row">
+        <div class="logistics-key">Commitment</div>
+        <div class="logistics-val">Part-time, with a dependable weekly cadence.</div>
+      </div>
+      <div class="logistics-row">
+        <div class="logistics-key">Location</div>
+        <div class="logistics-val">Remote-friendly.</div>
+      </div>
+      <div class="logistics-row">
+        <div class="logistics-key">Compensation</div>
+        <div class="logistics-val">¥300–800 per day, plus early-stage equity.</div>
+      </div>
+      <div class="logistics-row">
+        <div class="logistics-key">Work with</div>
+        <div class="logistics-val">Joseph Sifakis (Turing Award) and the founding team.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="apply-section" id="apply">
+    <div class="kicker">Apply</div>
+    <h2 class="block-heading">Send us your resume.</h2>
+    <p class="block-lede" style="margin-bottom:0;">Upload your resume and hit submit — it lands straight in our inbox. A link to relevant papers or modeling projects helps.</p>
+
+    <div class="apply-note" id="apply-note" hidden>
+      <span aria-hidden="true">✓</span>
+      <span>Thanks — your resume is on its way to us. We read every application and will reach out if it's a fit.</span>
+    </div>
+
+    <form class="apply-form" id="apply-form" novalidate>
+      <div class="apply-field">
+        <span class="apply-label">Resume / CV <em>*</em></span>
+        <label class="apply-file" id="apply-file-label">
+          <input type="file" id="apply-file" required
+                 accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          <span class="apply-file-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+          </span>
+          <span class="apply-file-text" id="apply-file-text">Upload a file — PDF or Word, up to 3&nbsp;MB</span>
+        </label>
+      </div>
+      <label class="apply-field">
+        <span class="apply-label">Email <em>(optional, so we can reply)</em></span>
+        <input type="email" id="apply-email" placeholder="you@domain.com" autocomplete="email">
+      </label>
+      <div class="apply-error" id="apply-error" hidden></div>
+      <button type="submit" class="apply-submit" id="apply-submit">
+        <span id="apply-submit-label">Submit application</span>
+        <span>→</span>
+      </button>
+      <div class="apply-meta">Prefer email? Send your resume to <a href="mailto:hello@loka.inc?subject=Application%3A%20ML%20Researcher%20(Part-time)">hello@loka.inc</a></div>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-icons">
+    <a class="footer-icon" href="https://twitter.com/lokainc" target="_blank" rel="noreferrer" aria-label="Twitter">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21.5l-7.5 8.573L22.5 22h-6.86l-5.37-7.02L4.5 22H1.244l8.03-9.176L1 2h6.96l4.86 6.42L18.244 2Zm-1.202 18h1.898L7.05 4H5.06L17.042 20Z"/></svg>
+    </a>
+    <a class="footer-icon" href="https://github.com/lora-loka" target="_blank" rel="noreferrer" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.575.105.786-.25.786-.556 0-.275-.01-1.003-.016-1.97-3.202.695-3.878-1.545-3.878-1.545-.523-1.328-1.278-1.681-1.278-1.681-1.045-.714.079-.7.079-.7 1.156.081 1.764 1.187 1.764 1.187 1.028 1.76 2.697 1.251 3.354.957.104-.744.402-1.252.732-1.54-2.556-.29-5.244-1.278-5.244-5.687 0-1.257.45-2.284 1.187-3.089-.119-.291-.514-1.466.112-3.054 0 0 .967-.31 3.171 1.18a11.023 11.023 0 0 1 5.774 0c2.203-1.49 3.169-1.18 3.169-1.18.627 1.588.232 2.763.114 3.054.74.805 1.185 1.832 1.185 3.089 0 4.42-2.693 5.394-5.257 5.679.412.354.78 1.054.78 2.124 0 1.533-.014 2.769-.014 3.146 0 .308.208.667.79.554A11.5 11.5 0 0 0 12 .5Z"/></svg>
+    </a>
+    <a class="footer-icon" href="https://linkedin.com/company/loka-labs" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.93v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.02H3.56V9h3.56v11.45Z"/></svg>
+    </a>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/#research">Research</a>
+    <a href="mailto:hello@loka.inc">Contact</a>
+  </div>
+  <div class="footer-copy">Loka Labs · © 2026 · Causal economic infrastructure. All rights reserved.</div>
+</footer>
+
+<script>
+(function applyUpload() {
+  const form = document.getElementById('apply-form');
+  const note = document.getElementById('apply-note');
+  const fileInput = document.getElementById('apply-file');
+  const fileLabel = document.getElementById('apply-file-label');
+  const fileText = document.getElementById('apply-file-text');
+  const emailInput = document.getElementById('apply-email');
+  const errBox = document.getElementById('apply-error');
+  const submit = document.getElementById('apply-submit');
+  const submitLabel = document.getElementById('apply-submit-label');
+  if (!form || !fileInput) return;
+
+  const fileDefault = fileText.innerHTML;
+  const MAX_BYTES = 3 * 1024 * 1024; // keep base64 body under Vercel's ~4.5MB cap
+  const ROLE = 'ML Researcher (Part-time)';
+
+  function showError(msg) {
+    errBox.textContent = msg;
+    errBox.hidden = false;
+  }
+  function resetSubmit() {
+    submit.disabled = false;
+    submitLabel.textContent = 'Submit application';
+  }
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    errBox.hidden = true;
+    if (!file) {
+      fileLabel.classList.remove('has-file');
+      fileText.innerHTML = fileDefault;
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      fileInput.value = '';
+      fileLabel.classList.remove('has-file');
+      fileText.innerHTML = fileDefault;
+      showError('That file is over 3 MB — please choose a smaller PDF or Word doc.');
+      return;
+    }
+    fileLabel.classList.add('has-file');
+    fileText.textContent = file.name;
+  });
+
+  function readAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+      reader.onerror = () => reject(reader.error || new Error('Could not read the file.'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errBox.hidden = true;
+    const file = fileInput.files[0];
+    if (!file) { showError('Please attach your resume first.'); return; }
+
+    submit.disabled = true;
+    submitLabel.textContent = 'Sending…';
+    try {
+      const contentBase64 = await readAsBase64(file);
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename: file.name,
+          contentType: file.type || 'application/octet-stream',
+          contentBase64,
+          email: (emailInput && emailInput.value.trim()) || '',
+          role: ROLE,
+        }),
+      });
+      let data = {};
+      try { data = await res.json(); } catch {}
+      if (res.ok && data.success) {
+        form.hidden = true;
+        note.hidden = false;
+        note.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      } else {
+        showError(data.error || 'Something went wrong sending your application. Please email it to hello@loka.inc instead.');
+        resetSubmit();
+      }
+    } catch (err) {
+      showError('Network error — please try again, or email your resume to hello@loka.inc.');
+      resetSubmit();
+    }
+  });
+})();
+</script>
+</body>
+</html>

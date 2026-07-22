@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<title>Careers — Open Roles | Loka Labs</title>
+<meta name="description" content="Open roles at Loka Labs — help build the Economic World Model alongside Turing laureate Joseph Sifakis and a founding team from Harvard, MIT, NUS, and Tsinghua." />
+<meta name="keywords" content="Loka Labs careers, Loka Inc jobs, open roles, economic world model, ML researcher, head of communications" />
+<link rel="canonical" href="https://loka.inc/careers" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://loka.inc/careers" />
+<meta property="og:title" content="Careers — Open Roles | Loka Labs" />
+<meta property="og:description" content="Help build the Economic World Model. Open roles across research and communications." />
+<meta property="og:site_name" content="loka.Inc" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://loka.inc/careers" />
+<meta name="twitter:title" content="Careers — Open Roles | Loka Labs" />
+<meta name="twitter:description" content="Help build the Economic World Model. Open roles across research and communications." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "Inferi";
+  src: url("/0620/Inferi-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --inferi: "Inferi", Georgia, serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --white: #f4f6f3;
+  --edge-x: clamp(20px, 4vw, 56px);
+  --rule: rgba(244,246,243,0.16);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #080a0d;
+  color: var(--white);
+  font-family: var(--mono);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* On-brand backdrop: echoes the home hero's dark-olive-into-black wash. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(130% 90% at 50% -20%, rgba(73,77,3,0.20) 0%, rgba(28,32,14,0.16) 30%, transparent 62%),
+    linear-gradient(180deg, #12140e 0%, #0c0e0c 34%, #080a0d 72%);
+}
+
+a { color: inherit; }
+
+/* ── Header ── transparent floating logo only ───────────────── */
+.site-header {
+  display: flex;
+  align-items: center;
+  padding: 26px var(--edge-x) 0;
+}
+.brand-link { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand-mark { width: 52px; height: auto; opacity: 0.86; color: currentColor; }
+.brand-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  padding-left: 12px;
+  border-left: 1px solid var(--rule);
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+main { max-width: 760px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: rgba(244,246,243,0.5);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.kicker::before { content: ''; width: 22px; height: 1px; background: currentColor; opacity: 0.5; }
+
+/* ── Hero ───────────────────────────────────────────────── */
+.hero { padding: 72px 0 44px; }
+.hero-role {
+  margin: 0;
+  font-family: var(--inferi);
+  font-weight: 300;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: rgba(244,246,243,0.98);
+}
+.hero-manifesto {
+  margin: 26px 0 0;
+  max-width: 580px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(244,246,243,0.74);
+}
+.hero-manifesto strong { color: rgba(244,246,243,0.95); font-weight: 500; }
+
+/* ── Role list ──────────────────────────────────────────── */
+.roles { padding: 8px 0 24px; }
+.roles-count {
+  margin: 0 0 8px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244,246,243,0.4);
+}
+.role-card {
+  display: block;
+  text-decoration: none;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  transition: border-color 0.25s ease;
+}
+.role-card:last-of-type { border-bottom: 1px solid var(--rule); }
+.role-card:hover { border-top-color: rgba(244,246,243,0.6); }
+.role-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.role-card-title {
+  margin: 0;
+  font-family: var(--inferi);
+  font-weight: 300;
+  font-size: clamp(21px, 3vw, 27px);
+  line-height: 1.15;
+  color: rgba(244,246,243,0.96);
+  transition: color 0.2s ease;
+}
+.role-card:hover .role-card-title { color: rgba(244,246,243,1); }
+.role-card-arrow {
+  flex: none;
+  font-size: 18px;
+  color: rgba(244,246,243,0.45);
+  transition: transform 0.3s ease, color 0.2s ease;
+}
+.role-card:hover .role-card-arrow { color: rgba(244,246,243,0.95); transform: translateX(4px); }
+.role-card-meta {
+  margin-top: 12px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(244,246,243,0.5);
+}
+.role-card-desc {
+  margin: 12px 0 0;
+  max-width: 560px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(244,246,243,0.72);
+}
+
+/* ── Open application note ──────────────────────────────── */
+.open-note {
+  padding: 40px 0 72px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(244,246,243,0.58);
+}
+.open-note a { text-decoration: underline; text-underline-offset: 3px; color: rgba(244,246,243,0.85); }
+
+/* ── Footer ─────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px var(--edge-x) 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-icons { display: flex; gap: 16px; }
+.footer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: rgba(244,246,243,0.55);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.footer-icon:hover { color: rgba(244,246,243,0.95); background: rgba(244,246,243,0.08); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244,246,243,0.55);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover { color: rgba(244,246,243,0.92); }
+.footer-copy { font-size: 10.5px; letter-spacing: 0.06em; color: rgba(244,246,243,0.35); width: 100%; text-align: center; margin-top: 8px; }
+
+@media (max-width: 640px) {
+  .hero { padding: 56px 0 32px; }
+  .footer-links { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand-link" href="/">
+    <svg class="brand-mark" viewBox="0 0 120 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Loka">
+      <path d="M28.5774 19.0202L28.429 17.7598H27.3106L23.6191 18.0674V19.0103H27.2513V49.7875L23.9358 49.9959L23.8468 50.8892H32.1403L32.2293 49.9959L28.5774 49.7776V19.0202Z" fill="currentColor"/>
+      <path d="M47.4813 34.1662C40.8504 34.1662 36.8818 37.7491 36.8818 43.7437C36.8818 49.3811 40.702 52.6067 47.3526 52.6067C55.27 52.6067 58.0708 47.803 58.0708 43.6941C58.0708 37.8086 54.0131 34.1562 47.4714 34.1562L47.4813 34.1662ZM56.8337 43.575C56.8337 48.1603 53.0433 51.2371 47.4021 51.2371C43.6314 51.2371 41.949 50.4828 39.8212 48.8848C38.7226 47.2472 38.1387 45.4707 38.1387 43.7437C38.1387 38.6324 41.6224 35.5854 47.4417 35.5854C50.8858 35.5854 53.2511 36.4588 55.3393 38.5034C56.2795 40.012 56.8337 41.3221 56.8337 43.575Z" fill="currentColor"/>
+      <path d="M74.7262 18.8714L78.0416 18.6629L78.1307 17.7598H69.8273L69.7382 18.6629L73.3901 18.8714V28.0519H72.1728C69.6491 24.7271 65.7696 20.5387 62.7016 17.8193L62.6323 17.7598H58.8518L58.7627 18.653L62.0187 18.8714C64.7304 21.3327 68.6595 25.402 71.0149 28.6276V28.7864L63.5032 37.2226L61.0587 37.4409L60.9697 38.3341H67.4323L67.5213 37.4409L65.1362 37.2523L72.1629 29.3025H73.3901V49.6287L73.5386 50.8991H74.6569L78.3484 50.5815V49.6486H74.7163V18.8714H74.7262Z" fill="currentColor"/>
+      <path d="M97.3294 19.2491L100.843 19.0605V14.2866L99.9421 14.1973L99.7343 17.9489H87.8285C82.6228 17.9489 79.9902 20.3805 79.9902 25.1842C79.9902 27.3875 80.3069 29.5313 80.9205 31.5361L80.9601 31.6751L81.7222 31.8438L86.9279 31.4468L86.8586 30.3054L81.8904 30.2657C81.5341 28.9556 81.1976 26.9409 81.1976 25.1941C81.1976 20.311 84.8496 19.2888 87.9175 19.2888H90.0157C90.273 24.8666 90.7678 29.303 91.4705 32.4889L91.5002 32.608L91.609 32.6576C92.1534 32.9058 93.6676 33.4715 95.9636 33.4715C99.8135 33.4715 101.179 30.1863 101.179 27.3677C101.179 23.4969 98.9524 20.7378 97.3393 19.259L97.3294 19.2491ZM99.9718 27.318C99.9718 30.3749 98.4378 32.1316 95.7558 32.1316C94.301 32.1316 93.1529 31.8239 92.5393 31.6056C91.8466 28.8266 91.3616 22.8617 91.2132 19.2788H95.548C96.9335 20.3309 99.9718 23.1099 99.9718 27.318Z" fill="currentColor"/>
+    </svg>
+    <span class="brand-tag">Careers</span>
+  </a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="kicker">Careers</div>
+    <h1 class="hero-role">Open roles.</h1>
+    <p class="hero-manifesto">Loka Labs is building the <strong>Economic World Model</strong> — a new category of infrastructure for testing economic and public-policy decisions before they're deployed in the real world. Our Founding Scientist is Joseph Sifakis, recipient of the Turing Award. We're hiring across research and communications.</p>
+  </section>
+
+  <section class="roles">
+    <p class="roles-count">2 open roles</p>
+
+    <a class="role-card" href="/careers/head-of-narrative">
+      <div class="role-card-head">
+        <h2 class="role-card-title">Head of Narrative &amp; Communications</h2>
+        <span class="role-card-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="role-card-meta">San Francisco / Remote · Full-time · Reports to the CEO</div>
+      <p class="role-card-desc">Build the public voice of a category that doesn't exist yet — narrative, media, and community for the Economic World Model.</p>
+    </a>
+
+    <a class="role-card" href="/careers/ml-researcher">
+      <div class="role-card-head">
+        <h2 class="role-card-title">ML Researcher</h2>
+        <span class="role-card-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="role-card-meta">Remote-friendly · Part-time · Research</div>
+      <p class="role-card-desc">Turn the architecture into a model that runs — time-series and behavioral modeling at the core of the world model, from research to backtest.</p>
+    </a>
+  </section>
+
+  <section class="open-note">
+    Don't see your role? We're always glad to meet exceptional people. Send your resume and a note to <a href="mailto:hello@loka.inc?subject=Open%20application%20%E2%80%94%20Loka%20Labs">hello@loka.inc</a>.
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-icons">
+    <a class="footer-icon" href="https://twitter.com/lokainc" target="_blank" rel="noreferrer" aria-label="Twitter">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21.5l-7.5 8.573L22.5 22h-6.86l-5.37-7.02L4.5 22H1.244l8.03-9.176L1 2h6.96l4.86 6.42L18.244 2Zm-1.202 18h1.898L7.05 4H5.06L17.042 20Z"/></svg>
+    </a>
+    <a class="footer-icon" href="https://github.com/lora-loka" target="_blank" rel="noreferrer" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.575.105.786-.25.786-.556 0-.275-.01-1.003-.016-1.97-3.202.695-3.878-1.545-3.878-1.545-.523-1.328-1.278-1.681-1.278-1.681-1.045-.714.079-.7.079-.7 1.156.081 1.764 1.187 1.764 1.187 1.028 1.76 2.697 1.251 3.354.957.104-.744.402-1.252.732-1.54-2.556-.29-5.244-1.278-5.244-5.687 0-1.257.45-2.284 1.187-3.089-.119-.291-.514-1.466.112-3.054 0 0 .967-.31 3.171 1.18a11.023 11.023 0 0 1 5.774 0c2.203-1.49 3.169-1.18 3.169-1.18.627 1.588.232 2.763.114 3.054.74.805 1.185 1.832 1.185 3.089 0 4.42-2.693 5.394-5.257 5.679.412.354.78 1.054.78 2.124 0 1.533-.014 2.769-.014 3.146 0 .308.208.667.79.554A11.5 11.5 0 0 0 12 .5Z"/></svg>
+    </a>
+    <a class="footer-icon" href="https://linkedin.com/company/loka-labs" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.93v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.02H3.56V9h3.56v11.45Z"/></svg>
+    </a>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/#research">Research</a>
+    <a href="mailto:hello@loka.inc">Contact</a>
+  </div>
+  <div class="footer-copy">Loka Labs · © 2026 · Causal economic infrastructure. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
