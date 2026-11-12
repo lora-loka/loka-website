@@ -1,30 +1,48 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
-// The careers listing lives at /careers/index.html; each open role lives at
-// /careers/<slug>/index.html. Vite's dev server only resolves a directory's
-// index.html when the URL has a trailing slash, so we add one for /careers and
-// for each role path. Production (vercel.json cleanUrls) handles this natively;
-// this keeps `npm run dev` matching prod.
-function cleanUrlRewrite() {
+// These libraries prefer window.THREE even in their ESM distributions. Keep
+// their modern imported constructors separate from the original site's r128
+// global, without changing that global or the existing brand scenes.
+const isolatedGraphPackages = ['3d-force-graph', 'three-forcegraph', 'three-render-objects']
+function isolateGraphThree() {
   return {
-    name: 'clean-url-rewrite',
-    configureServer(server) {
-      server.middlewares.use((req, res, next) => {
-        const path = req.url.split('?')[0]
-        // /careers or /careers/<slug> (no trailing slash) → add one so the
-        // directory index resolves.
-        if (/^\/careers(\/[^/]+)?$/.test(path)) {
-          req.url = path + '/' + req.url.slice(path.length)
-        }
-        next()
-      })
+    name: 'isolate-graph-three',
+    enforce: 'pre',
+    transform(code, id) {
+      if (!isolatedGraphPackages.some(name => id.includes(`/node_modules/${name}/`))) return
+      if (!code.includes('window.THREE')) return
+      return { code: code.replace(/\bwindow\.THREE\b/g, 'undefined'), map: null }
     },
   }
 }
 
+// Resolve directory entry points consistently in dev, preview, and production
+// (where vercel.json enables clean URLs).
+function cleanUrlRewrite() {
+  const install = (server) => {
+    server.middlewares.use((req, res, next) => {
+      const path = req.url.split('?')[0]
+      if (/^\/(?:blog|careers(?:\/[^/]+)?)$/.test(path)) {
+        req.url = path + '/' + req.url.slice(path.length)
+      }
+      next()
+    })
+  }
+  return {
+    name: 'clean-url-rewrite',
+    configureServer: install,
+    configurePreviewServer: install,
+  }
+}
+
 export default defineConfig({
-  plugins: [cleanUrlRewrite()],
+  plugins: [isolateGraphThree(), cleanUrlRewrite()],
+  optimizeDeps: {
+    exclude: isolatedGraphPackages,
+    // Excluded ESM packages still need their CommonJS children pre-bundled.
+    include: ['three-forcegraph > ngraph.forcelayout', 'three-forcegraph > ngraph.graph', 'three-forcegraph > tinycolor2'],
+  },
   server: {
     port: 5174,
   },
@@ -32,6 +50,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        blog: resolve(__dirname, 'blog/index.html'),
         careers: resolve(__dirname, 'careers/index.html'),
         careersNarrative: resolve(__dirname, 'careers/head-of-narrative/index.html'),
         careersMl: resolve(__dirname, 'careers/ml-researcher/index.html'),
