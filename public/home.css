@@ -28,8 +28,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .economic-sector-labels [data-sector="firms"] { left: 16%; bottom: 20%; color: #223c54; }
 .economic-sector-labels [data-sector="households"] { right: 14%; bottom: 13%; color: #223c54; }
 
-/* Selected use cases follows the original research panel: light type,
-   fine rules, transparent charts and the original blue-to-paper gradient. */
+/* Pair each real-world setting with its illustrative scenario, keeping
+   the original fine rules, light type and blue-to-paper gradient. */
 .usecases-content { left: var(--edge-x); right: var(--edge-x); top: 12vh; bottom: 17vh; display: flex; flex-direction: column; }
 .usecases-heading { display: flex; gap: 48px; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
 .usecases-heading .kicker { margin-bottom: 12px; }
@@ -37,27 +37,29 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .usecases-heading > p { max-width: 355px; font-size: 11px; line-height: 1.6; color: rgba(244,246,243,.65); }
 .case-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 36px; }
 .case-card { min-width: 0; }
-.case-visual { height: 157px; position: relative; border-top: 1px solid rgba(244,246,243,.4); border-bottom: 1px solid rgba(244,246,243,.2); padding: 13px 0 15px; color: rgba(244,246,243,.86); }
-.chart-heading { display: flex; justify-content: space-between; gap: 10px; font-size: 9px; line-height: 1.5; text-transform: uppercase; letter-spacing: .08em; }
+.case-media { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); grid-template-rows: minmax(0,1fr); gap: 16px; height: 204px; }
+.case-photo { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; border-radius: 2px; filter: saturate(.78); }
+.case-visual { min-width: 0; min-height: 0; height: 100%; position: relative; display: flex; flex-direction: column; border-top: 1px solid rgba(244,246,243,.4); border-bottom: 1px solid rgba(244,246,243,.2); padding: 12px 0 22px; color: rgba(244,246,243,.9); }
+.chart-heading { display: flex; justify-content: space-between; gap: 7px; font-size: 9px; line-height: 1.5; text-transform: uppercase; letter-spacing: .06em; min-height: 27px; }
 .chart-heading > span { opacity: .5; }
-.chart-subtitle { font-size: 9px; opacity: .55; margin: 4px 0 0; }
-.line-chart { display: block; width: 100%; height: 110px; margin-top: -6px; }
+.chart-subtitle { font-size: 9px; opacity: .7; margin: 4px 0 0; }
+.line-chart { display: block; width: 100%; height: 116px; flex: 1; min-height: 0; margin-top: 5px; }
 .line-chart > path:nth-of-type(1) { stroke: #d8e3da; }
 .line-chart > path:nth-of-type(2) { stroke: #b0bed8; }
 .line-chart > path:nth-of-type(3) { stroke: #87909d; }
 .visual-note { position: absolute; bottom: 5px; left: 0; font-size: 8px; opacity: .55; }
-.health-chart { display: flex; align-items: center; gap: 20px; height: 101px; }
-.demand-ring { width: 80px; height: 80px; flex-shrink: 0; border-radius: 50%; border: 2px solid rgba(244,246,243,.25); border-top-color: #e4ebec; border-right-color: #e4ebec; border-bottom-color: #e4ebec; padding: 5px; }
+.health-chart { display: flex; align-items: center; gap: 10px; flex: 1; min-height: 0; }
+.demand-ring { width: 72px; height: 72px; flex-shrink: 0; border-radius: 50%; border: 2px solid rgba(244,246,243,.25); border-top-color: #e4ebec; border-right-color: #e4ebec; border-bottom-color: #e4ebec; padding: 5px; }
 .demand-ring > div { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.demand-ring strong { font-family: var(--inferi); font-size: 28px; font-weight: 300; line-height: 1; }
-.demand-ring span { font-size: 8px; margin-top: 5px; }
-.health-stats { margin: 0; flex: 1; }
+.demand-ring strong { font-family: var(--inferi); font-size: 24px; font-weight: 300; line-height: 1; }
+.demand-ring span { font-size: 7px; margin-top: 5px; }
+.health-stats { margin: 0; flex: 1; min-width: 0; }
 .health-stats > div { display: flex; justify-content: space-between; align-items: center; gap: 7px; padding: 6px 0; border-bottom: 1px solid rgba(244,246,243,.13); }
 .health-stats > div:last-child { border: 0; }
-.health-stats dt { font-size: 8px; line-height: 1.5; opacity: .7; }
+.health-stats dt { font-size: 8px; line-height: 1.5; opacity: .8; }
 .health-stats dd { font-size: 11px; margin: 0; }
-.housing-chart { margin: 9px 0 0; }
-.housing-chart > div { margin-bottom: 6px; }
+.housing-chart { margin: auto 0; padding-top: 7px; }
+.housing-chart > div { margin-bottom: 8px; }
 .housing-chart dt { font-size: 8px; line-height: 1.4; opacity: .7; }
 .housing-chart dd { margin: 3px 0 0; display: flex; align-items: center; gap: 8px; }
 .housing-chart .bar { height: 4px; flex-basis: calc(var(--bar) * .75); background: rgba(219,229,237,.7); }
@@ -95,10 +97,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .usecases-heading { margin-bottom: 19px; }
   .usecases-heading h2 { font-size: 32px; }
   .case-grid { gap: 25px; }
-  .case-visual { height: 138px; }
-  .line-chart { height: 92px; }
-  .health-chart { height: 85px; }
-  .demand-ring { width: 69px; height: 69px; }
+  .case-media { height: 190px; gap: 13px; }
   .case-copy { padding-top: 13px; }
   .case-copy h3 { font-size: 22px; }
   .case-copy > p.case-audience { margin-top: 12px; }
@@ -111,7 +110,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 @media (max-width: 1100px) and (min-width: 821px) {
   .case-grid { gap: 23px; }
-  .health-chart { gap: 10px; }
+  .case-media { grid-template-columns: minmax(0,.7fr) minmax(0,1.3fr); gap: 12px; }
+  .health-chart { gap: 6px; }
+  .demand-ring { width: 50px; height: 50px; padding: 3px; }
+  .demand-ring strong { font-size: 16px; }
   .usecases-heading { gap: 25px; }
   .usecases-heading > p { max-width: 280px; }
   .case-copy h3 { font-size: 22px; }
@@ -151,18 +153,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .usecases-heading > p { font-size: 12px; max-width: 420px; margin: 20px 0 0; color: #f4f6f3; }
   .usecases-heading .kicker { color: #f4f6f3; }
   .case-grid { grid-template-columns: 1fr; gap: 42px; }
-  .case-visual { height: 195px; }
-  .chart-heading { font-size: 11px; }
+  .case-media { grid-template-columns: minmax(0,1fr) minmax(0,1fr); height: 235px; gap: 24px; }
+  .case-visual { height: 100%; padding-bottom: 25px; }
+  .chart-heading { font-size: 11px; min-height: 33px; }
   .chart-subtitle { font-size: 10px; }
   .line-chart { height: 142px; }
-  .health-chart { height: 135px; gap: 28px; }
+  .health-chart { gap: 20px; }
   .demand-ring { width: 105px; height: 105px; }
   .demand-ring strong { font-size: 36px; }
   .demand-ring span { font-size: 10px; }
   .health-stats dt { font-size: 10px; }
   .health-stats dd { font-size: 14px; }
   .health-stats > div { padding: 9px 0; }
-  .housing-chart { margin-top: 14px; }
+  .housing-chart { margin: auto 0; }
   .housing-chart > div { margin-bottom: 11px; }
   .housing-chart dt { font-size: 10px; }
   .housing-chart strong { font-size: 11px; }
@@ -216,5 +219,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .footer-col--center { gap: 22px; }
   .footer-col--center a { font-size: 11px; }
   .contact-field input, .contact-field textarea, .contact-field select { font-size: 16px; }
+}
+/* On phones the photograph becomes a wide, quiet opening to each case;
+   the charts keep the full reading width instead of shrinking their labels. */
+@media (max-width:600px) {
+  .case-media { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; gap: 18px; }
+  .case-photo { height: auto; aspect-ratio: 16 / 10; max-height: 245px; }
+  .case-visual { height: 195px; }
+  .chart-heading { min-height: auto; }
+  .health-chart { gap: 24px; }
+  .demand-ring { width: 90px; height: 90px; }
+  .demand-ring strong { font-size: 29px; }
 }
 @media (prefers-reduced-motion:reduce) { .contact-overlay, .contact-modal { animation: none; } .economic-webgl, .economic-fallback { transition: none; } }

@@ -33,10 +33,10 @@ The simulation introduction uses a transparent, scene-local 3D network built wit
 
 ## Current content decisions
 
-- Use Cases points to the homepage section at `/#use-cases`.
+- Use Cases points to the third homepage section at `/#use-cases`. Its three scenario photographs accompany the existing illustrative charts; photo credits and license links are recorded in `public/use-cases/SOURCES.md`.
 - Blog links now open `/blog`; the original research titles, metadata, and destination URLs are retained.
 - GitHub links to the confirmed Loka organization at `https://github.com/loka-inc` (currently no public repositories). The unconfirmed X social link remains hidden. LinkedIn uses the public company page at `https://www.linkedin.com/company/113464383/`.
 - The two Explore LokaWorld buttons temporarily use the verified live entry point at `https://lokaworld.vercel.app/`, retaining their original beta styling. The custom domain `world.loka.inc` still returns 404; its domain binding has not been restored, and the source of the current live deployment has not been located. The other pilot contact controls remain available.
-- The healthcare question retains `±30%` from the supplied revision document, pending comparison with the original one-pager artwork.
+- The healthcare question uses `a 30% increase`, matching the original one-pager image supplied on November 17, 2026. The accompanying chart retains `+30% Demand`; the earlier transcription's `±30%` has been corrected.
 
 The contact and application forms retain their existing delivery integrations. Local visual checks should not submit real inquiries or applications.
