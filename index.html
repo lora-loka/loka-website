@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Keep previously shared Research links working after the move to Blog.
+(() => {
+  const redirectResearch = () => {
+    if (window.location.hash.toLowerCase() === '#research') {
+      window.location.replace('/blog' + window.location.search);
+    }
+  };
+  redirectResearch();
+  window.addEventListener('hashchange', redirectResearch);
+})();
+</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <title>loka.Inc — Economic World Model | Loka Labs</title>
 <meta name="description" content="Loka Labs builds the Economic World Model for decisions that move worlds: simulation and verification infrastructure for complex economic systems." />
@@ -1921,51 +1933,79 @@ main {
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
-  <section class="panel" id="use-cases" aria-labelledby="use-cases-title">
+  <section class="panel" id="use-cases" aria-labelledby="use-cases-title" data-flow-panel>
     <div class="panel-bg s5-bg"></div>
     <div class="content usecases-content">
       <div class="usecases-heading"><div><div class="kicker">01 Selected use cases</div><h2 class="serif" id="use-cases-title">Explore what comes next.</h2></div><p class="mono">Illustrative examples of how governments and international institutions can use Loka.</p></div>
       <div class="case-grid">
-      <article class="case-card">
-        <div class="case-media">
+        <article class="case-card">
           <img class="case-photo" src="/use-cases/energy.webp" alt="Rows of solar panels across an energy infrastructure site" width="800" height="572" loading="lazy" decoding="async">
-        <div class="case-visual investment-visual">
-          <div class="chart-heading">Investment scenarios <span>01</span></div>
-          <p class="chart-subtitle">Regional GDP impact</p>
-          <svg class="line-chart" viewBox="0 0 360 160" role="img" aria-label="Illustrative investment scenarios from 2026 to 2034; curves are schematic, not model results.">
-            <g stroke="currentColor" stroke-width=".6" opacity=".15"><path d="M12 20H348M12 55H348M12 90H348M12 125H348"/></g>
-            <path d="M14 122C60 119 76 112 106 106S158 89 183 74S225 64 252 48S304 24 346 13" fill="none" stroke="#5b6f43" stroke-width="2.5"/>
-            <path d="M14 122C57 119 76 115 106 110S151 100 184 93S225 80 252 78S306 66 346 58" fill="none" stroke="#a07f50" stroke-width="2"/>
-            <path d="M14 122C64 121 82 118 106 118S153 112 184 110S224 102 252 104S307 94 346 90" fill="none" stroke="#8a9186" stroke-width="1.5" stroke-dasharray="4 4"/>
-            <g font-size="16" font-family="monospace" fill="currentColor" opacity=".75"><text x="12" y="151">2026</text><text x="164" y="151">2030</text><text x="308" y="151">2034</text></g>
-          </svg>
-          <div class="visual-note">Illustrative scenarios</div>
-        </div>
-        </div>
-        <div class="case-copy"><p class="case-category">Energy &amp; infrastructure investment</p><h3>Where could a $50 billion infrastructure programme create the greatest impact?</h3><p>Compare data centers, power grids and transport investments across energy demand, electricity prices, employment and regional growth.</p><p class="case-audience">Ministry of Energy · Electricity &amp; Water Authorities · Infrastructure Investment Agencies</p></div>
-      </article>
-      <article class="case-card">
-        <div class="case-media">
+          <div class="case-copy">
+            <p class="case-category">Energy &amp; infrastructure investment</p>
+            <h3>Where could a $50 billion infrastructure programme create the greatest impact?</h3>
+            <details class="case-details">
+              <summary aria-label="Explore scenario: energy and infrastructure">Explore scenario</summary>
+              <div class="case-detail-content">
+                <p>Compare data centers, power grids and transport investments across energy demand, electricity prices, employment and regional growth.</p>
+                <div class="case-visual investment-visual">
+                  <div class="chart-heading">Investment scenarios <span>01</span></div>
+                  <p class="chart-subtitle">Regional GDP impact</p>
+                  <p class="chart-scale">Qualitative comparison · no numerical scale</p>
+                  <svg class="line-chart" viewBox="0 0 360 140" role="img" aria-label="Schematic scenarios A, B and C from 2026 to 2034. A rises most, B moderately and C least. No numerical vertical scale; these are not model results.">
+                    <g stroke="currentColor" stroke-width=".6" opacity=".25"><path d="M12 20H348M12 55H348M12 90H348M12 125H348"/></g>
+                    <path class="scenario-a" d="M14 122C60 119 76 112 106 106S158 89 183 74S225 64 252 48S304 24 346 13" fill="none" stroke="#e2ecdc" stroke-width="3"/>
+                    <path class="scenario-b" d="M14 122C57 119 76 115 106 110S151 100 184 93S225 80 252 78S306 66 346 58" fill="none" stroke="#c8d7f0" stroke-width="2.5" stroke-dasharray="8 4"/>
+                    <path class="scenario-c" d="M14 122C64 121 82 118 106 118S153 112 184 110S224 102 252 104S307 94 346 90" fill="none" stroke="#e3cda5" stroke-width="2.5" stroke-dasharray="2 5" stroke-linecap="round"/>
+                  </svg>
+                  <div class="chart-years" aria-hidden="true"><span>2026</span><span>2030</span><span>2034</span></div>
+                  <ul class="scenario-legend" aria-label="Scenario legend"><li><span class="legend-line scenario-a" aria-hidden="true"></span>Scenario A</li><li><span class="legend-line scenario-b" aria-hidden="true"></span>Scenario B</li><li><span class="legend-line scenario-c" aria-hidden="true"></span>Scenario C</li></ul>
+                  <p class="visual-note">Schematic paths, not model outputs.</p>
+                </div>
+                <p class="case-audience">Ministry of Energy · Electricity &amp; Water Authorities · Infrastructure Investment Agencies</p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <article class="case-card">
           <img class="case-photo" src="/use-cases/healthcare.webp" alt="Doctor writing on a patient’s chart" width="800" height="450" loading="lazy" decoding="async">
-        <div class="case-visual health-visual">
-          <div class="chart-heading">Healthcare system impact <span>02</span></div><p class="chart-subtitle">2036 vs. 2026</p>
-          <div class="health-chart"><div class="demand-ring"><div><strong>+30%</strong><span>Demand</span></div></div><dl class="health-stats"><div><dt>Hospital Capacity</dt><dd>92%</dd></div><div><dt>Public Spending</dt><dd>+18%</dd></div><div><dt>Workforce Need</dt><dd>+24%</dd></div></dl></div>
-          <div class="visual-note">Illustrative scenario</div>
-        </div>
-        </div>
-        <div class="case-copy"><p class="case-category">Public health &amp; social development</p><h3>How should a government prepare for a 30% increase in healthcare demand over the next decade?</h3><p>Simulate hospital capacity, healthcare workforce requirements, insurance costs and the distributional effects of public spending.</p><p class="case-audience">Ministry of Health · Social Welfare Agencies · Public Health Insurance &amp; Pension Authorities</p></div>
-      </article>
-      <article class="case-card">
-        <div class="case-media">
+          <div class="case-copy">
+            <p class="case-category">Public health &amp; social development</p>
+            <h3>How should a government prepare for a 30% increase in healthcare demand over the next decade?</h3>
+            <details class="case-details">
+              <summary aria-label="Explore scenario: public health">Explore scenario</summary>
+              <div class="case-detail-content">
+                <p>Simulate hospital capacity, healthcare workforce requirements, insurance costs and the distributional effects of public spending.</p>
+                <div class="case-visual health-visual">
+                  <div class="chart-heading">Healthcare system impact <span>02</span></div>
+                  <p class="chart-subtitle">2036 vs. 2026</p>
+                  <div class="health-chart"><div class="demand-ring"><div><strong>+30%</strong><span>Demand</span></div></div><dl class="health-stats"><div><dt>Hospital Capacity</dt><dd>92%</dd></div><div><dt>Public Spending</dt><dd>+18%</dd></div><div><dt>Workforce Need</dt><dd>+24%</dd></div></dl></div>
+                  <p class="visual-note">Illustrative scenario</p>
+                </div>
+                <p class="case-audience">Ministry of Health · Social Welfare Agencies · Public Health Insurance &amp; Pension Authorities</p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <article class="case-card">
           <img class="case-photo" src="/use-cases/housing.webp" alt="Apartment buildings in a residential neighbourhood" width="600" height="800" loading="lazy" decoding="async">
-        <div class="case-visual housing-visual">
-          <div class="chart-heading">Housing market impact <span>03</span></div><p class="chart-subtitle">Δ vs. baseline</p>
-          <dl class="housing-chart"><div><dt>Housing Prices</dt><dd><span class="bar" style="--bar:58%"></span><strong>−7.4%</strong></dd></div><div><dt>Mortgage Demand</dt><dd><span class="bar" style="--bar:100%"></span><strong>−12.8%</strong></dd></div><div><dt>Consumption Demand</dt><dd><span class="bar" style="--bar:15%"></span><strong>−1.9%</strong></dd></div></dl>
-          <div class="visual-note">Illustrative scenario</div>
-        </div>
-        </div>
-        <div class="case-copy"><p class="case-category">Economic &amp; housing policy</p><h3>What happens when interest rates move by 200 basis points?</h3><p>Simulate changes in housing demand, mortgage borrowing, household consumption and investment across income groups.</p><p class="case-audience">Ministry of Finance · Central Banks · Housing &amp; Urban Development Authorities · Economic Planning Agencies</p></div>
-      </article>
+          <div class="case-copy">
+            <p class="case-category">Economic &amp; housing policy</p>
+            <h3>What happens when interest rates move by 200 basis points?</h3>
+            <details class="case-details">
+              <summary aria-label="Explore scenario: economic and housing policy">Explore scenario</summary>
+              <div class="case-detail-content">
+                <p>Simulate changes in housing demand, mortgage borrowing, household consumption and investment across income groups.</p>
+                <div class="case-visual housing-visual">
+                  <div class="chart-heading">Housing market impact <span>03</span></div>
+                  <p class="chart-subtitle">Δ vs. baseline</p>
+                  <dl class="housing-chart"><div><dt>Housing Prices</dt><dd><span class="bar" style="--bar:58%" aria-hidden="true"></span><strong>−7.4%</strong></dd></div><div><dt>Mortgage Demand</dt><dd><span class="bar" style="--bar:100%" aria-hidden="true"></span><strong>−12.8%</strong></dd></div><div><dt>Consumption Demand</dt><dd><span class="bar" style="--bar:15%" aria-hidden="true"></span><strong>−1.9%</strong></dd></div></dl>
+                  <p class="visual-note">Illustrative values. Rate direction and baseline assumptions are unspecified; these figures do not predict the effect of a rate increase or decrease.</p>
+                </div>
+                <p class="case-audience">Ministry of Finance · Central Banks · Housing &amp; Urban Development Authorities · Economic Planning Agencies</p>
+              </div>
+            </details>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -2282,6 +2322,7 @@ if (!window.gsap || !window.THREE || !window.ScrollTrigger) throw new Error('Vis
 // If initialization fails, the catch below restores the static fallback.
 document.documentElement.classList.remove('visual-fallback');
 gsap.registerPlugin(ScrollTrigger);
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 /* ═══════════════════════════════════════════════════════
    THREE.JS GLOBE
@@ -2708,7 +2749,6 @@ resizeVerificationSlice();
 function updateVerificationSlice(time) {
   verificationGlobe.rotation.set(1.08, -0.12, -0.42);
   verificationSpinGlobe.rotation.y = time * 0.24;
-  verificationRenderer.render(verificationScene, verificationCamera);
 }
 
 function usesFlowLayout() {
@@ -2762,29 +2802,44 @@ ScrollTrigger.create({
   onUpdate: self => { scrollProg = self.progress; }
 });
 
-// Render loop — slow rotation (~2.5 rpm)
+// Draw only visible legacy scenes. Reduced motion uses the same composition
+// at a fixed time and redraws on scroll/layout changes, never continuously.
 let t = 0;
-(function loop() {
-  requestAnimationFrame(loop);
-  t += 0.0018;
-
-  const damp = 1 - scrollProg * 0.7;
-  globe.rotation.y =  t * 0.28;
-  globe.rotation.x =  Math.sin(t * 0.17) * 0.15 * damp;  // gentle wobble; camera elevation handles the "looking down"
-  globe.rotation.z =  Math.sin(t * 0.12 + 1.1) * 0.08 * damp;
-
-  // Zoom out (scale up) + fade on scroll
-  globe.scale.setScalar(1 + scrollProg * 2.0);
-  pMat.opacity = 0.55 * Math.max(0, 1 - scrollProg * 1.3);
-
-  updateDomeAnimation(t);
-  updateLayerGlobes(t);
-  updateVerificationSlice(t);
-
-  renderer.render(scene, camera);
-  domeRenderer.render(domeScene, domeCamera);
-  layersRenderer.render(layersScene, layersCamera);
-})();
+function renderLegacyScenes(deltaMs) {
+  const globeVisible = scrollProg < 1 / 1.3;
+  const decorVisible = node => decorOpacity[fixedDecors.indexOf(node)] > 0.001;
+  const domeVisible = decorVisible(domeWrap);
+  const layersVisible = decorVisible(layersWrap);
+  const verificationVisible = decorVisible(verificationWrap);
+  if (!motionPreference.matches && (globeVisible || domeVisible || layersVisible || verificationVisible)) {
+    t += Math.min(deltaMs, 100) * 0.000108;
+  }
+  const time = motionPreference.matches ? 0 : t;
+  // Hiding the wrapper also removes the last rendered frame when the material
+  // becomes transparent, without drawing an otherwise invisible scene.
+  wrap.style.visibility = globeVisible ? 'visible' : 'hidden';
+  if (globeVisible) {
+    const damp = 1 - scrollProg * 0.7;
+    globe.rotation.y = time * 0.28;
+    globe.rotation.x = Math.sin(time * 0.17) * 0.15 * damp;
+    globe.rotation.z = Math.sin(time * 0.12 + 1.1) * 0.08 * damp;
+    globe.scale.setScalar(1 + scrollProg * 2.0);
+    pMat.opacity = 0.55 * Math.max(0, 1 - scrollProg * 1.3);
+    renderer.render(scene, camera);
+  }
+  if (domeVisible) {
+    updateDomeAnimation(time);
+    domeRenderer.render(domeScene, domeCamera);
+  }
+  if (layersVisible) {
+    updateLayerGlobes(time);
+    layersRenderer.render(layersScene, layersCamera);
+  }
+  if (verificationVisible) {
+    updateVerificationSlice(time);
+    verificationRenderer.render(verificationScene, verificationCamera);
+  }
+}
 
 const fixedBgs = gsap.utils.toArray(".fixed-bg");
 const fixedDecors = gsap.utils.toArray(".fixed-decor");
@@ -2895,6 +2950,7 @@ function addTextItem(panel, index, selector, options) {
   if (!nodes.length) return;
 
   textItems.push({
+    panel,
     index,
     nodes,
     y: 0,
@@ -2963,11 +3019,15 @@ function updateBgTargets() {
 function updateTextMotion(rawIndex) {
   // Long mobile sections scroll as normal text. Their background and globe
   // transitions still follow the actual section positions above.
-  if (usesFlowLayout()) {
+  if (usesFlowLayout() || motionPreference.matches) {
     textItems.forEach(item => gsap.set(item.nodes, {clearProps: 'opacity,transform'}));
     return;
   }
   textItems.forEach((item) => {
+    if (item.panel.hasAttribute('data-flow-panel')) {
+      gsap.set(item.nodes, {clearProps: 'opacity,transform'});
+      return;
+    }
     const dist = item.index - rawIndex;
     const opacityTarget = Math.max(0, Math.min(1, 1 - Math.abs(dist) * item.fade));
     const yTarget = dist >= 0
@@ -3040,11 +3100,16 @@ function updateBallMotion(rawIndex) {
   });
 }
 
-gsap.ticker.add(() => {
+let visualTickerAttached = false;
+let staticFrameId = 0;
+let pageActive = true;
+function updateVisualFrame(_time, deltaMs = 1000 / 60) {
+  if (document.hidden || !pageActive) return;
   const rawIndex = updateBgTargets();
+  const reduced = motionPreference.matches;
 
   fixedBgs.forEach((bg, i) => {
-    bgOpacity[i] += (bgTarget[i] - bgOpacity[i]) * BG_FADE_SPEED;
+    bgOpacity[i] = reduced ? bgTarget[i] : bgOpacity[i] + (bgTarget[i] - bgOpacity[i]) * BG_FADE_SPEED;
     bg.style.opacity = bgOpacity[i].toFixed(4);
   });
 
@@ -3052,23 +3117,61 @@ gsap.ticker.add(() => {
     const decorFadeSpeed = decorTarget[i] > decorOpacity[i]
       ? DECOR_FADE_IN_SPEED
       : DECOR_FADE_OUT_SPEED;
-    decorOpacity[i] += (decorTarget[i] - decorOpacity[i]) * decorFadeSpeed;
+    decorOpacity[i] = reduced ? decorTarget[i] : decorOpacity[i] + (decorTarget[i] - decorOpacity[i]) * decorFadeSpeed;
+    if (Math.abs(decorTarget[i] - decorOpacity[i]) < 0.001) decorOpacity[i] = decorTarget[i];
     decor.style.opacity = decorOpacity[i].toFixed(4);
   });
 
   updateTextMotion(rawIndex);
-  updateBallMotion(rawIndex);
+  if (!reduced) updateBallMotion(rawIndex);
 
   if (globalLine) {
     const lineTarget = rawIndex < panels.length - 1.35 ? 1 : 0;
-    globalLineOpacity += (lineTarget - globalLineOpacity) * LINE_FADE_SPEED;
+    globalLineOpacity = reduced ? lineTarget : globalLineOpacity + (lineTarget - globalLineOpacity) * LINE_FADE_SPEED;
     globalLine.style.opacity = globalLineOpacity.toFixed(4);
   }
-});
+  renderLegacyScenes(deltaMs);
+}
+
+function requestStaticFrame() {
+  if (staticFrameId || document.hidden || !pageActive) return;
+  staticFrameId = requestAnimationFrame(() => {
+    staticFrameId = 0;
+    updateVisualFrame();
+  });
+}
+
+function syncVisualMotion() {
+  const shouldTick = pageActive && !document.hidden && !motionPreference.matches;
+  if (shouldTick && !visualTickerAttached) {
+    gsap.ticker.add(updateVisualFrame);
+    visualTickerAttached = true;
+  } else if (!shouldTick && visualTickerAttached) {
+    gsap.ticker.remove(updateVisualFrame);
+    visualTickerAttached = false;
+  }
+  cancelAnimationFrame(staticFrameId);
+  staticFrameId = 0;
+  requestStaticFrame();
+}
+
+document.addEventListener('visibilitychange', syncVisualMotion);
+motionPreference.addEventListener('change', syncVisualMotion);
+window.addEventListener('scroll', () => {
+  if (motionPreference.matches) requestStaticFrame();
+}, { passive: true });
+window.addEventListener('pagehide', () => { pageActive = false; syncVisualMotion(); });
+window.addEventListener('pageshow', () => { pageActive = true; syncVisualMotion(); });
+syncVisualMotion();
 
 function scrollToSection(index) {
   const targetIndex = Math.max(0, Math.min(panels.length - 1, index));
   const targetY = panels[targetIndex].offsetTop;
+  if (motionPreference.matches) {
+    sectionScrollTween?.kill();
+    window.scrollTo(0, targetY);
+    return;
+  }
   if (targetIndex === activeSectionIndex && Math.abs(window.scrollY - targetY) < 2) return;
 
   const isSection3To4Transition = (activeSectionIndex === 2 && targetIndex === 3)
@@ -3102,7 +3205,21 @@ function scrollToSection(index) {
    `window.scrollY`-based animation loop, so panels transition on scroll
    without the 1500 ms tween that felt like lag. */
 
-window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlobes(); resizeVerificationSlice(); ScrollTrigger.refresh(); });
+window.addEventListener('resize', () => {
+  resize(); resizeDome(); resizeLayerGlobes(); resizeVerificationSlice();
+  ScrollTrigger.refresh();
+  requestStaticFrame();
+});
+
+// Native details can change a reading panel's height without a window resize.
+// Keep later scene transitions aligned with its new document position.
+if ('ResizeObserver' in window) {
+  const readingLayoutObserver = new ResizeObserver(() => {
+    ScrollTrigger.refresh();
+    requestStaticFrame();
+  });
+  document.querySelectorAll('[data-flow-panel]').forEach(panel => readingLayoutObserver.observe(panel));
+}
 
 (function drawGrain() {
   const grain = document.getElementById("grainCanvas");

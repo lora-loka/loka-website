@@ -35,9 +35,14 @@ if (panel && layer) {
     sync();
   }, { rootMargin: '45% 0px' });
   const visibilityObserver = new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting;
+    // Touching the viewport edge counts as isIntersecting even with zero
+    // visible pixels. A positive threshold also delivers the next entry when
+    // the panel actually enters, rather than leaving that edge state cached.
+    const entry = entries[0];
+    visible = entry.isIntersecting && entry.intersectionRatio >= 0.001
+      && entry.intersectionRect.width > 0 && entry.intersectionRect.height > 0;
     sync();
-  }, { threshold: 0 });
+  }, { threshold: [0, 0.001] });
   preloadObserver.observe(panel);
   visibilityObserver.observe(panel);
   document.addEventListener('visibilitychange', sync);
