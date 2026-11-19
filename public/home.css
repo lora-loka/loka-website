@@ -1,0 +1,225 @@
+/* Additions to the original Loka page. Its gradients, typography, fixed
+   chrome, WebGL scenes and architecture diagram remain in index.html. */
+[hidden] { display: none !important; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.site-header .brand-mark { pointer-events: auto; }
+.contact-modal { max-height: calc(100dvh - 48px); overflow-y: auto; }
+.contact-success-body em { overflow-wrap: anywhere; }
+.s4-explore { cursor: pointer; }
+.arch-top .kicker { margin-bottom: 10px; }
+
+/* The semantic network is a decorative layer inside the definition panel.
+   The central mask keeps moving links out of the main reading area. */
+#causation { overflow: hidden; }
+#causation .s2-copy { position: absolute; top: 38vh; }
+.s2-ball-layer { display: none; }
+.economic-background { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; color: #b3c3d5; mask-image: radial-gradient(ellipse 45% 25% at 50% 46%, transparent 25%, rgba(0,0,0,.12) 55%, #000 100%); }
+.economic-webgl, .economic-fallback { position: absolute; inset: 0; width: 100%; height: 100%; }
+.economic-webgl { opacity: 0; transition: opacity 1.8s ease; }
+.economic-webgl canvas { display: block; }
+.economic-fallback { opacity: .4; transition: opacity 1.8s ease; }
+.economic-background[data-state="running"] .economic-webgl, .economic-background[data-state="paused"] .economic-webgl { opacity: .85; }
+.economic-background[data-state="running"] .economic-fallback, .economic-background[data-state="paused"] .economic-fallback { opacity: 0; }
+.economic-background .scene-nav-info, .economic-background .scene-tooltip { display: none !important; }
+.economic-sector-labels { position: absolute; inset: 0; font-size: 8px; letter-spacing: .15em; text-transform: uppercase; color: #c5cfdb; }
+.economic-sector-labels span { position: absolute; opacity: .45; }
+.economic-sector-labels [data-sector="public"] { left: 10%; top: 19%; }
+.economic-sector-labels [data-sector="finance"] { right: 12%; top: 24%; }
+.economic-sector-labels [data-sector="firms"] { left: 16%; bottom: 20%; color: #223c54; }
+.economic-sector-labels [data-sector="households"] { right: 14%; bottom: 13%; color: #223c54; }
+
+/* New copy on the original verification gradient: white in the upper
+   band, black on the pale lower band, preserving its two-tone composition. */
+.why-content { top: 14vh; left: var(--edge-x); right: var(--edge-x); bottom: 10vh; display: flex; flex-direction: column; }
+.why-heading { display: grid; grid-template-columns: 1.1fr 1fr; gap: 9vw; align-items: center; }
+.why-heading .kicker { margin-bottom: 17px; }
+.why-heading h2 { color: rgba(244,246,243,.94); font-size: clamp(42px,5vw,70px); line-height: 1.02; }
+.why-intro .mono { font-size: 12px; line-height: 1.8; color: rgba(244,246,243,.76); }
+.why-intro p + p { margin-top: 17px; }
+.why-lower { margin-top: auto; color: rgba(8,9,8,.88); }
+.why-promise { font-size: clamp(25px,2.6vw,38px); line-height: 1.15; max-width: 1000px; margin-bottom: 32px; }
+.comparison-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 40px; }
+.comparison-grid article { border-top: 1px solid rgba(8,9,8,.22); padding-top: 15px; }
+.comparison-grid h3 { font-family: var(--mono); font-size: 10px; line-height: 1.6; font-weight: 400; letter-spacing: .12em; margin: 0 0 14px; }
+.comparison-lead { font-size: clamp(21px,2vw,29px); line-height: 1.12; margin-bottom: 12px; }
+.comparison-grid .mono { color: rgba(8,9,8,.68); font-size: 11px; line-height: 1.65; }
+
+/* Original content stays visible when CDNs or WebGL are unavailable. */
+.visual-fallback .bg-stack, .visual-fallback .decor-stack, .visual-fallback #globe-wrap { display: none; }
+.visual-fallback .panel-bg { display: block; position: absolute; inset: 0; z-index: -1; }
+.visual-fallback .panel-bg::before { content: ''; position: absolute; inset: 0; }
+.visual-fallback .content.s2-copy { position: absolute; }
+
+@media (min-width:821px) and (max-height:850px) {
+  .why-content { top: 100px; bottom: 70px; }
+  .why-heading h2 { font-size: 48px; }
+  .why-promise { margin-bottom: 23px; font-size: 29px; }
+  .comparison-grid { gap: 28px; }
+  .comparison-lead { font-size: 23px; }
+}
+
+@media (max-width: 1100px) and (min-width: 821px) {
+  .why-heading { gap: 45px; }
+  .comparison-grid { gap: 25px; }
+}
+
+/* The original mobile treatment compressed biographies to 9px. Keep the
+   same visual materials, but let content panels grow and scroll normally. */
+@media (max-width:900px), (max-height:600px) and (max-width:1100px) {
+  html { scroll-snap-type: y proximity; }
+  .panel { height: auto; min-height: 100svh; overflow: visible; isolation: auto; scroll-snap-stop: normal; }
+  #s1 { height: 100svh; min-height: 720px; overflow: hidden; isolation: isolate; }
+  .content.s2-copy, .content.s3-copy, .content.s7-copy, .why-content { position: relative; inset: auto; width: auto; height: auto; min-height: 100svh; overflow: visible; padding: 112px 24px 100px; transform: none; }
+  .content.s2-copy { min-height: 100svh; justify-content: center; padding-bottom: 190px; }
+  .s2-copy blockquote { font-size: 29px; line-height: 1.2; }
+  .s2-definition { font-size: 12px !important; line-height: 1.8 !important; }
+  #causation .s2-copy { position: relative; top: auto; min-height: 100svh; padding: 160px 24px 170px; display: flex; flex-direction: column; justify-content: center; }
+  .economic-background { mask-image: radial-gradient(ellipse 75% 30% at 50% 45%, transparent 18%, rgba(0,0,0,.1) 62%, #000 100%); }
+  .economic-webgl, .economic-fallback { mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 8%, #000 19%); }
+  .economic-background[data-state="running"] .economic-webgl, .economic-background[data-state="paused"] .economic-webgl { opacity: .7; }
+  .economic-sector-labels { font-size: 7px; letter-spacing: .08em; }
+  .economic-sector-labels [data-sector="public"] { top: 15%; left: 7%; }
+  .economic-sector-labels [data-sector="finance"] { top: 20%; right: 7%; }
+  .economic-sector-labels [data-sector="firms"] { left: 8%; bottom: 13%; }
+  .economic-sector-labels [data-sector="households"] { right: 7%; bottom: 8%; }
+  /* Long reading surfaces cross both pale and dark parts of the fixed
+     background. A restrained tint guarantees contrast without relying
+     on blend modes or altering the original desktop gradients. */
+  .content.s3-copy--team, #architecture .arch-stack, .why-content { mix-blend-mode: normal; }
+  .content.s3-copy--team { background: linear-gradient(180deg,rgba(7,16,24,.94),rgba(12,25,35,.91)); }
+  #architecture .arch-stack { background: linear-gradient(180deg,rgba(7,5,7,.94),rgba(13,10,14,.91)); }
+  .why-content { background: linear-gradient(180deg,rgba(7,8,20,.94),rgba(27,32,48,.91)); }
+  #architecture .arch-stack { position: relative; inset: auto !important; width: 100% !important; max-width: none; height: auto !important; min-height: 100svh; padding: 112px 24px 100px !important; overflow: visible !important; }
+  .arch-top { gap: 21px; }
+  .arch-heading h2 { font-size: 28px; line-height: 1.15; white-space: normal; }
+  .arch-lede { font-size: 12px; line-height: 1.8; margin-top: 12px; color: #f4f6f3; }
+  .arch-fit { flex: none; }
+  .arch-figure { position: static; top: auto; left: auto; width: 100%; transform: none; padding: 20px 0 0; }
+  .arch-row { grid-template-columns: 1fr; row-gap: 6px; height: auto; padding: 25px 0; }
+  .arch-row-left { text-align: left; order: 1; }
+  .arch-row-mid { order: 0; grid-template-columns: 24px 1fr; height: 56px; }
+  .arch-row-line-col::before, .arch-row-arrow { display: none; }
+  .arch-row-icon { width: 48px; height: 34px; }
+  .arch-row-feats { order: 2; }
+  .arch-row-title { font-size: 22px; }
+  .arch-row--hero .arch-row-title { font-size: 25px; }
+  .arch-row-sub { font-size: 12px; line-height: 1.7; color: #f4f6f3; margin: 9px 0; }
+  .arch-row-feats { font-size: 12px; line-height: 1.6; gap: 7px; }
+  .content.s3-copy--team { display: block; padding: 112px 24px 100px; }
+  .s3-copy.s3-copy--team h2 { font-size: 36px !important; line-height: 1.1; margin-bottom: 32px; }
+  .s3-copy--team .kicker { margin-bottom: 17px; }
+  .team-grid { grid-template-columns: 1fr !important; gap: 31px !important; }
+  .team-member { padding-top: 23px !important; }
+  .team-name { font-size: 31px !important; }
+  .team-role { font-size: 11px !important; line-height: 1.65; color: #f4f6f3; }
+  .team-bio { font-size: 13px !important; line-height: 1.85 !important; color: #f4f6f3; }
+  .why-heading { display: block; }
+  .why-heading h2 { font-size: 47px; color: #f4f6f3; }
+  .why-intro { margin-top: 28px; }
+  .why-intro .mono { font-size: 13px; line-height: 1.85; color: #f4f6f3; }
+  .why-lower { margin-top: 38px; color: #f4f6f3; }
+  .why-promise { font-size: 31px; line-height: 1.17; margin-bottom: 34px; }
+  .comparison-grid { grid-template-columns: 1fr; gap: 28px; }
+  .comparison-grid article { border-color: rgba(244,246,243,.4); padding-top: 21px; }
+  .comparison-grid h3 { font-size: 11px; }
+  .comparison-lead { font-size: 28px; line-height: 1.15; }
+  .comparison-grid .mono { font-size: 13px; line-height: 1.85; color: #f4f6f3; }
+  .content.s7-copy { top: auto !important; display: block; min-height: 100svh; padding: 190px 24px 210px; }
+  .s7-copy h2 { font-size: 36px !important; }
+  .s7-copy .proof-line { font-size: 12px !important; line-height: 1.8; }
+  .s7-copy .mono { font-size: 13px; line-height: 1.85; }
+  .site-footer.site-footer--v2 { gap: 16px; padding: 20px 24px 30px !important; }
+  .footer-col--center { gap: 22px; }
+  .footer-col--center a { font-size: 11px; }
+  .contact-field input, .contact-field textarea, .contact-field select { font-size: 16px; }
+}
+@media (prefers-reduced-motion:reduce) { .contact-overlay, .contact-modal { animation: none; } .economic-webgl, .economic-fallback { transition: none; } }
+
+/* Cases expand in document flow at every size. The original page gradient
+   remains visible around a quiet reading surface with predictable contrast. */
+#use-cases { height: auto; min-height: 100svh; overflow: visible; isolation: auto; scroll-snap-stop: normal; }
+#use-cases .usecases-content { position: relative; inset: auto; width: auto; height: auto; min-height: 100svh; padding: 110px var(--edge-x) 100px; overflow: visible; mix-blend-mode: normal; }
+.usecases-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 32px; }
+.usecases-heading .kicker { margin-bottom: 12px; color: #f4f6f3; }
+.usecases-heading h2 { font-size: clamp(32px,3.4vw,48px); line-height: 1.1; color: #f4f6f3; }
+.usecases-heading > p { max-width: 355px; margin: 0; font-size: 13px; line-height: 1.65; color: #f4f6f3; }
+.case-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: start; gap: 28px; }
+.case-card { min-width: 0; border: 1px solid rgba(244,246,243,.25); border-radius: 3px; background: rgba(9,18,25,.94); color: #f4f6f3; }
+.case-photo { display: block; width: 100%; height: 164px; object-fit: cover; border-radius: 2px 2px 0 0; filter: saturate(.78); }
+.case-copy { padding: 22px 20px 0; }
+.case-category { margin: 0 0 14px; min-height: 36px; color: #dae4e7; font-family: var(--mono); font-size: 12px; line-height: 1.5; letter-spacing: .06em; text-transform: uppercase; }
+.case-copy h3 { margin: 0 0 22px; min-height: 144px; font-family: var(--inferi); font-size: clamp(23px,2vw,29px); font-weight: 300; line-height: 1.18; letter-spacing: -.02em; color: #f4f6f3; }
+.case-details { border-top: 1px solid rgba(244,246,243,.35); }
+.case-details summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 54px; padding: 14px 0; color: #f4f6f3; font-family: var(--mono); font-size: 13px; line-height: 1.5; cursor: pointer; list-style: none; }
+.case-details summary::-webkit-details-marker { display: none; }
+.case-details summary::after { content: '+'; font-family: var(--mono); font-size: 21px; font-weight: 300; }
+.case-details[open] summary::after { content: '−'; }
+.case-details summary:focus-visible { outline: 2px solid #f4f6f3; outline-offset: 4px; border-radius: 2px; }
+.case-details summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+.case-detail-content { padding: 5px 0 22px; }
+.case-detail-content > p { margin: 0 0 22px; font-size: 13px; line-height: 1.75; color: #f4f6f3; }
+.case-detail-content > .case-audience { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid rgba(244,246,243,.3); font-size: 12px; line-height: 1.75; color: #dae4e7; }
+.case-visual { min-width: 0; padding: 18px 0 0; border-top: 1px solid rgba(244,246,243,.35); color: #f4f6f3; }
+.chart-heading { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; }
+.chart-heading > span { color: #dae4e7; }
+.chart-subtitle { margin: 9px 0 0; font-size: 13px; line-height: 1.5; color: #f4f6f3; }
+.chart-scale { margin: 6px 0 0; font-size: 12px; line-height: 1.5; color: #dae4e7; }
+.line-chart { display: block; width: 100%; height: auto; margin-top: 15px; overflow: visible; }
+.chart-years { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; line-height: 1.5; color: #f4f6f3; }
+.scenario-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0 0; padding: 0; list-style: none; font-size: 12px; line-height: 1.5; color: #f4f6f3; }
+.scenario-legend li { display: flex; align-items: center; gap: 7px; }
+.legend-line { display: inline-block; width: 22px; height: 0; border-top: 3px solid; }
+.legend-line.scenario-a { border-color: #e2ecdc; }
+.legend-line.scenario-b { border-color: #c8d7f0; border-top-style: dashed; }
+.legend-line.scenario-c { border-color: #e3cda5; border-top-style: dotted; }
+.visual-note { margin: 16px 0 0; font-size: 12px; line-height: 1.65; color: #dae4e7; }
+.health-chart { display: flex; align-items: center; gap: 16px; margin-top: 20px; }
+.demand-ring { width: 88px; height: 88px; flex-shrink: 0; border: 2px solid #dae4e7; border-radius: 50%; padding: 5px; }
+.demand-ring > div { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.demand-ring strong { font-family: var(--inferi); font-size: 29px; font-weight: 300; line-height: 1; }
+.demand-ring span { margin-top: 6px; font-size: 12px; }
+.health-stats { flex: 1; min-width: 0; margin: 0; }
+.health-stats > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(244,246,243,.25); }
+.health-stats > div:last-child { border: 0; }
+.health-stats dt { font-size: 12px; line-height: 1.5; }
+.health-stats dd { margin: 0; font-size: 14px; white-space: nowrap; }
+.housing-chart { margin: 20px 0 0; }
+.housing-chart > div + div { margin-top: 16px; }
+.housing-chart dt { font-size: 12px; line-height: 1.5; }
+.housing-chart dd { display: flex; align-items: center; gap: 12px; margin: 7px 0 0; }
+.housing-chart .bar { height: 5px; flex-basis: calc(var(--bar) * .75); background: #dae4e7; }
+.housing-chart strong { font-size: 14px; line-height: 1.5; font-weight: 400; white-space: nowrap; }
+
+@media (min-width:901px) and (max-width:1100px) {
+  #use-cases .usecases-content { padding-left: 4vw; padding-right: 4vw; }
+  .case-grid { gap: 18px; }
+  .case-copy { padding-left: 16px; padding-right: 16px; }
+  .case-copy h3 { min-height: 163px; }
+  .case-photo { height: 145px; }
+  .health-chart { flex-direction: column; align-items: stretch; }
+  .demand-ring { align-self: center; }
+}
+@media (max-width:900px) {
+  #use-cases .usecases-content { padding: 120px 24px 80px; }
+  .usecases-heading { display: block; margin-bottom: 26px; }
+  .usecases-heading h2 { font-size: 36px; }
+  .usecases-heading > p { max-width: 500px; margin-top: 18px; }
+  .case-grid { grid-template-columns: 1fr; gap: 24px; }
+  .case-card { display: grid; grid-template-columns: minmax(0,.7fr) minmax(0,1.3fr); align-items: start; }
+  .case-photo { height: 100%; max-height: 290px; min-height: 200px; border-radius: 2px 0 0 2px; }
+  .case-copy { padding: 20px 22px 0; }
+  .case-category { min-height: 0; margin-bottom: 12px; }
+  .case-copy h3 { min-height: 0; margin-bottom: 20px; font-size: 27px; }
+}
+@media (max-width:600px) {
+  #use-cases .usecases-content { padding: 120px 20px 70px; }
+  .usecases-heading h2 { font-size: 32px; }
+  .case-card { display: block; }
+  .case-photo { height: 128px; min-height: 0; max-height: none; border-radius: 2px 2px 0 0; }
+  .case-copy { padding: 18px 18px 0; }
+  .case-copy h3 { font-size: 24px; line-height: 1.2; margin-bottom: 18px; }
+  .case-category { letter-spacing: .03em; }
+  .health-chart { gap: 12px; }
+  .demand-ring { width: 78px; height: 78px; }
+  .demand-ring strong { font-size: 26px; }
+}

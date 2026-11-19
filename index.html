@@ -1,8 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="visual-fallback">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Keep previously shared Research links working after the move to Blog.
+(() => {
+  const redirectResearch = () => {
+    if (window.location.hash.toLowerCase() === '#research') {
+      window.location.replace('/blog' + window.location.search);
+    }
+  };
+  redirectResearch();
+  window.addEventListener('hashchange', redirectResearch);
+})();
+</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <title>loka.Inc — Economic World Model | Loka Labs</title>
 <meta name="description" content="Loka Labs builds the Economic World Model for decisions that move worlds: simulation and verification infrastructure for complex economic systems." />
@@ -1780,14 +1792,15 @@ main {
   .site-footer--v2 { padding: 16px 24px !important; min-height: 0 !important; }
 }
 </style>
+<link rel="stylesheet" href="/home.css">
 </head>
 <body>
 <div class="bg-stack" aria-hidden="true">
   <div id="bg-s1" class="fixed-bg s1-bg"></div>
   <div id="bg-causation" class="fixed-bg s2-bg"></div>
-  <div id="bg-structural-gap" class="fixed-bg s3-bg"></div>
+  <div id="bg-use-cases" class="fixed-bg s5-bg"></div>
   <div id="bg-catalyst" class="fixed-bg s4-bg"></div>
-  <div id="bg-layers" class="fixed-bg s5-bg"></div>
+  <div id="bg-team" class="fixed-bg s3-bg"></div>
   <div id="bg-verification" class="fixed-bg s6-bg"></div>
   <div id="bg-final" class="fixed-bg s7-bg"></div>
 </div>
@@ -1800,7 +1813,7 @@ main {
     <img id="s2-ball-top" class="s2-ball s2-ball-top" src="0620/ball2.svg" alt="">
     <img id="s2-ball-right" class="s2-ball s2-ball-right" src="0620/ball1.svg" alt="">
   </div>
-  <div id="decor-structural-gap" class="fixed-decor dome-decor" data-panel-start="2" data-panel-end="3">
+  <div id="decor-structural-gap" class="fixed-decor dome-decor" data-panel-start="3" data-panel-end="4">
     <canvas id="domeCanvas"></canvas>
   </div>
   <div id="decor-layers" class="fixed-decor layers-globe-decor" data-panel-index="3">
@@ -1820,14 +1833,13 @@ main {
     <path d="M97.3294 19.2491L100.843 19.0605V14.2866L99.9421 14.1973L99.7343 17.9489H87.8285C82.6228 17.9489 79.9902 20.3805 79.9902 25.1842C79.9902 27.3875 80.3069 29.5313 80.9205 31.5361L80.9601 31.6751L81.7222 31.8438L86.9279 31.4468L86.8586 30.3054L81.8904 30.2657C81.5341 28.9556 81.1976 26.9409 81.1976 25.1941C81.1976 20.311 84.8496 19.2888 87.9175 19.2888H90.0157C90.273 24.8666 90.7678 29.303 91.4705 32.4889L91.5002 32.608L91.609 32.6576C92.1534 32.9058 93.6676 33.4715 95.9636 33.4715C99.8135 33.4715 101.179 30.1863 101.179 27.3677C101.179 23.4969 98.9524 20.7378 97.3393 19.259L97.3294 19.2491ZM99.9718 27.318C99.9718 30.3749 98.4378 32.1316 95.7558 32.1316C94.301 32.1316 93.1529 31.8239 92.5393 31.6056C91.8466 28.8266 91.3616 22.8617 91.2132 19.2788H95.548C96.9335 20.3309 99.9718 23.1099 99.9718 27.318Z" fill="currentColor"/>
   </svg>
   <nav class="header-nav" aria-label="Primary">
-    <a href="#team">About</a>
-    <a href="#research">Blog</a>
-    <a href="https://world.loka.inc/" target="_blank" rel="noreferrer">Use Cases</a>
+    <a href="/blog">Blog</a>
+    <a href="#use-cases">Use Cases</a>
     <a href="/careers">Careers</a>
   </nav>
   <div class="header-right-group">
     <div class="header-right">EWM<br>by Loka Labs</div>
-    <button type="button" class="header-cta" id="open-contact">Get in touch →</button>
+    <button type="button" class="header-cta" id="open-contact" data-contact>Get in touch →</button>
   </div>
 </header>
 
@@ -1897,67 +1909,105 @@ main {
 
   <section class="panel" id="causation">
     <div class="panel-bg s2-bg"></div>
+    <div class="economic-background" aria-hidden="true">
+      <svg class="economic-fallback" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice" fill="none" focusable="false">
+        <g stroke="currentColor" stroke-width=".8" opacity=".55">
+          <path d="M-40 180L130 115L240 240L100 350L-40 180M130 115L330 155L240 240L310 370L100 350M240 240L400 270L330 155M100 350L95 600L240 720L310 370M95 600L-30 690L130 825L240 720L370 860L130 825M240 720L420 650L370 860L520 790M400 270C620 80 820 100 1050 170M1050 170L1190 85L1370 210L1235 330L1050 170L1030 390L1235 330L1460 400L1370 210M1030 390L1125 635L1270 740L1235 330M1125 635L970 760L1050 890L1270 740L1390 850L1050 890M1270 740L1470 650L1390 850M520 790C700 890 820 900 970 760M310 370C410 440 770 615 1125 635M1030 390C890 510 640 625 420 650"/>
+        </g>
+        <g fill="currentColor" opacity=".75">
+          <circle cx="130" cy="115" r="3"/><circle cx="240" cy="240" r="5"/><circle cx="100" cy="350" r="3"/><circle cx="330" cy="155" r="2"/><circle cx="310" cy="370" r="3"/><circle cx="400" cy="270" r="3"/>
+          <circle cx="95" cy="600" r="2"/><circle cx="240" cy="720" r="5"/><circle cx="130" cy="825" r="3"/><circle cx="370" cy="860" r="3"/><circle cx="420" cy="650" r="2"/><circle cx="520" cy="790" r="3"/>
+          <circle cx="1050" cy="170" r="5"/><circle cx="1190" cy="85" r="3"/><circle cx="1370" cy="210" r="3"/><circle cx="1235" cy="330" r="3"/><circle cx="1030" cy="390" r="2"/>
+          <circle cx="1125" cy="635" r="3"/><circle cx="1270" cy="740" r="5"/><circle cx="970" cy="760" r="3"/><circle cx="1050" cy="890" r="2"/><circle cx="1390" cy="850" r="3"/>
+        </g>
+      </svg>
+      <div class="economic-webgl"></div>
+      <div class="economic-sector-labels"><span data-sector="public">Public sector</span><span data-sector="finance">Finance</span><span data-sector="firms">Firms</span><span data-sector="households">Households</span></div>
+    </div>
+
     <div class="content s2-copy s2-copy--definition">
       <blockquote class="serif">The economy is the only critical system humanity deploys<br>without simulation.</blockquote>
       <cite class="s2-definition">Loka is building the Economic World Model —<br>a behaviorally simulated, causally constrained, and formally verified system for testing decisions before they move nations, markets, and billions of lives.</cite>
+
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
-  <section class="panel" id="team">
-    <div class="panel-bg s3-bg"></div>
-    <div class="content s3-copy s3-copy--team">
-      <div class="kicker">Team</div>
-      <h2 class="serif">The people behind<br>Loka Labs.</h2>
-      <div class="team-grid">
-      <article class="team-member">
-        <div class="team-body">
-          <div class="team-heading">
-            <h3 class="team-name">Joseph Sifakis</h3>
-            <span class="team-role">Founding Scientist · Turing Award</span>
+  <section class="panel" id="use-cases" aria-labelledby="use-cases-title" data-flow-panel>
+    <div class="panel-bg s5-bg"></div>
+    <div class="content usecases-content">
+      <div class="usecases-heading"><div><div class="kicker">01 Selected use cases</div><h2 class="serif" id="use-cases-title">Explore what comes next.</h2></div><p class="mono">Illustrative examples of how governments and international institutions can use Loka.</p></div>
+      <div class="case-grid">
+        <article class="case-card">
+          <img class="case-photo" src="/use-cases/energy.webp" alt="Rows of solar panels across an energy infrastructure site" width="800" height="572" loading="lazy" decoding="async">
+          <div class="case-copy">
+            <p class="case-category">Energy &amp; infrastructure investment</p>
+            <h3>Where could a $50 billion infrastructure programme create the greatest impact?</h3>
+            <details class="case-details">
+              <summary aria-label="Explore scenario: energy and infrastructure">Explore scenario</summary>
+              <div class="case-detail-content">
+                <p>Compare data centers, power grids and transport investments across energy demand, electricity prices, employment and regional growth.</p>
+                <div class="case-visual investment-visual">
+                  <div class="chart-heading">Investment scenarios <span>01</span></div>
+                  <p class="chart-subtitle">Regional GDP impact</p>
+                  <p class="chart-scale">Qualitative comparison · no numerical scale</p>
+                  <svg class="line-chart" viewBox="0 0 360 140" role="img" aria-label="Schematic scenarios A, B and C from 2026 to 2034. A rises most, B moderately and C least. No numerical vertical scale; these are not model results.">
+                    <g stroke="currentColor" stroke-width=".6" opacity=".25"><path d="M12 20H348M12 55H348M12 90H348M12 125H348"/></g>
+                    <path class="scenario-a" d="M14 122C60 119 76 112 106 106S158 89 183 74S225 64 252 48S304 24 346 13" fill="none" stroke="#e2ecdc" stroke-width="3"/>
+                    <path class="scenario-b" d="M14 122C57 119 76 115 106 110S151 100 184 93S225 80 252 78S306 66 346 58" fill="none" stroke="#c8d7f0" stroke-width="2.5" stroke-dasharray="8 4"/>
+                    <path class="scenario-c" d="M14 122C64 121 82 118 106 118S153 112 184 110S224 102 252 104S307 94 346 90" fill="none" stroke="#e3cda5" stroke-width="2.5" stroke-dasharray="2 5" stroke-linecap="round"/>
+                  </svg>
+                  <div class="chart-years" aria-hidden="true"><span>2026</span><span>2030</span><span>2034</span></div>
+                  <ul class="scenario-legend" aria-label="Scenario legend"><li><span class="legend-line scenario-a" aria-hidden="true"></span>Scenario A</li><li><span class="legend-line scenario-b" aria-hidden="true"></span>Scenario B</li><li><span class="legend-line scenario-c" aria-hidden="true"></span>Scenario C</li></ul>
+                  <p class="visual-note">Schematic paths, not model outputs.</p>
+                </div>
+                <p class="case-audience">Ministry of Energy · Electricity &amp; Water Authorities · Infrastructure Investment Agencies</p>
+              </div>
+            </details>
           </div>
-          <p class="team-bio">Founder of model checking. Pioneered proving complex systems correct before they run — chips, aircraft, mission-critical infrastructure. First commercial engagement applying formal verification to economic systems.</p>
-        </div>
-      </article>
-      <article class="team-member">
-        <div class="team-body">
-          <div class="team-heading">
-            <h3 class="team-name">Lora Jiang</h3>
-            <span class="team-role">Co-founder, CEO · Parsons, Harvard</span>
+        </article>
+        <article class="case-card">
+          <img class="case-photo" src="/use-cases/healthcare.webp" alt="Doctor writing on a patient’s chart" width="800" height="450" loading="lazy" decoding="async">
+          <div class="case-copy">
+            <p class="case-category">Public health &amp; social development</p>
+            <h3>How should a government prepare for a 30% increase in healthcare demand over the next decade?</h3>
+            <details class="case-details">
+              <summary aria-label="Explore scenario: public health">Explore scenario</summary>
+              <div class="case-detail-content">
+                <p>Simulate hospital capacity, healthcare workforce requirements, insurance costs and the distributional effects of public spending.</p>
+                <div class="case-visual health-visual">
+                  <div class="chart-heading">Healthcare system impact <span>02</span></div>
+                  <p class="chart-subtitle">2036 vs. 2026</p>
+                  <div class="health-chart"><div class="demand-ring"><div><strong>+30%</strong><span>Demand</span></div></div><dl class="health-stats"><div><dt>Hospital Capacity</dt><dd>92%</dd></div><div><dt>Public Spending</dt><dd>+18%</dd></div><div><dt>Workforce Need</dt><dd>+24%</dd></div></dl></div>
+                  <p class="visual-note">Illustrative scenario</p>
+                </div>
+                <p class="case-audience">Ministry of Health · Social Welfare Agencies · Public Health Insurance &amp; Pension Authorities</p>
+              </div>
+            </details>
           </div>
-          <p class="team-bio">Led Taiko Labs' $1.2B Series A (Lightspeed Faction lead). Built frontier capital systems and scaled emerging technologies globally. Backed by Sequoia China, Tencent, BAI.</p>
-        </div>
-      </article>
-      <article class="team-member">
-        <div class="team-body">
-          <div class="team-heading">
-            <h3 class="team-name">Akasha Zhu</h3>
-            <span class="team-role">Co-founder, President · Tsinghua, MIT</span>
+        </article>
+        <article class="case-card">
+          <img class="case-photo" src="/use-cases/housing.webp" alt="Apartment buildings in a residential neighbourhood" width="600" height="800" loading="lazy" decoding="async">
+          <div class="case-copy">
+            <p class="case-category">Economic &amp; housing policy</p>
+            <h3>What happens when interest rates move by 200 basis points?</h3>
+            <details class="case-details">
+              <summary aria-label="Explore scenario: economic and housing policy">Explore scenario</summary>
+              <div class="case-detail-content">
+                <p>Simulate changes in housing demand, mortgage borrowing, household consumption and investment across income groups.</p>
+                <div class="case-visual housing-visual">
+                  <div class="chart-heading">Housing market impact <span>03</span></div>
+                  <p class="chart-subtitle">Δ vs. baseline</p>
+                  <dl class="housing-chart"><div><dt>Housing Prices</dt><dd><span class="bar" style="--bar:58%" aria-hidden="true"></span><strong>−7.4%</strong></dd></div><div><dt>Mortgage Demand</dt><dd><span class="bar" style="--bar:100%" aria-hidden="true"></span><strong>−12.8%</strong></dd></div><div><dt>Consumption Demand</dt><dd><span class="bar" style="--bar:15%" aria-hidden="true"></span><strong>−1.9%</strong></dd></div></dl>
+                  <p class="visual-note">Illustrative values. Rate direction and baseline assumptions are unspecified; these figures do not predict the effect of a rate increase or decrease.</p>
+                </div>
+                <p class="case-audience">Ministry of Finance · Central Banks · Housing &amp; Urban Development Authorities · Economic Planning Agencies</p>
+              </div>
+            </details>
           </div>
-          <p class="team-bio">12 patents. Founder of Hetu (distributed systems), Vinci (consumer hardware), and Tongxue (social network). Early advocate of economic simulation infrastructure.</p>
-        </div>
-      </article>
-      <article class="team-member">
-        <div class="team-body">
-          <div class="team-heading">
-            <h3 class="team-name">Jialin Li</h3>
-            <span class="team-role">Co-founder, CTO · NUS Assistant Professor</span>
-          </div>
-          <p class="team-bio">Distributed systems researcher. OSDI / NSDI Best Paper. Co-founded Hetu with Akasha — they have shipped together before. Builds the systems that make the impossible run at scale.</p>
-        </div>
-      </article>
-      <article class="team-member">
-        <div class="team-body">
-          <div class="team-heading">
-            <h3 class="team-name">Felix Oberholzer-Gee</h3>
-            <span class="team-role">Founding Strategist · Harvard Business School</span>
-          </div>
-          <p class="team-bio">Strategy and economics scholar at Harvard Business School. Advises on the market design and institutional adoption of large-scale simulation infrastructure.</p>
-        </div>
-      </article>
+        </article>
       </div>
     </div>
-    <div class="section-line" aria-hidden="true"></div>
   </section>
 
   <section class="panel" id="architecture">
@@ -1969,7 +2019,7 @@ main {
         <h2 class="serif">A modular, composable stack.</h2>
         <p class="mono arch-lede">From raw data to real decisions — one continuous, causal pipeline.</p>
       </div>
-      <a class="s4-explore s4-explore--inline" href="https://world.loka.inc/" target="_blank" rel="noreferrer">
+      <a class="s4-explore s4-explore--inline" href="https://lokaworld.vercel.app/" target="_blank" rel="noreferrer">
         <span>Explore LokaWorld</span>
         <span class="beta-tag">beta</span>
         <span class="arrow">→</span>
@@ -2125,62 +2175,51 @@ main {
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
-  <section class="panel" id="research">
-    <div class="panel-bg s5-bg"></div>
-    <div class="content s5-copy s5-copy--research">
-      <div class="kicker">Research</div>
-      <h2 class="serif">Papers, essays,<br>and public briefings.</h2>
-      <p class="mono">Grounded in a Turing Award lineage in formal verification and systems research published at OSDI, SOSP, and SIGCOMM — from verification foundations to the empirical calibration of economic worlds.</p>
-    </div>
-    <div class="research-grid">
-      <a class="research-card research-card--new" href="https://www.usenix.org/conference/nsdi26/presentation/wei" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>NSDI '26</span><span class="research-tag research-tag--award">Best Paper</span></div>
-        <h3>HyperEdge: Cost-Efficient Edge CDN</h3>
-      </a>
-      <a class="research-card" href="https://dl.acm.org/doi/10.1145/3545178" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>ACM TECS '23</span><span class="research-tag research-tag--award">Turing Laureate</span></div>
-        <h3>Trustworthy Autonomous Systems</h3>
-      </a>
-      <a class="research-card" href="https://arxiv.org/abs/2405.11995" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>arXiv '24</span><span class="research-tag research-tag--award">Turing Laureate</span></div>
-        <h3>Safe by Design Autonomous Systems</h3>
-      </a>
-      <a class="research-card" href="https://arxiv.org/pdf/2310.08373" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>arXiv</span><span class="research-tag">PDF ↗</span></div>
-        <h3>Chrono: Verifiable Causality</h3>
-      </a>
-      <a class="research-card" href="https://www.usenix.org/system/files/atc25-he-yongjun.pdf" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>USENIX ATC '25</span><span class="research-tag">PDF ↗</span></div>
-        <h3>Resource Multiplexing for LLMs</h3>
-      </a>
-      <a class="research-card" href="https://dl.acm.org/doi/pdf/10.1145/3603269.3604874" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>SIGCOMM '23</span><span class="research-tag">PDF ↗</span></div>
-        <h3>NeoBFT: In-Network Ordering</h3>
-      </a>
-      <a class="research-card" href="https://www.comp.nus.edu.sg/~lijl/" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>SOSP '17</span><span class="research-tag">Paper ↗</span></div>
-        <h3>Eris: Coordination-Free Consistent Transactions</h3>
-      </a>
-      <a class="research-card" href="https://www.usenix.org/conference/osdi16/technical-sessions/presentation/li" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>OSDI '16</span><span class="research-tag">Paper ↗</span></div>
-        <h3>NOPaxos: Consensus via Network Ordering</h3>
-      </a>
-      <a class="research-card" href="https://yao.lu/ai_native.pdf" target="_blank" rel="noreferrer">
-        <div class="research-meta"><span>Whitepaper</span><span class="research-tag">PDF ↗</span></div>
-        <h3>Cloud-Native to AI-Native</h3>
-      </a>
+  <section class="panel" id="team">
+    <div class="panel-bg s3-bg"></div>
+    <div class="content s3-copy s3-copy--team">
+      <div class="kicker">Team</div>
+      <h2 class="serif">The people behind <br>Loka Labs.</h2>
+      <div class="team-grid">
+<article class="team-member">
+        <div class="team-body">
+          <div class="team-heading">
+            <h3 class="team-name">Lora Jiang</h3>
+            <span class="team-role">Co-founder, CEO · Parsons, Harvard</span>
+          </div>
+          <p class="team-bio">Led Taiko Labs' $1.2B Series A (Lightspeed Faction lead). Built frontier capital systems and scaled emerging technologies globally. Backed by Sequoia China, Tencent, BAI.</p>
+        </div>
+      </article>
+<article class="team-member">
+        <div class="team-body">
+          <div class="team-heading">
+            <h3 class="team-name">Felix Oberholzer-Gee</h3>
+            <span class="team-role">Founding Strategist · Harvard Business School</span>
+          </div>
+          <p class="team-bio">Strategy and economics scholar at Harvard Business School. Advises on the market design and institutional adoption of large-scale simulation infrastructure.</p>
+        </div>
+      </article>
+<article class="team-member">
+        <div class="team-body">
+          <div class="team-heading">
+            <h3 class="team-name">Joseph Sifakis</h3>
+            <span class="team-role">Founding Scientist · Turing Award</span>
+          </div>
+          <p class="team-bio">Founder of model checking. Pioneered proving complex systems correct before they run — chips, aircraft, mission-critical infrastructure. First commercial engagement applying formal verification to economic systems.</p>
+        </div>
+      </article>
+      </div>
     </div>
     <div class="section-line" aria-hidden="true"></div>
   </section>
 
-  <section class="panel" id="verification">
+  <section class="panel" id="verification" aria-labelledby="why-title">
     <div class="panel-bg s6-bg"></div>
-    <div class="content s6-copy">
-      <h2 class="serif">The error is public,<br>timestamped,<br>and verifiable by anyone.</h2>
-      <p class="mono">Beyond Truth Calibration<br>We do not depend on synthetic data. Anchored on public macroeconomic data and decades of controlled behavioral economics research (Kahneman, Thaler).</p>
-      <p class="mono">Live Public Verification<br>Taylor Swift Eras Tour &amp; 2026 FIFA World Cup. Pre-event economic impact prediction vs real verified data. Not a client testimonial; an accuracy test anyone can check.</p>
+    <div class="content why-content">
+      <div class="why-heading"><div><div class="kicker">02 Why it matters</div><h2 class="serif" id="why-title">Decisions are <br>EXPENSIVE.</h2></div><div class="why-intro"><p class="mono">Governments cannot run the same economy five times to test five different policies.</p><p class="mono">Yet a single decision can reshape billions in investment and millions of lives.</p></div></div>
+      <div class="why-lower"><p class="why-promise serif">Loka makes it possible to explore alternative outcomes before committing to one.</p>
+      <div class="comparison-grid"><article><h3>MONTE CARLO</h3><p class="comparison-lead serif">Simulates uncertainty, not decisions.</p><p class="mono">Thousands of outcomes, but behavior and causal mechanisms remain largely predefined.</p></article><article><h3>DSGE</h3><p class="comparison-lead serif">Models equilibrium, not the full complexity of adaptation.</p><p class="mono">Structural assumptions can miss heterogeneous responses, nonlinear interactions and emerging behavior.</p></article><article><h3>GENERAL-PURPOSE LLMs</h3><p class="comparison-lead serif">Generates answers, not economic realities.</p><p class="mono">Fluent reasoning alone cannot guarantee causal consistency, persistent world states or reproducible outcomes.</p></article></div></div>
     </div>
-    <div class="section-line" aria-hidden="true"></div>
   </section>
 
   <section class="panel" id="final">
@@ -2188,9 +2227,9 @@ main {
     <div class="content s7-copy">
       <div class="built-on">Built on</div>
       <p class="mono proof-line">Formal Verification (Turing Award)<br>&amp; Distributed AI at Scale (NSDI/OSDI Best Paper).</p>
-      <h2 class="serif">Economic simulation for<br>decisions that move worlds.</h2>
+      <h2 class="serif">Economic simulation for <br>decisions that move worlds.</h2>
       <p class="mono">Loka Labs helps governments, financial institutions, and global event operators stress-test policies, markets, and large-scale events before they unfold in the real world.</p>
-      <a class="cta cta--explore" href="https://world.loka.inc/" target="_blank" rel="noreferrer">
+      <a class="cta cta--explore" href="https://lokaworld.vercel.app/" target="_blank" rel="noreferrer">
         <span>Explore LokaWorld</span>
         <span class="beta-tag beta-tag--dark">beta</span>
         <span class="arrow">→</span>
@@ -2198,35 +2237,31 @@ main {
     </div>
     <footer class="site-footer site-footer--v2">
       <div class="footer-col footer-col--left">
-        <a class="footer-icon" href="https://twitter.com/lokainc" target="_blank" rel="noreferrer" aria-label="Twitter">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21.5l-7.5 8.573L22.5 22h-6.86l-5.37-7.02L4.5 22H1.244l8.03-9.176L1 2h6.96l4.86 6.42L18.244 2Zm-1.202 18h1.898L7.05 4H5.06L17.042 20Z"/></svg>
-        </a>
-        <a class="footer-icon" href="https://github.com/lora-loka" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <a class="footer-icon" href="https://github.com/loka-inc" target="_blank" rel="noreferrer" aria-label="GitHub">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.575.105.786-.25.786-.556 0-.275-.01-1.003-.016-1.97-3.202.695-3.878-1.545-3.878-1.545-.523-1.328-1.278-1.681-1.278-1.681-1.045-.714.079-.7.079-.7 1.156.081 1.764 1.187 1.764 1.187 1.028 1.76 2.697 1.251 3.354.957.104-.744.402-1.252.732-1.54-2.556-.29-5.244-1.278-5.244-5.687 0-1.257.45-2.284 1.187-3.089-.119-.291-.514-1.466.112-3.054 0 0 .967-.31 3.171 1.18a11.023 11.023 0 0 1 5.774 0c2.203-1.49 3.169-1.18 3.169-1.18.627 1.588.232 2.763.114 3.054.74.805 1.185 1.832 1.185 3.089 0 4.42-2.693 5.394-5.257 5.679.412.354.78 1.054.78 2.124 0 1.533-.014 2.769-.014 3.146 0 .308.208.667.79.554A11.5 11.5 0 0 0 12 .5Z"/></svg>
         </a>
-        <a class="footer-icon" href="https://linkedin.com/company/loka-labs" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+        <a class="footer-icon" href="https://www.linkedin.com/company/113464383/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.93v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.02H3.56V9h3.56v11.45Z"/></svg>
         </a>
       </div>
       <div class="footer-col footer-col--center">
-        <a href="#team">About</a>
-        <a href="#research">Blog</a>
-        <a href="https://world.loka.inc/" target="_blank" rel="noreferrer">Use Cases</a>
+            <a href="/blog">Blog</a>
+        <a href="#use-cases">Use Cases</a>
         <a href="/careers">Careers</a>
       </div>
       <div class="footer-col footer-col--right">
-        <button type="button" class="footer-pilot" id="open-contact-footer">Request a Pilot →</button>
+        <button type="button" class="footer-pilot" id="open-contact-footer" data-contact>Request a Pilot →</button>
       </div>
     </footer>
   </section>
 </main>
 
-<div class="contact-overlay" id="contact-overlay" hidden role="dialog" aria-modal="true">
+<div class="contact-overlay" id="contact-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="contact-title" aria-describedby="contact-description">
   <div class="contact-modal" id="contact-modal">
     <button class="contact-close" id="contact-close" aria-label="Close">×</button>
     <div class="contact-eyebrow">— Contact</div>
-    <h2 class="contact-title">Request a Loka pilot.</h2>
-    <p class="contact-sub">For institutional partnerships, research collaborations, simulation pilots, or investor inquiries — tell us what you're exploring.</p>
+    <h2 class="contact-title" id="contact-title">Request a Loka pilot.</h2>
+    <p class="contact-sub" id="contact-description">For institutional partnerships, research collaborations, simulation pilots, or investor inquiries — tell us what you're exploring.</p>
 
     <form class="contact-form" id="contact-form">
       <label class="contact-field">
@@ -2258,7 +2293,7 @@ main {
         <span class="contact-label">Message <em>*</em></span>
         <textarea name="message" required rows="4" placeholder="Briefly describe what you'd like to explore."></textarea>
       </label>
-      <div class="contact-error" id="contact-error" hidden></div>
+      <div class="contact-error" id="contact-error" role="alert" hidden></div>
       <button type="submit" class="contact-submit" id="contact-submit">
         <span id="contact-submit-label">Submit inquiry</span>
         <span class="arrow">→</span>
@@ -2266,7 +2301,7 @@ main {
       <div class="contact-meta">Or email us directly at <a href="mailto:hello@loka.inc">hello@loka.inc</a></div>
     </form>
 
-    <div class="contact-success" id="contact-success" hidden>
+    <div class="contact-success" id="contact-success" role="status" hidden>
       <div class="contact-success-mark">✓</div>
       <div>
         <div class="contact-success-title">Message received.</div>
@@ -2280,7 +2315,14 @@ main {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script>
+(function initializeVisuals() {
+try {
+if (!window.gsap || !window.THREE || !window.ScrollTrigger) throw new Error('Visual dependencies unavailable');
+// Reveal the scene containers before any renderer measures their dimensions.
+// If initialization fails, the catch below restores the static fallback.
+document.documentElement.classList.remove('visual-fallback');
 gsap.registerPlugin(ScrollTrigger);
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 /* ═══════════════════════════════════════════════════════
    THREE.JS GLOBE
@@ -2707,17 +2749,32 @@ resizeVerificationSlice();
 function updateVerificationSlice(time) {
   verificationGlobe.rotation.set(1.08, -0.12, -0.42);
   verificationSpinGlobe.rotation.y = time * 0.24;
-  verificationRenderer.render(verificationScene, verificationCamera);
+}
+
+function usesFlowLayout() {
+  return window.matchMedia('(max-width:900px), (max-height:600px) and (max-width:1100px)').matches;
 }
 
 function getRawIndex() {
-  const panelHeight = document.querySelector(".panel")?.offsetHeight || window.innerHeight || 1;
-  return window.scrollY / panelHeight;
+  // Preserve the original per-panel animation, using real panel positions so
+  // readable mobile sections can grow without shifting every later effect.
+  const layoutPanels = [...document.querySelectorAll('.panel')];
+  const y = window.scrollY;
+  for (let index = layoutPanels.length - 1; index >= 0; index--) {
+    const panel = layoutPanels[index];
+    if (y < panel.offsetTop) continue;
+    if (index === layoutPanels.length - 1) return index;
+    const nextTop = layoutPanels[index + 1].offsetTop;
+    const transitionStart = Math.max(panel.offsetTop, nextTop - window.innerHeight);
+    const progress = Math.max(0, Math.min(1, (y - transitionStart) / Math.max(1, nextTop - transitionStart)));
+    return index + progress;
+  }
+  return 0;
 }
 
 function updateDomeAnimation(time) {
   const rawIndex = getRawIndex();
-  const section4Progress = smoothstep(0, 1, clamp01(rawIndex - 2));
+  const section4Progress = 1 - smoothstep(0, 1, clamp01(rawIndex - 3));
   const motionProgress = smoothstep(0.02, 0.98, section4Progress);
   const dissolveProgress = smoothstep(0, 1, section4Progress);
   const liveRotY = time * 0.28;
@@ -2745,29 +2802,44 @@ ScrollTrigger.create({
   onUpdate: self => { scrollProg = self.progress; }
 });
 
-// Render loop — slow rotation (~2.5 rpm)
+// Draw only visible legacy scenes. Reduced motion uses the same composition
+// at a fixed time and redraws on scroll/layout changes, never continuously.
 let t = 0;
-(function loop() {
-  requestAnimationFrame(loop);
-  t += 0.0018;
-
-  const damp = 1 - scrollProg * 0.7;
-  globe.rotation.y =  t * 0.28;
-  globe.rotation.x =  Math.sin(t * 0.17) * 0.15 * damp;  // gentle wobble; camera elevation handles the "looking down"
-  globe.rotation.z =  Math.sin(t * 0.12 + 1.1) * 0.08 * damp;
-
-  // Zoom out (scale up) + fade on scroll
-  globe.scale.setScalar(1 + scrollProg * 2.0);
-  pMat.opacity = 0.55 * Math.max(0, 1 - scrollProg * 1.3);
-
-  updateDomeAnimation(t);
-  updateLayerGlobes(t);
-  updateVerificationSlice(t);
-
-  renderer.render(scene, camera);
-  domeRenderer.render(domeScene, domeCamera);
-  layersRenderer.render(layersScene, layersCamera);
-})();
+function renderLegacyScenes(deltaMs) {
+  const globeVisible = scrollProg < 1 / 1.3;
+  const decorVisible = node => decorOpacity[fixedDecors.indexOf(node)] > 0.001;
+  const domeVisible = decorVisible(domeWrap);
+  const layersVisible = decorVisible(layersWrap);
+  const verificationVisible = decorVisible(verificationWrap);
+  if (!motionPreference.matches && (globeVisible || domeVisible || layersVisible || verificationVisible)) {
+    t += Math.min(deltaMs, 100) * 0.000108;
+  }
+  const time = motionPreference.matches ? 0 : t;
+  // Hiding the wrapper also removes the last rendered frame when the material
+  // becomes transparent, without drawing an otherwise invisible scene.
+  wrap.style.visibility = globeVisible ? 'visible' : 'hidden';
+  if (globeVisible) {
+    const damp = 1 - scrollProg * 0.7;
+    globe.rotation.y = time * 0.28;
+    globe.rotation.x = Math.sin(time * 0.17) * 0.15 * damp;
+    globe.rotation.z = Math.sin(time * 0.12 + 1.1) * 0.08 * damp;
+    globe.scale.setScalar(1 + scrollProg * 2.0);
+    pMat.opacity = 0.55 * Math.max(0, 1 - scrollProg * 1.3);
+    renderer.render(scene, camera);
+  }
+  if (domeVisible) {
+    updateDomeAnimation(time);
+    domeRenderer.render(domeScene, domeCamera);
+  }
+  if (layersVisible) {
+    updateLayerGlobes(time);
+    layersRenderer.render(layersScene, layersCamera);
+  }
+  if (verificationVisible) {
+    updateVerificationSlice(time);
+    verificationRenderer.render(verificationScene, verificationCamera);
+  }
+}
 
 const fixedBgs = gsap.utils.toArray(".fixed-bg");
 const fixedDecors = gsap.utils.toArray(".fixed-decor");
@@ -2878,6 +2950,7 @@ function addTextItem(panel, index, selector, options) {
   if (!nodes.length) return;
 
   textItems.push({
+    panel,
     index,
     nodes,
     y: 0,
@@ -2889,7 +2962,7 @@ function addTextItem(panel, index, selector, options) {
 panels.forEach((panel, index) => {
   const isSection2 = index === 1;
 
-  addTextItem(panel, index, ".s1-copy h1, .s2-copy blockquote, .s3-copy h2, .arch-heading h2, .s5-copy h2, .s6-copy h2, .s7-copy h2", {
+  addTextItem(panel, index, ".s1-copy h1, .s2-copy blockquote, .s3-copy h2, .arch-heading h2, .s5-copy h2, .s6-copy h2, .s7-copy h2, .usecases-heading h2, .why-heading h2", {
     enterY: isSection2 ? SECTION_2_TITLE_ENTER_Y : TITLE_ENTER_Y,
     leaveY: TITLE_LEAVE_Y,
     fade: isSection2 ? SECTION_2_TITLE_FADE_STRENGTH : TITLE_FADE_STRENGTH,
@@ -2897,12 +2970,21 @@ panels.forEach((panel, index) => {
     opacitySpeed: isSection2 ? SECTION_2_TITLE_FADE_SPEED : TITLE_FADE_SPEED
   });
 
-  addTextItem(panel, index, ".s1-copy p, .s2-copy cite, .kicker, .s3-copy > p, .team-grid, .arch-lede, .s4-explore, .arch-fit, .s5-copy > p, .research-grid, .s6-copy > p, .s7-copy .built-on, .s7-copy .proof-line, .s7-copy > p:not(.proof-line), .cta, .site-footer", {
+  addTextItem(panel, index, ".s1-copy p, .s2-copy cite, .kicker, .s3-copy > p, .team-grid, .arch-lede, .s4-explore, .arch-fit, .s5-copy > p, .research-grid, .s6-copy > p, .s7-copy .built-on, .s7-copy .proof-line, .s7-copy > p:not(.proof-line), .cta, .usecases-heading > p, .case-grid, .why-intro, .why-lower", {
     enterY: isSection2 ? SECTION_2_BODY_ENTER_Y : BODY_ENTER_Y,
     leaveY: BODY_LEAVE_Y,
     fade: isSection2 ? SECTION_2_BODY_FADE_STRENGTH : BODY_FADE_STRENGTH,
     moveSpeed: isSection2 ? SECTION_2_BODY_MOVE_SPEED : BODY_MOVE_SPEED,
     opacitySpeed: isSection2 ? SECTION_2_BODY_FADE_SPEED : BODY_FADE_SPEED
+  });
+  // The footer is already anchored to the bottom edge: translating it
+  // down during entry would briefly move its links outside the viewport.
+  addTextItem(panel, index, ".site-footer", {
+    enterY: 0,
+    leaveY: 0,
+    fade: BODY_FADE_STRENGTH,
+    moveSpeed: BODY_MOVE_SPEED,
+    opacitySpeed: BODY_FADE_SPEED
   });
 });
 
@@ -2910,8 +2992,7 @@ gsap.set(fixedBgs, { opacity: 0 });
 gsap.set("#bg-s1", { opacity: 1 });
 
 function updateBgTargets() {
-  const panelHeight = panels[0]?.offsetHeight || window.innerHeight || 1;
-  const rawIndex = window.scrollY / panelHeight;
+  const rawIndex = getRawIndex();
   const activeIndex = Math.max(0, Math.min(panels.length - 1, Math.floor(rawIndex)));
   const nextProgress = Math.max(0, Math.min(1, rawIndex - activeIndex));
 
@@ -2936,7 +3017,17 @@ function updateBgTargets() {
 }
 
 function updateTextMotion(rawIndex) {
+  // Long mobile sections scroll as normal text. Their background and globe
+  // transitions still follow the actual section positions above.
+  if (usesFlowLayout() || motionPreference.matches) {
+    textItems.forEach(item => gsap.set(item.nodes, {clearProps: 'opacity,transform'}));
+    return;
+  }
   textItems.forEach((item) => {
+    if (item.panel.hasAttribute('data-flow-panel')) {
+      gsap.set(item.nodes, {clearProps: 'opacity,transform'});
+      return;
+    }
     const dist = item.index - rawIndex;
     const opacityTarget = Math.max(0, Math.min(1, 1 - Math.abs(dist) * item.fade));
     const yTarget = dist >= 0
@@ -3009,11 +3100,16 @@ function updateBallMotion(rawIndex) {
   });
 }
 
-gsap.ticker.add(() => {
+let visualTickerAttached = false;
+let staticFrameId = 0;
+let pageActive = true;
+function updateVisualFrame(_time, deltaMs = 1000 / 60) {
+  if (document.hidden || !pageActive) return;
   const rawIndex = updateBgTargets();
+  const reduced = motionPreference.matches;
 
   fixedBgs.forEach((bg, i) => {
-    bgOpacity[i] += (bgTarget[i] - bgOpacity[i]) * BG_FADE_SPEED;
+    bgOpacity[i] = reduced ? bgTarget[i] : bgOpacity[i] + (bgTarget[i] - bgOpacity[i]) * BG_FADE_SPEED;
     bg.style.opacity = bgOpacity[i].toFixed(4);
   });
 
@@ -3021,23 +3117,61 @@ gsap.ticker.add(() => {
     const decorFadeSpeed = decorTarget[i] > decorOpacity[i]
       ? DECOR_FADE_IN_SPEED
       : DECOR_FADE_OUT_SPEED;
-    decorOpacity[i] += (decorTarget[i] - decorOpacity[i]) * decorFadeSpeed;
+    decorOpacity[i] = reduced ? decorTarget[i] : decorOpacity[i] + (decorTarget[i] - decorOpacity[i]) * decorFadeSpeed;
+    if (Math.abs(decorTarget[i] - decorOpacity[i]) < 0.001) decorOpacity[i] = decorTarget[i];
     decor.style.opacity = decorOpacity[i].toFixed(4);
   });
 
   updateTextMotion(rawIndex);
-  updateBallMotion(rawIndex);
+  if (!reduced) updateBallMotion(rawIndex);
 
   if (globalLine) {
     const lineTarget = rawIndex < panels.length - 1.35 ? 1 : 0;
-    globalLineOpacity += (lineTarget - globalLineOpacity) * LINE_FADE_SPEED;
+    globalLineOpacity = reduced ? lineTarget : globalLineOpacity + (lineTarget - globalLineOpacity) * LINE_FADE_SPEED;
     globalLine.style.opacity = globalLineOpacity.toFixed(4);
   }
-});
+  renderLegacyScenes(deltaMs);
+}
+
+function requestStaticFrame() {
+  if (staticFrameId || document.hidden || !pageActive) return;
+  staticFrameId = requestAnimationFrame(() => {
+    staticFrameId = 0;
+    updateVisualFrame();
+  });
+}
+
+function syncVisualMotion() {
+  const shouldTick = pageActive && !document.hidden && !motionPreference.matches;
+  if (shouldTick && !visualTickerAttached) {
+    gsap.ticker.add(updateVisualFrame);
+    visualTickerAttached = true;
+  } else if (!shouldTick && visualTickerAttached) {
+    gsap.ticker.remove(updateVisualFrame);
+    visualTickerAttached = false;
+  }
+  cancelAnimationFrame(staticFrameId);
+  staticFrameId = 0;
+  requestStaticFrame();
+}
+
+document.addEventListener('visibilitychange', syncVisualMotion);
+motionPreference.addEventListener('change', syncVisualMotion);
+window.addEventListener('scroll', () => {
+  if (motionPreference.matches) requestStaticFrame();
+}, { passive: true });
+window.addEventListener('pagehide', () => { pageActive = false; syncVisualMotion(); });
+window.addEventListener('pageshow', () => { pageActive = true; syncVisualMotion(); });
+syncVisualMotion();
 
 function scrollToSection(index) {
   const targetIndex = Math.max(0, Math.min(panels.length - 1, index));
   const targetY = panels[targetIndex].offsetTop;
+  if (motionPreference.matches) {
+    sectionScrollTween?.kill();
+    window.scrollTo(0, targetY);
+    return;
+  }
   if (targetIndex === activeSectionIndex && Math.abs(window.scrollY - targetY) < 2) return;
 
   const isSection3To4Transition = (activeSectionIndex === 2 && targetIndex === 3)
@@ -3071,7 +3205,21 @@ function scrollToSection(index) {
    `window.scrollY`-based animation loop, so panels transition on scroll
    without the 1500 ms tween that felt like lag. */
 
-window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlobes(); resizeVerificationSlice(); ScrollTrigger.refresh(); });
+window.addEventListener('resize', () => {
+  resize(); resizeDome(); resizeLayerGlobes(); resizeVerificationSlice();
+  ScrollTrigger.refresh();
+  requestStaticFrame();
+});
+
+// Native details can change a reading panel's height without a window resize.
+// Keep later scene transitions aligned with its new document position.
+if ('ResizeObserver' in window) {
+  const readingLayoutObserver = new ResizeObserver(() => {
+    ScrollTrigger.refresh();
+    requestStaticFrame();
+  });
+  document.querySelectorAll('[data-flow-panel]').forEach(panel => readingLayoutObserver.observe(panel));
+}
 
 (function drawGrain() {
   const grain = document.getElementById("grainCanvas");
@@ -3110,7 +3258,7 @@ window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlo
   if (!fit || !figure) return;
 
   function apply() {
-    if (window.innerWidth <= 900) {
+    if (window.innerWidth <= 900 || usesFlowLayout()) {
       figure.style.removeProperty('--arch-scale');
       return;
     }
@@ -3131,83 +3279,14 @@ window.addEventListener('resize', () => { resize(); resizeDome(); resizeLayerGlo
   }
 })();
 
-/* Contact modal + web3forms submission */
-(function contactModal() {
-  const overlay = document.getElementById('contact-overlay');
-  if (!overlay) return;
-  const closeBtn = document.getElementById('contact-close');
-  const form = document.getElementById('contact-form');
-  const success = document.getElementById('contact-success');
-  const successEmail = document.getElementById('contact-success-email');
-  const errBox = document.getElementById('contact-error');
-  const submit = document.getElementById('contact-submit');
-  const submitLabel = document.getElementById('contact-submit-label');
-  const WEB3FORMS_ACCESS_KEY = '3181ff54-df0a-4280-9f85-33c11d4b064e';
-
-  function open() {
-    overlay.hidden = false;
-    document.body.style.overflow = 'hidden';
-  }
-  function close() {
-    overlay.hidden = true;
-    document.body.style.overflow = '';
-    form.hidden = false;
-    success.hidden = true;
-    errBox.hidden = true;
-    form.reset();
-    submitLabel.textContent = 'Submit inquiry';
-    submit.disabled = false;
-  }
-
-  ['open-contact', 'open-contact-cta', 'open-contact-footer'].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('click', open);
-  });
-  closeBtn.addEventListener('click', close);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.hidden) close(); });
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submit.disabled = true;
-    submitLabel.textContent = 'Sending…';
-    errBox.hidden = true;
-    const fd = new FormData(form);
-    const topic = fd.get('topic') || 'General inquiry';
-    const org = fd.get('organization') || '';
-    const messageBody = `Topic: ${topic}\nOrganization: ${org}\n\n${fd.get('message') || ''}`;
-    const payload = {
-      access_key: WEB3FORMS_ACCESS_KEY,
-      subject: `[${topic}] ${fd.get('name') || fd.get('email')} — loka.inc`,
-      from_name: fd.get('name') || 'loka.inc visitor',
-      email: fd.get('email'),
-      message: messageBody,
-    };
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
-      if (data.success) {
-        successEmail.textContent = payload.email;
-        form.hidden = true;
-        success.hidden = false;
-      } else {
-        errBox.textContent = data.message || 'Something went wrong.';
-        errBox.hidden = false;
-        submit.disabled = false;
-        submitLabel.textContent = 'Submit inquiry';
-      }
-    } catch (err) {
-      errBox.textContent = err.message || 'Network error.';
-      errBox.hidden = false;
-      submit.disabled = false;
-      submitLabel.textContent = 'Submit inquiry';
-    }
-  });
+document.documentElement.classList.remove('visual-fallback');
+} catch (error) {
+  document.documentElement.classList.add('visual-fallback');
+  console.warn('Decorative effects unavailable; displaying the static page.', error);
+}
 })();
 </script>
+<script src="/home.js" defer></script>
+<script type="module" src="/src/economic-background.js"></script>
 </body>
 </html>
