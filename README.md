@@ -20,6 +20,10 @@ npm run preview
 
 The production build is written to `dist/`. The preview command serves that build locally. Both development and preview resolve the extensionless page URLs below.
 
+## Deployment verification
+
+The website's Vercel checks link to the `loka-labs / loka-website` project. Build with `npm run build` and publish the `dist/` directory. After merging a PR into `main`, confirm that Vercel reports a successful Production deployment for the resulting commit and check the live homepage and `/blog`; a merged PR alone does not confirm that the site is live. LokaWorld is a separate application and deployment.
+
 ## Pages and assets
 
 - `/` — homepage: original brand opening, simulation introduction, Use Cases, Architecture, Team, Why it matters, and contact CTA. The original gradients, grain, WebGL visuals, typography, and desktop panel transitions are preserved. Use Cases expands in document flow at every screen size; mobile reading sections can also grow to fit their content.
